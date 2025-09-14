@@ -67,8 +67,18 @@ public function register_form() {
         else if(User::where('username', request('username'))->first()) 
         {
             Session::put('error', 'nome_utente_gia_esistente');
-            return redirect('register')->withInput();
+                 return redirect('register')->withInput();
         }
+        else if(
+                strlen(request('password')) < 8 ||
+                !preg_match('/[a-z]/', request('password')) ||
+                !preg_match('/[A-Z]/', request('password')) ||
+                !preg_match('/[0-9]/', request('password')) ||
+                !preg_match('/[\W]/', request('password'))
+) {
+    Session::put('error', 'password_insicura');
+    return redirect('register')->withInput();
+}
     
 
         //Creazione nuovo utente
