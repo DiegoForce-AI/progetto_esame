@@ -36,6 +36,7 @@ namespace App\Http\Controllers;
         }
           //Login 
         Session::put('user_id', $user->id);
+        Session::put('username', $user->username);
         return redirect('home');
     }
 

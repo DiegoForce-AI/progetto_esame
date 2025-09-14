@@ -47,6 +47,13 @@ nav a:hover {
     z-index: 1000;
 }
 
+.account img {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
 .account-dropdown form {
     margin: 0;
     padding: 10px;
