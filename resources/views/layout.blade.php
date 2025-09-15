@@ -34,8 +34,8 @@
 
 
                 <form id="search-form" action="{{ url('prodotti') }}" method="get" style="margin:0;">
-                    <input type="text" name="name" id="search-input" placeholder="Cerca prodotti..."
-                        value="{{ request('name') }}"
+                    <input type="text" name="nome" id="search-input" placeholder="Cerca prodotti..."
+                        value="{{ request('nome') }}"
                         style="padding:4px 8px; border-radius:4px; border:1px solid #ccc; width:160px;">
                     <button id="searchBtn" type="submit"
                         style="padding:4px 10px; border-radius:4px; border:1px solid #ccc; background:#f5f5f5; cursor:pointer;">

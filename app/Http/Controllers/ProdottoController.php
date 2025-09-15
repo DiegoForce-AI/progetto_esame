@@ -25,16 +25,16 @@ class ProdottoController extends BaseController
     }
     public function search(Request $request)
     {
-        $name = $request->query('name'); // parametro ?name=...
+        $nome = $request->query('nome'); // parametro ?nome=...
 
-        if (!$name) {
+        if (!$nome) {
             return response()->json([
                 'success' => false,
-                'message' => 'Parametro "name" mancante'
+                'message' => 'Parametro "nome" mancante'
             ], 400);
         }
 
-    $product = Prodotto::where('nome', 'LIKE', "%{$name}%")->first();
+    $product = Prodotto::where('nome', 'LIKE', "%{$nome}%")->first();
 
         if ($product) {
             return response()->json([

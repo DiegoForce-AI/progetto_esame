@@ -1,4 +1,3 @@
-console.log('home.js eseguito');
 
 document.addEventListener('DOMContentLoaded', function () {
     // Profilo utente
@@ -42,17 +41,17 @@ document.addEventListener('DOMContentLoaded', function () {
             e.preventDefault();
             const name = searchInput.value;
             try {
-                const response = await fetch(`/prodotti/search?name=${encodeURIComponent(name)}`);
+                const response = await fetch(`/prodotti/search?nome=${encodeURIComponent(name)}`);
                 const data = await response.json();
                 if (data.success && data.product && data.product.id) {
-                    window.location.href = `/prodotto/${data.product.id}`;
+                    window.location.href = "/progetto_esame/public/prodotto/" + data.product.id;
                 } else {
                     const resultDiv = document.getElementById('result');
-                    if(resultDiv) resultDiv.innerHTML = `<p style="color:red">${data.message || 'Prodotto non trovato'}</p>`;
+                    if (resultDiv) resultDiv.innerHTML = `<p style="color:red">${data.message || 'Prodotto non trovato'}</p>`;
                 }
             } catch (err) {
                 const resultDiv = document.getElementById('result');
-                if(resultDiv) resultDiv.innerHTML = `<p style="color:red">Errore durante la ricerca.</p>`;
+                if (resultDiv) resultDiv.innerHTML = `<p style="color:red">Errore durante la ricerca.</p>`;
             }
         });
     }
