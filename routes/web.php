@@ -26,3 +26,6 @@ Route::get('prodotti/json', function() {
     return response()->json($prodotti);
 });
 
+Route::get('prodotto/{id}', [ProdottoController::class, 'show']);
+Route::get('/prodotti/search', [ProdottoController::class, 'search']);
+

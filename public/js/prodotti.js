@@ -27,8 +27,31 @@ document.addEventListener('DOMContentLoaded', function() {
                     <h3>${prodotto.nome}</h3>
                     <p>${prodotto.descrizione}</p>
                     <strong>${prodotto.prezzo} €</strong>
+                    <a href="prodotto/${prodotto.id}" class="dettaglio-link">Dettagli</a>
                 `;
                 row.appendChild(card);
             });
+        });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    fetch(`prodotto/${id}`) //Backtick (``) per la concatenazione delle stringhe 
+        .then(response => response.json())
+        .then(prodotto => {
+            const container = document.getElementById('dettaglio-prodotto');
+            let immaginiHtml = '';
+            if (prodotto.immagini && prodotto.immagini.length > 0) {
+                prodotto.immagini.forEach(img => {
+                    immaginiHtml += `<img src="${img.url}" alt="${prodotto.nome}" class="prodotto-img">`;
+                });
+            } else if (prodotto.immagine_url) {
+                immaginiHtml = `<img src="${prodotto.immagine_url}" alt="${prodotto.nome}" class="prodotto-img">`;
+            }
+            container.innerHTML = `
+                ${immaginiHtml}
+                <h2>${prodotto.nome}</h2>
+                <p>${prodotto.descrizione}</p>
+                <strong>${prodotto.prezzo} €</strong>
+            `;
         });
 });
