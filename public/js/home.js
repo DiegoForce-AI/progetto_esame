@@ -42,12 +42,10 @@ document.addEventListener('DOMContentLoaded', function () {
             e.preventDefault();
             const name = searchInput.value;
             try {
-                const response = await fetch(`${API_SEARCH_URL}?nome=${encodeURIComponent(name)}`);
+                const response = await fetch(`${BASE_URL}/prodotti/search?nome=${encodeURIComponent(name)}`);
                 const data = await response.json();
                 if (data.success && data.product && data.product.id) {
-                    // Correggi il path per puntare a /prodotto/{id}
-                    const prodottoUrl = API_SEARCH_URL.replace('/prodotti/search','/prodotto') + '/' + data.product.id;
-                    window.location.href = prodottoUrl;
+                    window.location.href = window.location.origin + '/progetto_esame/public/prodotto/' + data.product.id;
                 } else {
                     const resultDiv = document.getElementById('result');
                     if (resultDiv) resultDiv.innerHTML = `<p style="color:red">${data.message || 'Prodotto non trovato'}</p>`;
