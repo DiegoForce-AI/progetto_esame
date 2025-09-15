@@ -53,6 +53,9 @@
         <div id="result" style="margin:20px; padding:10px;"></div>
         @yield('content')
     </main>
+    <script>
+        const API_SEARCH_URL = "{{ url('prodotti/search') }}";
+    </script>
     <script src="{{ url('js/home.js') }}" defer></script>
     @yield('scripts')
 
