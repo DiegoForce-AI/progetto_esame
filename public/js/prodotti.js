@@ -1,6 +1,6 @@
 // public/js/prodotti.js
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     fetch('prodotti/json')
         .then(response => response.json())
         .then(prodotti => {
@@ -28,13 +28,39 @@ document.addEventListener('DOMContentLoaded', function() {
                     <p>${prodotto.descrizione}</p>
                     <strong>${prodotto.prezzo} €</strong>
                     <a href="prodotto/${prodotto.id}" class="dettaglio-link">Dettagli</a>
+                    <button class="add-to-cart-btn" data-id="${prodotto.id}">Aggiungi al carrello</button>
                 `;
                 row.appendChild(card);
+            });
+
+            // Gestione click su "Aggiungi al carrello" 
+            container.addEventListener('click', function (e) {
+                if (e.target.classList.contains('add-to-cart-btn')) {
+                    let prodottoId = e.target.getAttribute('data-id');
+                    fetch(BASE_URL + '/shopping/add', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-Requested-With': 'XMLHttpRequest',
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || ''
+                        },
+                        body: JSON.stringify({ prodotto_id: prodottoId, quantita: 1 })
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.error) {
+                                alert('Errore: ' + data.error);
+                            } else {
+                                alert('Prodotto aggiunto al carrello!');
+                            }
+                        })
+                        .catch(() => alert('Errore di rete.'));
+                }
             });
         });
 });
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     fetch(`prodotto/${id}`) //Backtick (``) per la concatenazione delle stringhe 
         .then(response => response.json())
         .then(prodotto => {

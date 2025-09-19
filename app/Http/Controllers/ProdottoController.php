@@ -25,7 +25,7 @@ class ProdottoController extends BaseController
     }
     public function search(Request $request)
     {
-        $nome = $request->query('nome'); // parametro ?nome=...
+        $nome = $request->query('nome');
 
         if (!$nome) {
             return response()->json([

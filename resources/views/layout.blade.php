@@ -47,12 +47,8 @@
             </div>
         </div>
 
-        <a href="#" id="shopping-btn"><img src="{{ url('assets/shopping.svg') }}" alt="shopping"></a>
-        <div id="shopping-dropdown">
-            <h4>Shopping Bag</h4>
-            <div id="shopping-items"></div>
-            <button id="add-product-btn">Aggiungi prodotto</button>
-        </div>
+        <a href="{{ url('/shopping') }}" id="shopping-btn"><img src="{{ url('assets/shopping.svg') }}" alt="shopping"></a>
+        
 
         <span id="welcome-message">Benvenuto, {{$username ?? ''}}</span>
     </nav>

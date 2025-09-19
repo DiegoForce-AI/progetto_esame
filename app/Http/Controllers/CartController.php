@@ -65,8 +65,10 @@ class CartController extends BaseController
             ->where('prodotto_id', $prodotto->id)
             ->first();
         if ($esistente) {
-            $esistente->quantita += $request->input('quantita', 1);
-            $esistente->save();
+            $nuovaQuantita = $esistente->quantita + $request->input('quantita', 1);
+            CarrelloProdotti::where('carrello_id', $carrello->id)
+                ->where('prodotto_id', $prodotto->id)
+                ->update(['quantita' => $nuovaQuantita]);
         } else {
             CarrelloProdotti::create([
                 'carrello_id' => $carrello->id,
@@ -108,9 +110,17 @@ class CartController extends BaseController
             $riga = CarrelloProdotti::where('carrello_id', $carrelloId)
                 ->where('prodotto_id', $prodottoId)
                 ->first();
-            if ($riga && $quantita > 0) {
-                $riga->quantita = $quantita;
-                $riga->save();
+            if ($riga) {
+                $nuovaQuantita = (int) $request->input('quantita');
+                if ($nuovaQuantita > 0) {
+                    CarrelloProdotti::where('carrello_id', $carrelloId)
+                        ->where('prodotto_id', $prodottoId)
+                        ->update(['quantita' => $nuovaQuantita]);
+                } else {
+                    CarrelloProdotti::where('carrello_id', $carrelloId)
+                        ->where('prodotto_id', $prodottoId)
+                        ->delete();
+                }
             }
         }
         return $this->index($request);

@@ -28,12 +28,6 @@
             </ul>
         @endif
     </div>
-    <form action="{{ url('shopping/add') }}" method="POST" style="margin-top:20px;">
-        @csrf
-        <input type="text" name="nome" placeholder="Nome prodotto" required>
-        <input type="number" name="quantita" value="1" min="1" style="width:50px;">
-        <button type="submit">Aggiungi prodotto</button>
-    </form>
     <div id="shopping-items">
 
     </div>

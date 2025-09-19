@@ -6,7 +6,9 @@
 
 @section('content')
     <h1>Prodotti disponibili</h1>
-    <div id="prodotti-container"></div>
+    <div id="prodotti-container" class="prodotti-list">
+        <!-- I prodotti verranno inseriti dinamicamente da prodotti.js -->
+    </div>
     
 @endsection
 

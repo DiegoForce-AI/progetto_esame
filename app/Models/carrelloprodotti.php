@@ -11,6 +11,8 @@ class CarrelloProdotti extends Model
     protected $table = 'carrello_prodotti';
     protected $fillable = ['carrello_id', 'prodotto_id', 'quantita'];
     public $timestamps = false;
+    protected $primaryKey = null;
+    public $incrementing = false;
 
     public function prodotto()
     {
