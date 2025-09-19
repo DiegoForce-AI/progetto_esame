@@ -3,16 +3,20 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model; 
+use App\Models\User;
+use App\Models\Prodotto;
 
 class Carrello extends Model
 {
-    protected $table = 'carrelli';
+    protected $table = 'carrello';
+    protected $fillable = ['utente_id'];
 
     public function utente()
     {
-        return $this->belongsTo(Utente::class, 'utente_id');
+        return $this->belongsTo(User::class, 'utente_id');
     }
 
+    // relazione many-to-many con Prodotto attraverso la pivot
     public function prodotti()
     {
         return $this->belongsToMany(Prodotto::class, 'carrello_prodotti', 'carrello_id', 'prodotto_id')

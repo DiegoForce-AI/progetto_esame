@@ -3,7 +3,9 @@
 
 <head>
     <link rel="stylesheet" href="{{ url('css/home.css') }}">
+    <link rel="stylesheet" href="{{ url('css/shopping.css') }}">
     @yield('head')
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 
 <body>
@@ -45,7 +47,13 @@
             </div>
         </div>
 
-        <a href="#"><img src="{{ url('assets/shopping.svg') }}" alt="shopping"></a>
+        <a href="#" id="shopping-btn"><img src="{{ url('assets/shopping.svg') }}" alt="shopping"></a>
+        <div id="shopping-dropdown">
+            <h4>Shopping Bag</h4>
+            <div id="shopping-items"></div>
+            <button id="add-product-btn">Aggiungi prodotto</button>
+        </div>
+
         <span id="welcome-message">Benvenuto, {{$username ?? ''}}</span>
     </nav>
 
@@ -55,8 +63,10 @@
     </main>
     <script>
         const API_SEARCH_URL = "{{ url('prodotti/search') }}";
+        window.csrfToken = document.querySelector('meta[name=csrf-token]').getAttribute('content');
     </script>
     <script src="{{ url('js/home.js') }}" defer></script>
+    <script src="{{ url('js/shopping.js') }}" defer></script>
     @yield('scripts')
 
 </body>

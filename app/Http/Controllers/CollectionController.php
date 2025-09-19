@@ -18,6 +18,6 @@ namespace App\Http\Controllers;
     return view('home')->with('username', $user->username);
     }
 
-
+    
 
 }

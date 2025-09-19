@@ -1,9 +1,11 @@
+
 <?php
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\CollectionController;
 use App\Http\Controllers\ProdottoController;
+use App\Http\Controllers\CartController;
 
 Route::get('/', function () {
     return redirect('login');
@@ -26,6 +28,12 @@ Route::get('prodotti/json', function() {
     return response()->json($prodotti);
 });
 
+// Dettagli prodotto
 Route::get('prodotto/{id}', [ProdottoController::class, 'show']);
 Route::get('/prodotti/search', [ProdottoController::class, 'search']);
 
+// Rotte per la shopping bag
+Route::get('/shopping', [CartController::class, 'index']);
+Route::post('/shopping/add', [CartController::class, 'add']);
+Route::delete('/shopping/remove', [CartController::class, 'remove']);
+Route::patch('/shopping/update', [CartController::class, 'update']);
