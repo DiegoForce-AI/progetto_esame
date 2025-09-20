@@ -3,7 +3,7 @@
 
 <head>
     <link rel="stylesheet" href="{{ url('css/home.css') }}">
-    <link rel="stylesheet" href="{{ url('css/shopping.css') }}">
+    <link rel="stylesheet" href="{{ url('css/shopping.css') }}">    
     @yield('head')
     <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
@@ -15,7 +15,7 @@
         <a href="#">Mac</a>
         <a href="#">iPad</a>
         <a href="#">iPhone</a>
-        <a href="#">Watch</a>
+        <a href="{{ url('album') }}">Album</a>
         <a href="#">AirPods</a>
 
         <div class="dropdown-account">
@@ -62,8 +62,9 @@
         window.csrfToken = document.querySelector('meta[name=csrf-token]').getAttribute('content');
     </script>
     <script src="{{ url('js/home.js') }}" defer></script>
-    <script src="{{ url('js/shopping.js') }}"></script>
+    
     @yield('scripts')
+    <script src="{{ url('js/shopping.js') }}"></script>
 
 </body>
 

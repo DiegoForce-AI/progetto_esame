@@ -68,7 +68,11 @@ document.addEventListener('DOMContentLoaded', function () {
                         headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': csrfToken },
                         body: JSON.stringify({ prodotto_id: prodottoId, quantita })
                     });
-                    if (res.ok) index();
+                    if (res.ok) {
+                        setTimeout(() => {
+                            index();
+                        }, 500);
+                    }
                 }
             }
         });
