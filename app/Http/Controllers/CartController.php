@@ -35,7 +35,7 @@ class CartController extends BaseController
         }
         return view('shopping', ['cart' => $prodotti]);
     }
-    
+
 
 
     // Aggiungi prodotto
@@ -87,9 +87,10 @@ class CartController extends BaseController
             return response()->json(['error' => 'Utente non autenticato'], 401);
         }
         $carrello = Carrello::where('utente_id', $utenteId)->first();
-        if ($carrello) {
+        $prodottoId = $request->query('prodotto_id');
+        if ($carrello && $prodottoId) {
             CarrelloProdotti::where('carrello_id', $carrello->id)
-                ->where('prodotto_id', $request->input('prodotto_id'))
+                ->where('prodotto_id', $prodottoId)
                 ->delete();
         }
         return $this->index($request);

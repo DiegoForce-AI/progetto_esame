@@ -62,7 +62,7 @@
         window.csrfToken = document.querySelector('meta[name=csrf-token]').getAttribute('content');
     </script>
     <script src="{{ url('js/home.js') }}" defer></script>
-    <script src="{{ url('js/shopping.js') }}" defer></script>
+    <script src="{{ url('js/shopping.js') }}"></script>
     @yield('scripts')
 
 </body>
