@@ -42,6 +42,11 @@ Route::get('/spotify', function() {
     return view('spotify');
 });
 
+
+// Rotte per il checkout
+Route::get('/checkout', [App\Http\Controllers\CheckoutController::class, 'showForm']);
+Route::post('/checkout', [App\Http\Controllers\CheckoutController::class, 'processOrder']);
+
 /* API FAKESTORE */
 Route::get('/fakestore', function() {
     return view('fakestore');
