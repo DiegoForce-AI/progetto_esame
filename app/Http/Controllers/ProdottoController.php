@@ -21,8 +21,17 @@ class ProdottoController extends BaseController
             return redirect('prodotti');
         }
         return view('prodotto')->with('prodotto', $prodotto);
-
     }
+
+    public function showJson($id)
+    {
+        $prodotto = Prodotto::with('immagini')->find($id);
+        if (!$prodotto) {
+            return response()->json(['error' => 'Prodotto non trovato'], 404);
+        }
+        return response()->json($prodotto);
+    }
+
     public function search(Request $request)
     {
         $nome = $request->query('nome');
@@ -34,7 +43,7 @@ class ProdottoController extends BaseController
             ], 400);
         }
 
-    $product = Prodotto::where('nome', 'LIKE', "%{$nome}%")->first();
+        $product = Prodotto::where('nome', 'LIKE', "%{$nome}%")->first();
 
         if ($product) {
             return response()->json([

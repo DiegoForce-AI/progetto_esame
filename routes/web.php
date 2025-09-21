@@ -28,6 +28,7 @@ Route::get('prodotti/json', function () {
 
 // Dettagli prodotto
 Route::get('prodotto/{id}', [ProdottoController::class, 'show']);
+Route::get('prodotto/{id}/json', [ProdottoController::class, 'showJson']);
 Route::get('/prodotti/search', [ProdottoController::class, 'search']);
 
 // Rotte per la shopping bag
