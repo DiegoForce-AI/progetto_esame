@@ -23,11 +23,13 @@ document.addEventListener('DOMContentLoaded', function () {
                     immaginiHtml = `<img src="${prodotto.immagine_url}" alt="${prodotto.nome}" class="prodotto-img">`;
                 }
                 card.innerHTML = `
+                    <a href="prodotto/${prodotto.id}" class="dettaglio-link">
                     ${immaginiHtml}
                     <h3>${prodotto.nome}</h3>
                     <p>${prodotto.descrizione}</p>
                     <strong>${prodotto.prezzo} €</strong>
-                    <a href="prodotto/${prodotto.id}" class="dettaglio-link">Dettagli</a>
+                    </a>
+                    <br>
                     <button class="add-to-cart-btn" data-id="${prodotto.id}">Aggiungi al carrello</button>
                 `;
                 row.appendChild(card);

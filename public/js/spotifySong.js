@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             tracks.forEach(track => {
                 listHtml += `<li style="margin-bottom:10px;cursor:pointer;" data-track-id="${track.id}">
                     <img src="${track.album.images[0]?.url}" alt="${track.name}" style="width:50px;vertical-align:middle;"> 
-                    <strong>${track.name}</strong> - ${track.artists.map(a=>a.name).join(', ')} (${track.album.name})
+                    <strong>${track.name}</strong> - ${track.artists.map(a => a.name).join(', ')} (${track.album.name})
                 </li>`;
             });
             listHtml += '</ul>';
@@ -64,32 +64,33 @@ document.addEventListener('DOMContentLoaded', async function () {
                         document.getElementById('backBtn').onclick = () => {
                             showTrackResults();
                         };
-function showTrackResults() {
-    const container = document.getElementById('song-container');
-    const query = document.getElementById('song-name-input').value.trim();
-    if (!query) {
-        container.innerHTML = '';
-        return;
-    }
-    container.innerHTML = '<p>Caricamento...</p>';
-    searchTracks(query).then(tracks => {
-        if (tracks && tracks.length > 0) {
-            let listHtml = '<h3>Risultati:</h3><ul>';
-            tracks.forEach(track => {
-                listHtml += `<li style="margin-bottom:10px;cursor:pointer;" data-track-id="${track.id}">
+                        
+                        function showTrackResults() {
+                            const container = document.getElementById('song-container');
+                            const query = document.getElementById('song-name-input').value.trim();
+                            if (!query) {
+                                container.innerHTML = '';
+                                return;
+                            }
+                            container.innerHTML = '<p>Caricamento...</p>';
+                            searchTracks(query).then(tracks => {
+                                if (tracks && tracks.length > 0) {
+                                    let listHtml = '<h3>Risultati:</h3><ul>';
+                                    tracks.forEach(track => {
+                                        listHtml += `<li style="margin-bottom:10px;cursor:pointer;" data-track-id="${track.id}">
                     <img src="${track.album.images[0]?.url}" alt="${track.name}" style="width:50px;vertical-align:middle;"> 
-                    <strong>${track.name}</strong> - ${track.artists.map(a=>a.name).join(', ')} (${track.album.name})
+                    <strong>${track.name}</strong> - ${track.artists.map(a => a.name).join(', ')} (${track.album.name})
                 </li>`;
-            });
-            listHtml += '</ul>';
-            container.innerHTML = listHtml;
-            container.querySelectorAll('li[data-track-id]').forEach(li => {
-                li.addEventListener('click', async function () {
-                    const trackId = li.getAttribute('data-track-id');
-                    container.innerHTML = '<p>Caricamento canzone...</p>';
-                    const trackData = await fetchTrackData(trackId);
-                    if (trackData) {
-                        container.innerHTML = `
+                                    });
+                                    listHtml += '</ul>';
+                                    container.innerHTML = listHtml;
+                                    container.querySelectorAll('li[data-track-id]').forEach(li => {
+                                        li.addEventListener('click', async function () {
+                                            const trackId = li.getAttribute('data-track-id');
+                                            container.innerHTML = '<p>Caricamento canzone...</p>';
+                                            const trackData = await fetchTrackData(trackId);
+                                            if (trackData) {
+                                                container.innerHTML = `
                             <h2>${trackData.name}</h2>
                             <p>Artista: ${trackData.artists.map(artist => artist.name).join(', ')}</p>
                             <p>Album: ${trackData.album.name}</p>
@@ -97,19 +98,19 @@ function showTrackResults() {
                             <p>Durata: ${Math.floor(trackData.duration_ms / 60000)}:${String(Math.floor((trackData.duration_ms % 60000) / 1000)).padStart(2, '0')}</p>
                             <button id="backBtn">Torna ai risultati</button>
                         `;
-                        document.getElementById('backBtn').onclick = () => {
-                            showTrackResults();
-                        };
-                    } else {
-                        container.innerHTML = '<p>Canzone non trovata.</p>';
-                    }
-                });
-            });
-        } else {
-            container.innerHTML = '<p>Nessuna canzone trovata.</p>';
-        }
-    });
-}
+                                                document.getElementById('backBtn').onclick = () => {
+                                                    showTrackResults();
+                                                };
+                                            } else {
+                                                container.innerHTML = '<p>Canzone non trovata.</p>';
+                                            }
+                                        });
+                                    });
+                                } else {
+                                    container.innerHTML = '<p>Nessuna canzone trovata.</p>';
+                                }
+                            });
+                        }
                     } else {
                         container.innerHTML = '<p>Canzone non trovata.</p>';
                     }

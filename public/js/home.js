@@ -48,12 +48,21 @@ document.addEventListener('DOMContentLoaded', function () {
                     window.location.href = window.location.origin + '/progetto_esame/public/prodotto/' + data.product.id;
                 } else {
                     const resultDiv = document.getElementById('result');
-                    if (resultDiv) resultDiv.innerHTML = `<p style="color:red">${data.message || 'Prodotto non trovato'}</p>`;
+                    if (resultDiv) {
+                        resultDiv.style.display = 'block';
+                        resultDiv.innerHTML = `<p style="color:red">${data.message || 'Prodotto non trovato'}</p>`;
+                    }
                 }
             } catch (err) {
                 const resultDiv = document.getElementById('result');
-                if (resultDiv) resultDiv.innerHTML = `<p style="color:red">Errore durante la ricerca.</p>`;
+                if (resultDiv) {
+                    resultDiv.style.display = 'block';
+                    resultDiv.innerHTML = `<p style="color:red">Errore durante la ricerca.</p>`;
+                }
             }
         });
+        // Nascondi il div result all'avvio
+        const resultDiv = document.getElementById('result');
+        if (resultDiv) resultDiv.style.display = 'none';
     }
 });

@@ -20,8 +20,6 @@
 #shopping-items {
     margin-bottom: 10px;
     min-height: 40px;
-    max-height: 300px;
-    overflow-y: auto;
 }
 #add-product-btn {
     margin-top: 10px;

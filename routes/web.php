@@ -40,3 +40,8 @@ Route::patch('/shopping/update', [CartController::class, 'update']);
 Route::get('/spotify', function() {
     return view('spotify');
 });
+
+/* API FAKESTORE */
+Route::get('/fakestore', function() {
+    return view('fakestore');
+});
