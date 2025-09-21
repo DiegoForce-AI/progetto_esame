@@ -37,6 +37,6 @@ Route::delete('/shopping/remove', [CartController::class, 'remove']);
 Route::patch('/shopping/update', [CartController::class, 'update']);
 
 /* API SPOTIFY */
-Route::get('/album', function() {
-    return view('album');
+Route::get('/spotify', function() {
+    return view('spotify');
 });

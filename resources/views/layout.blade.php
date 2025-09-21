@@ -15,7 +15,7 @@
         <a href="#">Mac</a>
         <a href="#">iPad</a>
         <a href="#">iPhone</a>
-        <a href="{{ url('album') }}">Album</a>
+        <a href="{{ url('spotify') }}">Spotify</a>
         <a href="#">AirPods</a>
 
         <div class="dropdown-account">
