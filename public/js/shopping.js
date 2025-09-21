@@ -1,5 +1,8 @@
 // Base URL dinamico
-const BASE_URL = window.location.origin + '/progetto_esame/public';
+if (!window.BASE_URL) {
+    window.BASE_URL = 'http://localhost/progetto_esame/public';
+}
+window.BASE_URL = 'http://localhost/progetto_esame/public';
 const shoppingItemsDiv = document.getElementById('shopping-items');
 
 document.addEventListener('DOMContentLoaded', function () {

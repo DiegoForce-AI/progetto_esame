@@ -6,6 +6,10 @@
     <link rel="stylesheet" href="{{ url('css/shopping.css') }}">    
     @yield('head')
     <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    @yield('scripts')
+    <script src="{{ url('js/home.js') }}" defer></script>
+    <script src="{{ url('js/shopping.js') }}" defer></script>
 </head>
 
 <body>
@@ -57,15 +61,10 @@
         <div id="result" style="margin:20px; padding:10px;"></div>
         @yield('content')
     </main>
+    
     <script>
         const API_SEARCH_URL = "{{ url('prodotti/search') }}";
         window.csrfToken = document.querySelector('meta[name=csrf-token]').getAttribute('content');
     </script>
-    <script src="{{ url('js/home.js') }}" defer></script>
-    
-    @yield('scripts')
-    <script src="{{ url('js/shopping.js') }}"></script>
-
 </body>
-
 </html>
