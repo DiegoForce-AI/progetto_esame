@@ -1,7 +1,10 @@
 @extends('layout')
-<link rel="stylesheet" href="{{ url('css/prodotti.css') }}">
+
+
+
 @section('head')
     <title>Lista Prodotti</title>
+    <link rel="stylesheet" href="{{ url('css/prodotti.css') }}">
 @endsection
 
 @section('content')
@@ -9,7 +12,6 @@
     <div id="prodotti-container" class="prodotti-list">
         <!-- I prodotti verranno inseriti dinamicamente da prodotti.js -->
     </div>
-    
 @endsection
 
 @section('scripts')

@@ -1,4 +1,5 @@
-// Gestione errori e login AJAX
+// Gestione errori form login con div .msg
+const BASE_URL = 'http://localhost/progetto_esame/public';
 
 document.addEventListener('DOMContentLoaded', function () {
   const form = document.querySelector('form');
@@ -7,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // Nascondi il messaggio di errore all'avvio
   if (msgElem) msgElem.style.display = 'none';
 
-  form.addEventListener('submit', async function (e) {
+  form.addEventListener('submit', function (e) {
     let valid = true;
     let errorMsg = '';
     const username = document.getElementById('username').value.trim();
@@ -20,46 +21,10 @@ document.addEventListener('DOMContentLoaded', function () {
       e.preventDefault();
       msgElem.textContent = errorMsg;
       msgElem.style.display = 'block';
-      return;
-    }
-    // Gestione login AJAX
-    e.preventDefault();
-    try {
-      const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-      const response = await fetch('/do_login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-CSRF-TOKEN': csrfToken
-        },
-        body: JSON.stringify({ username, password })
-      });
-      const data = await response.json();
-      if (!response.ok) {
-        msgElem.textContent = data.error || 'Errore durante il login';
-        msgElem.style.display = 'block';
-        return;
-      }
-      if (data.success && data.redirect) {
-        window.location.href = data.redirect;
-      }
-    } catch (err) {
-      msgElem.textContent = 'Errore durante il login';
-      msgElem.style.display = 'block';
-    }
-  });
+    } else {
+      msgElem.textContent = '';
+      msgElem.style.display = 'none';
 
-  // Nascondi il messaggio di errore quando l'utente inizia a scrivere
-  document.getElementById('username').addEventListener('input', function () {
-    if (msgElem.textContent) {
-      msgElem.textContent = '';
-      msgElem.style.display = 'none';
-    }
-  });
-  document.getElementById('password').addEventListener('input', function () {
-    if (msgElem.textContent) {
-      msgElem.textContent = '';
-      msgElem.style.display = 'none';
     }
   });
 });
