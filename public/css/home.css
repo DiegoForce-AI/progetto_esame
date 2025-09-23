@@ -459,6 +459,17 @@ footer img {
     width: 10%;
 }
 
+.spotify-label {
+    font-size: 1.18em;
+    font-weight: 500;
+    color: #1DB954;
+    margin-bottom: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    gap: 8px;
+}
+
 /* Stile per l'immagine della traccia Spotify nel footer */
  .spotify-track-img {
     height: 56px;
@@ -482,6 +493,79 @@ footer img {
     font-weight: 500;
     color: #1DB954;
     vertical-align: middle;
+}
+
+.footer-block-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-start;
+    width: 70%;
+   
+}
+
+.footer-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    max-width: 1100px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 1.5em;
+    min-height: 110px;
+    box-sizing: border-box;
+}
+.footer-block-fakestore {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 8px;
+}
+
+.footer-block-fakestore a {
+    display: inline-block;
+    width: auto;
+    max-width: 100%;
+}
+.fakestore-label {
+    font-size: 1.18em;
+    font-weight: 500;
+    color: #ffb300;
+    margin-bottom: 7px;
+}
+.fakestore-img {
+    height: 54px;
+    width: 54px;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+    border: 2px solid #ffb300;
+    margin-top: 0;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.fakestore-img:hover {
+    transform: scale(1.08) rotate(2deg);
+    box-shadow: 0 4px 18px rgba(255,179,0,0.22);
+}
+.footer-center {
+    width: 100%;
+    text-align: center;
+    margin-top: 24px;
+    font-size: 14px;
+    padding: 0.7em 0 0.4em 0;
+}
+@media (max-width: 900px) {
+    .footer-flex {
+        flex-direction: column;
+        align-items: center;
+        min-height: unset;
+    }
+    .footer-block-fakestore, .footer-block-right {
+        align-items: center;
+        width: 100%;
+        margin: 0 0 18px 0;
+    }
 }
 
 @media (max-width: 1068px) and (min-width: 735px) 

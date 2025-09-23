@@ -73,21 +73,29 @@
         
     </div>
     <footer>
-        <p>&copy; {{ date('Y') }} <span>Apple</span>. Tutti i diritti riservati. <br>
-        <br>Powered By: Diego Favitta, 1000044715</p>
-   
-        <a href="{{ url('spotify') }}">
-            <span>Ascolta su </span>
-            <img src="{{ url('/assets/common/spotify.jpg') }}" alt="Spotify">
-        </a>
-         @if(isset($track))
-            <div class ="spotify-track">
-                <a href="{{ $track['url'] }}">
-                    <img src="{{ $track['image'] }}" class="spotify-track-img" alt="Copertina brano">
-                    <span class="spotify-track-text"> {{ $track['title'] }} <br> {{ $track['artist'] }}</span>
+        <div class="footer-flex">
+            <div class="footer-block-fakestore">
+                <span class="fakestore-label">Continua ad acquistare su FakeStore</span>
+                <a href="{{ url('fakestore') }}">
+                    <img src="{{ url('assets/common/fakestore.png') }}" alt="FakeStore" class="fakestore-img">
                 </a>
             </div>
-        @endif
+            <div class="footer-block-right">
+                <span class="spotify-label">Ascolta su <img src="{{ url('assets/common/spotify.jpg') }}" alt="Spotify" class="spotify-track-text"></span>
+                @if(isset($track))
+                    <div class="spotify-track-info">
+                        <a href="{{ $track['url'] }}" target="_blank" class="spotify-track-link">
+                            <img src="{{ $track['image'] }}" alt="Copertina brano" class="spotify-track-img">
+                            <span class="spotify-track-text">{{ $track['title'] }}<br>{{ $track['artist'] }}</span>
+                        </a>
+                    </div>
+                @endif
+            </div>
+        </div>
+        <div class="footer-center">
+            <p>&copy; {{ date('Y') }} <span>Apple</span>. Tutti i diritti riservati.<br>
+            <br>Powered By: Diego Favitta, 1000044715</p>
+        </div>
 </footer>
 @endsection
 
