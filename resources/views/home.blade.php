@@ -57,13 +57,15 @@
             <p>Progettati per Apple Intelligence</p>
         </div>
     </div>
-    <div class="hero-evento-apple">
-        <h2>Evento Apple</h2>
-        <p>Seguilo oggi alle 19.</p>
-    <img src="{{ url('assets/common/hero_apple_event_september__c2amjfe3dcqe_largetall.jpg') }}" alt="evento">
-        <div class="hero-evento-apple-button">
+    <div class="hero-macbook">
+        <h2>Scopri i nuovi Macbook</h2>
+    <img src="{{ url(path: 'assets/common/promo_macbook_air_avail__e8ksaudoisey_large.jpg') }}" alt="evento">
+    <div class='hero-macbook-subdescription'>
+            <p>Progettati per Apple Intelligence</p>
+        </div>
+        <div class="hero-macbook-button">
             <div class="button">
-                <button class='btn'>Aggiungi al calendario</button>
+                <button class='btn'>Acquista</button>
             </div>
         </div>
     </div>
@@ -71,7 +73,21 @@
         
     </div>
     <footer>
-    &copy; 2024 Apple Inc. Tutti i diritti riservati.
+        <p>&copy; {{ date('Y') }} <span>Apple</span>. Tutti i diritti riservati. <br>
+        <br>Powered By: Diego Favitta, 1000044715</p>
+   
+        <a href="{{ url('spotify') }}">
+            <span>Ascolta su </span>
+            <img src="{{ url('/assets/common/spotify.jpg') }}" alt="Spotify">
+        </a>
+         @if(isset($track))
+            <div class ="spotify-track">
+                <a href="{{ $track['url'] }}">
+                    <img src="{{ $track['image'] }}" class="spotify-track-img" alt="Copertina brano">
+                    <span class="spotify-track-text"> {{ $track['title'] }} <br> {{ $track['artist'] }}</span>
+                </a>
+            </div>
+        @endif
 </footer>
 @endsection
 

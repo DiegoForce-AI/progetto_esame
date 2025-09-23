@@ -15,7 +15,14 @@ namespace App\Http\Controllers;
     }
     //Leggiamo username
     $user = User::find(Session::get('user_id'));
-    return view('home')->with('username', $user->username);
+            // Esempio: recupero traccia da Spotify API (mock, sostituisci con chiamata reale)
+            $track = [
+                'title' => 'Blinding Lights',
+                'artist' => 'The Weeknd',
+                'image' => 'https://i.scdn.co/image/ab67616d0000b2738863bc11d2aa12b54f5aeb36',
+                'url' => 'spotify'
+            ];
+            return view('home', compact('track'));
     }
 
     
