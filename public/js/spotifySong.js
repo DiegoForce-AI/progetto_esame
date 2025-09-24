@@ -57,22 +57,21 @@ document.addEventListener('DOMContentLoaded', async function () {
                     container.innerHTML = '<p>Caricamento canzone...</p>';
                     const trackData = await fetchTrackData(trackId);
                     if (trackData) {
-                                                container.innerHTML = `
-                                                    <div class="spotify-album-card">
-                                                        <div class="spotify-album-info">
-                                                            <div class="spotify-album-title">${trackData.name}</div>
-                                                            <div class="spotify-album-meta">Artista: ${trackData.artists.map(artist => artist.name).join(', ')}</div>
-                                                            <div class="spotify-album-meta">Album: ${trackData.album.name}</div>
-                                                            <div class="spotify-album-meta">Durata: ${Math.floor(trackData.duration_ms / 60000)}:${String(Math.floor((trackData.duration_ms % 60000) / 1000)).padStart(2, '0')}</div>
-                                                        </div>
-                                                        <img src="${trackData.album.images[0]?.url}" alt="${trackData.name}" class="spotify-album-cover">
-                                                    </div>
-                                                    <a id="backBtn" class="spotify-back-btn" href="#">Torna ai risultati</a>
-                                                `;
+                        container.innerHTML = `
+                            <div class="spotify-album-card">
+                                <div class="spotify-album-info">
+                                    <div class="spotify-album-title">${trackData.name}</div>
+                                    <div class="spotify-album-meta">Artista: ${trackData.artists.map(artist => artist.name).join(', ')}</div>
+                                    <div class="spotify-album-meta">Album: ${trackData.album.name}</div>
+                                    <div class="spotify-album-meta">Durata: ${Math.floor(trackData.duration_ms / 60000)}:${String(Math.floor((trackData.duration_ms % 60000) / 1000)).padStart(2, '0')}</div>
+                                </div>
+                                <img src="${trackData.album.images[0]?.url}" alt="${trackData.name}" class="spotify-album-cover">
+                            </div>
+                            <a id="backBtn" class="spotify-back-btn" href="#">Torna ai risultati</a>`;
                         document.getElementById('backBtn').onclick = () => {
                             showTrackResults();
                         };
-                        
+
                         function showTrackResults() {
                             const container = document.getElementById('song-container');
                             const query = document.getElementById('song-name-input').value.trim();

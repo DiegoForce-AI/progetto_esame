@@ -20,6 +20,7 @@ async function fetchAlbumData(albumId) {
 
 document.addEventListener('DOMContentLoaded', async function () {
     const container = document.getElementById('album-container');
+    container.style.display = 'none'; // Nascondi di default
     // Crea form di ricerca
     const searchForm = document.createElement('form');
     searchForm.classList.add('spotify-search-form-centered');
@@ -29,10 +30,17 @@ document.addEventListener('DOMContentLoaded', async function () {
     `;
     container.parentNode.insertBefore(searchForm, container);
 
+    // Mostra #album-container solo dopo submit valido
+    const albumInput = searchForm.querySelector('#album-id-input');
+
     searchForm.addEventListener('submit', async function (e) {
         e.preventDefault();
-        const query = document.getElementById('album-id-input').value.trim();
-        if (!query) return;
+        const query = albumInput.value.trim();
+        if (!query) {
+            container.style.display = 'none';
+            return;
+        }
+        container.style.display = '';
         container.innerHTML = '<p>Caricamento...</p>';
         const albums = await searchAlbums(query);
         if (albums && albums.length > 0) {
@@ -58,25 +66,26 @@ document.addEventListener('DOMContentLoaded', async function () {
                     container.innerHTML = '<p>Caricamento album...</p>';
                     const albumData = await fetchAlbumData(albumId);
                     if (albumData) {
-                                                let tracksHtml = '';
-                                                albumData.tracks.items.forEach(track => {
-                                                        tracksHtml += `<li>${track.track_number}. ${track.name} (${Math.floor(track.duration_ms / 60000)}:${String(Math.floor((track.duration_ms % 60000) / 1000)).padStart(2, '0')})</li>`;
-                                                });
-                                                container.innerHTML = `
-                                                    <div class="spotify-album-card">
-                                                        <div class="spotify-album-info">
-                                                            <div class="spotify-album-title">${albumData.name}</div>
-                                                            <div class="spotify-album-meta">Artista: ${albumData.artists.map(artist => artist.name).join(', ')}</div>
-                                                            <div class="spotify-album-meta">Data di rilascio: ${albumData.release_date}</div>
-                                                        </div>
-                                                        <img src="${albumData.images[0]?.url}" alt="${albumData.name}" class="spotify-album-cover">
-                                                    </div>
-                                                                                <div class="spotify-album-tracks">
-                                                                                    <div class="spotify-album-tracks-title">Tracce:</div>
-                                                                                    <ul class="spotify-album-tracks-list">${tracksHtml}</ul>
-                                                                                </div>
-                                                    <a id="backBtn" class="spotify-back-btn" href="#">Torna ai risultati</a>
-                                                `;
+                        let tracksHtml = '';
+                        albumData.tracks.items.forEach(track => {
+                            tracksHtml += `<li>${track.track_number}. ${track.name} (${Math.floor(track.duration_ms / 60000)}:${String(Math.floor((track.duration_ms % 60000) / 1000)).padStart(2, '0')})</li>`;
+                        });
+                        container.innerHTML = `
+                        <a id="backBtn" class="spotify-back-btn" href="#">Torna ai risultati</a>
+                            <div class="spotify-album-card">
+                                <div class="spotify-album-info">
+                                    <div class="spotify-album-title">${albumData.name}</div>
+                                    <div class="spotify-album-meta">Artista: ${albumData.artists.map(artist => artist.name).join(', ')}</div>
+                                    <div class="spotify-album-meta">Data di rilascio: ${albumData.release_date}</div>
+                                </div>
+                                <img src="${albumData.images[0]?.url}" alt="${albumData.name}" class="spotify-album-cover">
+                            </div>
+                            <div class="spotify-album-tracks">
+                                <div class="spotify-album-tracks-title">Tracce:</div>
+                                <ul class="spotify-album-tracks-list">${tracksHtml}</ul>
+                            </div>
+                            
+                        `;
                         document.getElementById('backBtn').onclick = () => {
                             searchForm.dispatchEvent(new Event('submit'));
                         };
