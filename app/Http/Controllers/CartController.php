@@ -22,18 +22,29 @@ class CartController extends BaseController
         }
         $prodotti = $carrello->prodotti()->with(['immagini'])->get()
             ->map(function ($prodotto) {
-                $foto = $prodotto->immagini->first() ? $prodotto->immagini->first()->url : null;
+                $foto = null;
+                if ($prodotto->immagini && $prodotto->immagini->count() > 0) {
+                    $foto = $prodotto->immagini->first()->url;
+                } else if (!empty($prodotto->immagine_url)) {
+                    $foto = $prodotto->immagine_url;
+                }
+                $prezzo = $prodotto->prezzo;
+                $quantita = $prodotto->pivot->quantita;
+                $subtotale = $prezzo * $quantita;
                 return [
                     'id' => $prodotto->id,
                     'nome' => $prodotto->nome,
-                    'quantita' => $prodotto->pivot->quantita,
+                    'quantita' => $quantita,
                     'foto' => $foto,
+                    'prezzo' => $prezzo,
+                    'subtotale' => $subtotale,
                 ];
             });
+        $totale = $prodotti->sum('subtotale');
         if ($request->ajax() || $request->wantsJson()) {
-            return response()->json(['cart' => $prodotti]);
+            return response()->json(['cart' => $prodotti, 'totale' => $totale]);
         }
-        return view('shopping', ['cart' => $prodotti]);
+        return view('shopping', ['cart' => $prodotti, 'totale' => $totale]);
     }
 
 

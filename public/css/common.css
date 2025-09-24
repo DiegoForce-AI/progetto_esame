@@ -1,0 +1,63 @@
+/* /* /* Footer layout globale */
+/* .site-footer {
+    width: 100%;
+    background: #f7f7f7;
+    padding: 20px 0 0 0;
+    color: #888;
+    position: relative;
+    left: 0;
+    bottom: 0;
+    margin-top: 40px;
+    box-shadow: 0 -2px 8px rgba(0,0,0,0.03);
+}
+.footer-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+.footer-block-fakestore, .footer-block-right {
+    flex: 1 1 300px;
+    margin: 10px 0;
+}
+.footer-center {
+    text-align: center;
+    margin-top: 20px;
+    color: #888;
+    font-size: 0.95em;
+}
+.fakestore-img, .spotify-track-img {
+    max-height: 40px;
+    vertical-align: middle;
+}
+.spotify-label {
+    font-weight: 500;
+    margin-right: 8px;
+}
+.spotify-track-info {
+    display: flex;
+    align-items: center;
+    margin-top: 8px;
+}
+.spotify-track-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+}
+.spotify-track-text {
+    margin-left: 10px;
+    font-size: 1em;
+}
+@media (max-width: 800px) {
+    .footer-flex {
+        flex-direction: column;
+        align-items: center;
+    }
+    .footer-block-fakestore, .footer-block-right {
+        text-align: center;
+    }
+} */

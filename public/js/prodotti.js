@@ -1,5 +1,6 @@
 // public/js/prodotti.js
 const BASE_URL = window.BASE_URL || 'http://localhost/progetto_esame/public';
+const IMG_BASE = '/progetto_esame/public/';
 
 document.addEventListener('DOMContentLoaded', function () {
     // LISTA PRODOTTI
@@ -10,6 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
             .then(prodotti => {
                 let row;
                 prodotti.forEach((prodotto, index) => {
+                    console.log(prodotto);
                     if (index % 3 === 0) {
                         row = document.createElement('div');
                         row.className = 'prodotti-row';
@@ -22,10 +24,10 @@ document.addEventListener('DOMContentLoaded', function () {
                     let immaginiHtml = '';
                     if (prodotto.immagini && prodotto.immagini.length > 0) {
                         prodotto.immagini.forEach(img => {
-                            immaginiHtml += `<img src="${img.url}" alt="${prodotto.nome}" class="prodotto-img">`;
+                            immaginiHtml += `<img src="${IMG_BASE}${img.url}" alt="${prodotto.nome}" class="prodotto-img">`;
                         });
                     } else if (prodotto.immagine_url) {
-                        immaginiHtml = `<img src="${prodotto.immagine_url}" alt="${prodotto.nome}" class="prodotto-img">`;
+                        immaginiHtml = `<img src="${IMG_BASE}${prodotto.immagine_url}" alt="${prodotto.nome}" class="prodotto-img">`;
                     }
 
                     card.innerHTML = `
@@ -61,10 +63,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 let immaginiHtml = '';
                 if (prodotto.immagini && prodotto.immagini.length > 0) {
                     prodotto.immagini.forEach(img => {
-                        immaginiHtml += `<img src="${img.url}" alt="${prodotto.nome}" class="prodotto-img">`;
+                        immaginiHtml += `<img src="${IMG_BASE}${img.url}" alt="${prodotto.nome}" class="prodotto-img">`;
                     });
                 } else if (prodotto.immagine_url) {
-                    immaginiHtml = `<img src="${prodotto.immagine_url}" alt="${prodotto.nome}" class="prodotto-img">`;
+                    immaginiHtml = `<img src="${IMG_BASE}${prodotto.immagine_url}" alt="${prodotto.nome}" class="prodotto-img">`;
                 }
 
                 dettaglioContainer.innerHTML = `

@@ -54,10 +54,39 @@
         <span id="welcome-message">Benvenuto, {{$username ?? ''}}</span>
     </nav>
 
+    
+
+
     <main>
         <div id="result" style="margin:20px; padding:10px;"></div>
         @yield('content')
     </main>
+
+    <footer class="site-footer">
+        <div class="footer-flex">
+            <div class="footer-block-fakestore">
+                <span class="fakestore-label">Continua ad acquistare su FakeStore</span>
+                <a href="{{ url('fakestore') }}">
+                    <img src="{{ url('assets/common/fakestore.png') }}" alt="FakeStore" class="fakestore-img">
+                </a>
+            </div>
+            <div class="footer-block-right">
+                <span class="spotify-label">Ascolta su <img src="{{ url('assets/common/spotify.jpg') }}" alt="Spotify" class="spotify-track-text"></span>
+                @if(isset($track))
+                    <div class="spotify-track-info">
+                        <a href="{{ $track['url'] }}" target="_blank" class="spotify-track-link">
+                            <img src="{{ $track['image'] }}" alt="Copertina brano" class="spotify-track-img">
+                            <span class="spotify-track-text">{{ $track['title'] }}<br>{{ $track['artist'] }}</span>
+                        </a>
+                    </div>
+                @endif
+            </div>
+        </div>
+        <div class="footer-center">
+            <p>&copy; {{ date('Y') }} <span>Apple</span>. Tutti i diritti riservati.<br>
+            <br>Powered By: Diego Favitta, 1000044715</p>
+        </div>
+    </footer>
 
     <script>
         const API_SEARCH_URL = "{{ url('prodotti/search') }}";
