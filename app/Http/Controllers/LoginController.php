@@ -1,15 +1,16 @@
 <?php
 
 namespace App\Http\Controllers;
-    use Illuminate\Routing\Controller as BaseController;
-    use Session;
-    use App\Models\User;
+use Illuminate\Routing\Controller as BaseController;
+use Session;
+use App\Models\User;
 
- class  LoginController extends BaseController
+class LoginController extends BaseController
 {
 
-    public function login_form() {
-        if(Session::get('user_id')){
+    public function login_form()
+    {
+        if (Session::get('user_id')) {
             return redirect('home');
         }
         $error = Session::get('error');
@@ -17,28 +18,45 @@ namespace App\Http\Controllers;
         return view('login')->with('error', $error);
     }
 
-    public function do_login() { 
-        if(Session::get('user_id')) {
+    public function do_login()
+    {
+        if (Session::get('user_id')) {
+            if (request()->ajax()) {
+                return response()->json(['success' => true, 'redirect' => url('home')]);
+            }
             return redirect('home');
         }
-        //Validazione dati
-        if(strlen(request('username'))== 0 || strlen(request('password')) == 0) {
+
+        if (strlen(request('username')) == 0 || strlen(request('password')) == 0) {
+            $error = 'Inserisci username e password';
+            if (request()->ajax()) {
+                return response()->json(['success' => false, 'error' => $error]);
+            }
             Session::put('error', 'dati_mancanti');
             return redirect('login')->withInput();
         }
+
         $user = User::where('username', request('username'))->first();
-        if(!$user || !password_verify(request('password'), $user->password)) {
+        if (!$user || !password_verify(request('password'), $user->password)) {
+            $error = 'Credenziali non valide';
+            if (request()->ajax()) {
+                return response()->json(['success' => false, 'error' => $error]);
+            }
             Session::put('error', 'credenziali_non_valide');
             return redirect('login')->withInput();
         }
-        //Login manuale
+
         Session::put('user_id', $user->id);
         Session::put('username', $user->username);
+        if (request()->ajax()) {
+            return response()->json(['success' => true, 'redirect' => url('home')]);
+        }
         return redirect('home');
     }
 
-    public function register_form() {
-        if(Session::get('user_id')){
+    public function register_form()
+    {
+        if (Session::get('user_id')) {
             return redirect('home');
         }
         $error = Session::get('error');
@@ -46,24 +64,22 @@ namespace App\Http\Controllers;
         return view('register')->with('error', $error);
     }
 
-    public function do_register() { 
-        if(Session::get('user_id')) {
+    public function do_register()
+    {
+        if (Session::get('user_id')) {
             return redirect('home');
         }
         //Validazione dati
-        if(strlen(request('username')) == 0 || strlen(request('password')) == 0) {
+        if (strlen(request('username')) == 0 || strlen(request('password')) == 0) {
             Session::put('error', 'dati_mancanti');
             return redirect('register')->withInput();
-        }
-        else if(request('password') != request('conferma')) {
+        } else if (request('password') != request('conferma')) {
             Session::put('error', 'le_password_non_corrispondono');
             return redirect('register')->withInput();
-        }
-        else if(User::where('username', request('username'))->first()) {
+        } else if (User::where('username', request('username'))->first()) {
             Session::put('error', 'nome_utente_gia_esistente');
             return redirect('register')->withInput();
-        }
-        else if(
+        } else if (
             strlen(request('password')) < 8 ||
             !preg_match('/[a-z]/', request('password')) ||
             !preg_match('/[A-Z]/', request('password')) ||
@@ -85,7 +101,8 @@ namespace App\Http\Controllers;
         Session::put('username', $user->username);
         return redirect('home');
     }
-    public function logout() {
+    public function logout()
+    {
         Session::flush();
         return redirect('login');
     }

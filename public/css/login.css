@@ -75,16 +75,19 @@ body {
   border-radius: 8px;
   cursor: pointer;
   margin: 0;
-  transition: background 0.3s;
+  transition: background 0.3s, opacity 0.2s;
   display: block;
+  opacity: 1;
+}
 
+.login-container .btn-login:disabled {
+  opacity: 0.5;
 }
 
 .login-container .btn-login:hover {
   background: linear-gradient(90deg, #357ab7 0%, #4a90e2 100%);
   filter: brightness(1.08);
 }
-
 
 
 .login-container label {

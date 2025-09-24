@@ -1,30 +1,48 @@
-// Gestione errori form login con div .msg
-const BASE_URL = 'http://localhost/progetto_esame/public';
-
 document.addEventListener('DOMContentLoaded', function () {
-  const form = document.querySelector('form');
-  const msgElem = document.getElementById('msg');
+  const form = document.getElementById('login-form');
+  const msg = document.getElementById('msg');
+  const username = document.getElementById('username');
+  const password = document.getElementById('password');
 
-  // Nascondi il messaggio di errore all'avvio
-  if (msgElem) msgElem.style.display = 'none';
+  username.addEventListener('input', checkInputs);
+  password.addEventListener('input', checkInputs);
+  checkInputs();
 
   form.addEventListener('submit', function (e) {
-    let valid = true;
-    let errorMsg = '';
-    const username = document.getElementById('username').value.trim();
-    const password = document.getElementById('password').value;
-    if (!username || !password) {
-      valid = false;
-      errorMsg = 'Compilare tutti i campi';
-    }
-    if (!valid) {
-      e.preventDefault();
-      msgElem.textContent = errorMsg;
-      msgElem.style.display = 'block';
-    } else {
-      msgElem.textContent = '';
-      msgElem.style.display = 'none';
-
-    }
+    e.preventDefault();
+    msg.textContent = '';
+    const formData = new FormData(form);
+    fetch(form.action, {
+      method: 'POST',
+      headers: {
+        'X-Requested-With': 'XMLHttpRequest',
+        'X-CSRF-TOKEN': form.querySelector('input[name=_token]').value
+      },
+      body: formData
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          window.location.href = data.redirect;
+        } else {
+          msg.textContent = data.error;
+        }
+      })
+      .catch((error) => {
+        console.error('Error: ', error)
+        msg.textContent = 'Errore di connessione.';
+      });
   });
 });
+
+function checkInputs() {
+  const submitBtn = document.getElementById('submit');
+
+  if (username.value.trim() && password.value) {
+    submitBtn.disabled = false;
+    submitBtn.classList.add('opacity: 0.5');
+  } else {
+    submitBtn.disabled = true;
+    submitBtn.classList.remove('enable');
+  }
+}
