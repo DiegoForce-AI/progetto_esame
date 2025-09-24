@@ -1,4 +1,5 @@
-const BASE_URL = 'http://localhost/progetto_esame/public';
+window.BASE_URL = window.BASE_URL || 'http://localhost/progetto_esame/public';
+const BASE_URL = window.BASE_URL;
 
 document.addEventListener('DOMContentLoaded', function () {
     // Profilo utente

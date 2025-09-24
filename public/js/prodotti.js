@@ -1,17 +1,17 @@
-// public/js/prodotti.js
-const BASE_URL = window.BASE_URL || 'http://localhost/progetto_esame/public';
+
+window.BASE_URL = window.BASE_URL || 'http://localhost/progetto_esame/public';
+// Usa sempre window.BASE_URL nel codice
 const IMG_BASE = '/progetto_esame/public/';
 
 document.addEventListener('DOMContentLoaded', function () {
     // LISTA PRODOTTI
     const listaContainer = document.getElementById('prodotti-container');
     if (listaContainer) {
-        fetch(BASE_URL + '/prodotti/json')
+        fetch(window.BASE_URL + '/prodotti/json')
             .then(response => response.json())
             .then(prodotti => {
                 let row;
                 prodotti.forEach((prodotto, index) => {
-                    console.log(prodotto);
                     if (index % 3 === 0) {
                         row = document.createElement('div');
                         row.className = 'prodotti-row';
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     }
 
                     card.innerHTML = `
-                        <a href="${BASE_URL}/prodotto/${prodotto.id}" class="dettaglio-link"">
+                        <a href="${window.BASE_URL}/prodotto/${prodotto.id}" class="dettaglio-link"">
                             ${immaginiHtml}
                             <div class="prodotto-nome">${prodotto.nome}</div>
                             <div class="prodotto-prezzo">${prodotto.prezzo} €</div>
@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const dettaglioContainer = document.getElementById('dettaglio-prodotto');
     if (dettaglioContainer) {
         const id = dettaglioContainer.getAttribute('data-id');
-        fetch(BASE_URL + '/prodotto/' + id + '/json')
+        fetch(window.BASE_URL + '/prodotto/' + id + '/json')
             .then(response => response.json())
             .then(prodotto => {
                 let immaginiHtml = '';
@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 dettaglioContainer.innerHTML = `
                     <div class="prodotto-card prodotto-card-center">
-                        <img src="${BASE_URL}/${prodotto.immagine_url}" alt="${prodotto.nome}" class="prodotto-img">
+                        <img src="${window.BASE_URL}/${prodotto.immagine_url}" alt="${prodotto.nome}" class="prodotto-img">
                         <div class="prodotto-nome prodotto-nome-big">${prodotto.nome}</div>
                         <div class="prodotto-prezzo prodotto-prezzo-big">${prodotto.prezzo} €</div>
                         <div class="prodotto-desc">${prodotto.descrizione || ''}</div>
@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // FUNZIONE COMUNE
 function aggiungiAlCarrello(prodottoId) {
-    fetch(BASE_URL + '/shopping/add', {
+    fetch(window.BASE_URL + '/shopping/add', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
