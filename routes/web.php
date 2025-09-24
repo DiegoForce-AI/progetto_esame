@@ -38,8 +38,13 @@ Route::delete('/shopping/remove', [CartController::class, 'remove']);
 Route::patch('/shopping/update', [CartController::class, 'update']);
 
 /* API SPOTIFY */
+
 Route::get('/spotify', function() {
     return view('spotify');
+});
+
+Route::get('/spotify-canzoni', function() {
+    return view('spotify-canzoni');
 });
 
 

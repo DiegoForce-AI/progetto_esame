@@ -1,21 +1,22 @@
-<script type="module" src="js/spotifyAlbum.js" defer></script>
+<script type="module" src="js/spotifySong.js" defer></script>
 @extends('layout')
 @section('head')
-    <title>Spotify</title>
+    <title>Spotify - Ricerca Canzoni</title>
     <link rel="stylesheet" href="{{ url('css/spotify.css') }}">
 @endsection
 @section('content')
     <div class="spotify-hero">
         <img src="{{ url('assets/common/spotify.jpg') }}" alt="Spotify" class="spotify-hero-logo">
         <h1 class="spotify-title">Spotify Music Search</h1>
-        <p class="spotify-desc">Cerca album e canzoni direttamente da Spotify</p>
+        <p class="spotify-desc">Cerca canzoni da Spotify!</p>
     </div>
     <div class="spotify-search-flex">
-        <div id="album-container" class="album-list">
-            <!-- Gli album verranno inseriti dinamicamente da spotifyAlbum.js -->
-        </div>
+        <div id="song-container"></div>
     </div>
     <div class="spotify-switch-search">
-        <a href="{{ url('spotify-canzoni') }}" class="spotify-switch-btn">Cerca per canzone &rarr;</a>
+        <a href="{{ url('spotify') }}" class="spotify-switch-btn">&larr; Cerca per album</a>
     </div>
+@endsection
+@section('scripts')
+    <script src="{{ url('js/spotifySong.js') }}" defer></script>
 @endsection

@@ -23,8 +23,8 @@ document.addEventListener('DOMContentLoaded', async function () {
     // Crea form di ricerca
     const searchForm = document.createElement('form');
     searchForm.innerHTML = `
-        <input type="text" id="song-name-input" placeholder="Cerca canzone" required>
-        <button type="submit">Cerca</button>
+        <input type="text" id="song-name-input" class="spotify-search-input" placeholder="Cerca canzone..." required>
+        <button type="submit" class="spotify-search-btn">Cerca</button>
     `;
     container.parentNode.insertBefore(searchForm, container);
 
@@ -36,31 +36,39 @@ document.addEventListener('DOMContentLoaded', async function () {
         const tracks = await searchTracks(query);
         if (tracks && tracks.length > 0) {
             // Mostra lista canzoni trovate
-            let listHtml = '<h3>Risultati:</h3><ul>';
+            let listHtml = '<h3>Risultati:</h3><div class="spotify-result-list">';
             tracks.forEach(track => {
-                listHtml += `<li style="margin-bottom:10px;cursor:pointer;" data-track-id="${track.id}">
-                    <img src="${track.album.images[0]?.url}" alt="${track.name}" style="width:50px;vertical-align:middle;"> 
-                    <strong>${track.name}</strong> - ${track.artists.map(a => a.name).join(', ')} (${track.album.name})
-                </li>`;
+                listHtml += `<div class="spotify-result-card" data-track-id="${track.id}">
+                    <img src="${track.album.images[0]?.url}" alt="${track.name}" class="spotify-result-img"> 
+                    <div class="spotify-result-info">
+                        <div class="spotify-result-title">${track.name}</div>
+                        <div class="spotify-result-artist">${track.artists.map(a => a.name).join(', ')}</div>
+                        <div class="spotify-result-meta">${track.album.name}</div>
+                    </div>
+                </div>`;
             });
-            listHtml += '</ul>';
+            listHtml += '</div>';
             container.innerHTML = listHtml;
 
             // Aggiungi click per mostrare dettagli canzone
-            container.querySelectorAll('li[data-track-id]').forEach(li => {
-                li.addEventListener('click', async function () {
-                    const trackId = li.getAttribute('data-track-id');
+            container.querySelectorAll('.spotify-result-card[data-track-id]').forEach(card => {
+                card.addEventListener('click', async function () {
+                    const trackId = card.getAttribute('data-track-id');
                     container.innerHTML = '<p>Caricamento canzone...</p>';
                     const trackData = await fetchTrackData(trackId);
                     if (trackData) {
-                        container.innerHTML = `
-                            <h2>${trackData.name}</h2>
-                            <p>Artista: ${trackData.artists.map(artist => artist.name).join(', ')}</p>
-                            <p>Album: ${trackData.album.name}</p>
-                            <img src="${trackData.album.images[0]?.url}" alt="${trackData.name}" style="width:200px;">
-                            <p>Durata: ${Math.floor(trackData.duration_ms / 60000)}:${String(Math.floor((trackData.duration_ms % 60000) / 1000)).padStart(2, '0')}</p>
-                            <button id="backBtn">Torna ai risultati</button>
-                        `;
+                                                container.innerHTML = `
+                                                    <div class="spotify-album-card">
+                                                        <div class="spotify-album-info">
+                                                            <div class="spotify-album-title">${trackData.name}</div>
+                                                            <div class="spotify-album-meta">Artista: ${trackData.artists.map(artist => artist.name).join(', ')}</div>
+                                                            <div class="spotify-album-meta">Album: ${trackData.album.name}</div>
+                                                            <div class="spotify-album-meta">Durata: ${Math.floor(trackData.duration_ms / 60000)}:${String(Math.floor((trackData.duration_ms % 60000) / 1000)).padStart(2, '0')}</div>
+                                                        </div>
+                                                        <img src="${trackData.album.images[0]?.url}" alt="${trackData.name}" class="spotify-album-cover">
+                                                    </div>
+                                                    <a id="backBtn" class="spotify-back-btn" href="#">Torna ai risultati</a>
+                                                `;
                         document.getElementById('backBtn').onclick = () => {
                             showTrackResults();
                         };
@@ -75,29 +83,37 @@ document.addEventListener('DOMContentLoaded', async function () {
                             container.innerHTML = '<p>Caricamento...</p>';
                             searchTracks(query).then(tracks => {
                                 if (tracks && tracks.length > 0) {
-                                    let listHtml = '<h3>Risultati:</h3><ul>';
+                                    let listHtml = '<h3>Risultati:</h3><div class="spotify-result-list">';
                                     tracks.forEach(track => {
-                                        listHtml += `<li style="margin-bottom:10px;cursor:pointer;" data-track-id="${track.id}">
-                    <img src="${track.album.images[0]?.url}" alt="${track.name}" style="width:50px;vertical-align:middle;"> 
-                    <strong>${track.name}</strong> - ${track.artists.map(a => a.name).join(', ')} (${track.album.name})
-                </li>`;
+                                        listHtml += `<div class="spotify-result-card" data-track-id="${track.id}">
+                                            <img src="${track.album.images[0]?.url}" alt="${track.name}" class="spotify-result-img"> 
+                                            <div class="spotify-result-info">
+                                                <div class="spotify-result-title">${track.name}</div>
+                                                <div class="spotify-result-artist">${track.artists.map(a => a.name).join(', ')}</div>
+                                                <div class="spotify-result-meta">${track.album.name}</div>
+                                            </div>
+                                        </div>`;
                                     });
-                                    listHtml += '</ul>';
+                                    listHtml += '</div>';
                                     container.innerHTML = listHtml;
-                                    container.querySelectorAll('li[data-track-id]').forEach(li => {
-                                        li.addEventListener('click', async function () {
-                                            const trackId = li.getAttribute('data-track-id');
+                                    container.querySelectorAll('.spotify-result-card[data-track-id]').forEach(card => {
+                                        card.addEventListener('click', async function () {
+                                            const trackId = card.getAttribute('data-track-id');
                                             container.innerHTML = '<p>Caricamento canzone...</p>';
                                             const trackData = await fetchTrackData(trackId);
                                             if (trackData) {
                                                 container.innerHTML = `
-                            <h2>${trackData.name}</h2>
-                            <p>Artista: ${trackData.artists.map(artist => artist.name).join(', ')}</p>
-                            <p>Album: ${trackData.album.name}</p>
-                            <img src="${trackData.album.images[0]?.url}" alt="${trackData.name}" style="width:200px;">
-                            <p>Durata: ${Math.floor(trackData.duration_ms / 60000)}:${String(Math.floor((trackData.duration_ms % 60000) / 1000)).padStart(2, '0')}</p>
-                            <button id="backBtn">Torna ai risultati</button>
-                        `;
+                                                    <div class="spotify-album-card">
+                                                        <div class="spotify-album-info">
+                                                            <div class="spotify-album-title">${trackData.name}</div>
+                                                            <div class="spotify-album-meta">Artista: ${trackData.artists.map(artist => artist.name).join(', ')}</div>
+                                                            <div class="spotify-album-meta">Album: ${trackData.album.name}</div>
+                                                            <div class="spotify-album-meta">Durata: ${Math.floor(trackData.duration_ms / 60000)}:${String(Math.floor((trackData.duration_ms % 60000) / 1000)).padStart(2, '0')}</div>
+                                                        </div>
+                                                        <img src="${trackData.album.images[0]?.url}" alt="${trackData.name}" class="spotify-album-cover">
+                                                    </div>
+                                                    <a id="backBtn" class="spotify-back-btn" href="#">Torna ai risultati</a>
+                                                `;
                                                 document.getElementById('backBtn').onclick = () => {
                                                     showTrackResults();
                                                 };
