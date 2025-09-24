@@ -15,7 +15,6 @@ namespace App\Http\Controllers;
     }
     //Leggiamo username
     $user = User::find(Session::get('user_id'));
-            // Esempio: recupero traccia da Spotify API (mock, sostituisci con chiamata reale)
             $track = [
                 'title' => 'Blinding Lights',
                 'artist' => 'The Weeknd',

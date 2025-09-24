@@ -1,7 +1,9 @@
 @extends('layout')
-<link rel="stylesheet" href="{{ url('css/shopping.css') }}">
+<link rel="stylesheet" href="{{ url('css/checkout.css') }}">
+
+<script src="{{ url('js/home.js') }}"></script>
 @section('content')
-    <h2>Checkout</h2>
+    <h2 class="checkout-title">Checkout</h2>
     @if(session('error'))
         <div class="alert alert-danger">{{ session('error') }}</div>
     @endif
@@ -13,6 +15,17 @@
         <ul>
             @forelse($cart as $prodotto)
                 <li>
+                    @php
+                        $img = null;
+                        if(isset($prodotto->immagini) && count($prodotto->immagini) > 0) {
+                            $img = $prodotto->immagini[0]->url;
+                        } elseif(isset($prodotto->immagine_url)) {
+                            $img = $prodotto->immagine_url;
+                        }
+                    @endphp
+                    @if($img)
+                        <img src="{{ url($img) }}" alt="{{ $prodotto->nome }}" class="checkout-thumb">
+                    @endif
                     <strong>{{ $prodotto->nome }}</strong> x {{ $prodotto->pivot->quantita }} - {{ $prodotto->prezzo }} €
                 </li>
             @empty

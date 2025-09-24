@@ -11,7 +11,13 @@ class ProdottoController extends BaseController
     public function index()
     {
         $prodotti = Prodotto::with('immagini')->get();
-        return view('prodotti')->with('prodotti', $prodotti);
+        $track = [
+            'title' => 'Blinding Lights',
+            'artist' => 'The Weeknd',
+            'image' => 'https://i.scdn.co/image/ab67616d0000b2738863bc11d2aa12b54f5aeb36',
+            'url' => 'spotify'
+        ];
+        return view('prodotti')->with(['prodotti' => $prodotti, 'track' => $track]);
     }
 
     public function show($id)
@@ -20,7 +26,13 @@ class ProdottoController extends BaseController
         if (!$prodotto) {
             return redirect('prodotti');
         }
-        return view('prodotto')->with('prodotto', $prodotto);
+        $track = [
+            'title' => 'Blinding Lights',
+            'artist' => 'The Weeknd',
+            'image' => 'https://i.scdn.co/image/ab67616d0000b2738863bc11d2aa12b54f5aeb36',
+            'url' => 'spotify'
+        ];
+        return view('prodotto')->with(['prodotto' => $prodotto, 'track' => $track]);
     }
 
     public function showJson($id)

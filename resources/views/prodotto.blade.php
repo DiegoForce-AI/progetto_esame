@@ -1,7 +1,8 @@
 @extends('layout')
 
 @section('head')
-    <title>Dettaglio Prodotto</title>
+    <title>Scheda Prodotto</title>
+    <link rel="stylesheet" href="{{ url('css/prodotti.css') }}">
 @endsection
 
 @section('scripts')
@@ -9,7 +10,13 @@
 @endsection
 
 @section('content')
-    <div id="dettaglio-prodotto" data-id="{{ $prodotto->id }}"></div>
-    <br>
-    <a href="{{ url('prodotti') }}">&larr; Torna alla lista prodotti</a>
+    <div class="prodotto-detail-wrapper">
+        <div class="prodotto-hero">
+            <h1 class="prodotto-title">Scheda prodotto</h1>
+        </div>
+        <div id="dettaglio-prodotto" data-id="{{ $prodotto->id }}"></div>
+    </div>
+    <div class="prodotto-back-link-wrapper">
+        <a href="{{ url('prodotti') }}" class="prodotto-back-link-btn">&larr; Torna alla lista prodotti</a>
+    </div>
 @endsection

@@ -1,10 +1,37 @@
-nav {
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+body {
+    min-height: 100vh;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 2.2em;
+    flex-direction: column;
+}
+main {
+    flex: 1 0 auto;
+}
+.site-footer {
+    flex-shrink: 0;
+    width: 100%;
+    padding: 20px 0 0 0;
+    color: #888;
+    box-shadow: 0 -2px 8px rgba(0,0,0,0.03);
+    position: relative;
+    left: 0;
+    bottom: 0;
+}
+
+nav {
     background: #fff;
-    max-height: 44px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: inherit;
+    font-style: normal;
+    position: relative;
+    z-index: 10;
 }
 
 nav a img {
@@ -17,17 +44,43 @@ nav a img {
 }
 
 nav a {
-    color: #1d1d1f;
+    color: #222;
     text-decoration: none;
-    font-size: 0.95em;
-    padding: 0.2em 0;
+    font-weight: 500;
+    margin: 0 12px;
+    padding: 4px 0;
+    position: relative;
     transition: color 0.2s;
-    font-size: 12px;
+    display: inline-block;
+    text-align: center;
 }
 
-nav a:hover {
-    text-decoration: underline;
+/* Effetto hover solo su link testuali, non sulle icone */
+nav a:not(:has(img)):hover, nav a:not(:has(img)):focus {
     color: #0071e3;
+}
+
+nav a:not(:has(img))::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 2px;
+    background: #0071e3;
+    transition: width 0.25s;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+
+nav a:not(:has(img)):hover::after, nav a:not(:has(img)):focus::after {
+    width: 100%;
+}
+
+nav img {
+    vertical-align: middle;
+    height: 32px;
+    margin-right: 8px;
+    transition: none;
 }
 
 .dropdown-account {
@@ -40,11 +93,14 @@ nav a:hover {
     display: none;
     position: absolute;
     right: 0;
+    top: 100%;
     background: #fff;
     border: 1px solid #ccc;
     border-radius: 6px;
-    min-width: 120px;
+    min-width: 180px;
     z-index: 1000;
+    padding: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
 }
 
 .account img {
@@ -497,10 +553,13 @@ footer img {
 
 .footer-block-right {
     display: flex;
+    position: relative;
+    bottom: 12px;
+    left: 174px;
     flex-direction: column;
     align-items: flex-end;
     justify-content: flex-start;
-    width: 70%;
+    width: 60%;
    
 }
 
@@ -517,6 +576,8 @@ footer img {
 }
 .footer-block-fakestore {
     display: flex;
+    position: relative;
+    right: 200px;
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
@@ -697,10 +758,63 @@ and (min-height: 734px) {
     }
 }
 
+#result {
+    margin: 20px;
+    padding: 10px;
+}
 
-footer {
-    background: #161617cc;
-    color: #fff;
-    text-align: center;
-    padding: 2em 1em;
+/* Dropdown account */
+.dropdown-account {
+    display: inline-block;
+    position: relative;
+}
+.account-dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    min-width: 180px;
+    z-index: 1000;
+    padding: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+}
+.account-dropdown form {
+    margin: 0;
+}
+
+/* Dropdown search */
+.search-dropdown-wrapper {
+    display: inline-block;
+    position: relative;
+}
+.search-dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    min-width: 240px;
+    z-index: 1000;
+    padding: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+}
+#search-form {
+    margin: 0;
+}
+#search-input {
+    padding: 4px 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    width: 160px;
+}
+#searchBtn {
+    padding: 4px 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    background: #f5f5f5;
+    cursor: pointer;
 }

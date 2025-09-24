@@ -2,11 +2,7 @@
 <html>
 <head>
     <link rel="stylesheet" href="{{ url('css/home.css') }}">
-    <link rel="stylesheet" href="{{ url('css/shopping.css') }}">    
-    <script>
-
-</script>
-
+    <link rel="stylesheet" href="{{ url('css/shopping.css') }}">
     @yield('head')
     <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
@@ -32,19 +28,13 @@
             </div>
         </div>
 
-        <div style="display:inline-block; position:relative;">
+        <div class="search-dropdown-wrapper">
             <a href="#" id="search-btn"><img src="{{ url('assets/search.svg') }}" alt="lente"></a>
-            <div id="search-dropdown"
-                 style="display:none; position:absolute; right:0; background:#fff; border:1px solid #ccc; border-radius:6px; min-width:240px; z-index:1000; padding:10px;">
-
-                <form id="search-form" action="{{ url('prodotti') }}" method="get" style="margin:0;">
+            <div id="search-dropdown" class="search-dropdown">
+                <form id="search-form" action="{{ url('prodotti') }}" method="get">
                     <input type="text" name="nome" id="search-input" placeholder="Cerca prodotti..."
-                           value="{{ request('nome') }}"
-                           style="padding:4px 8px; border-radius:4px; border:1px solid #ccc; width:160px;">
-                    <button id="searchBtn" type="submit"
-                            style="padding:4px 10px; border-radius:4px; border:1px solid #ccc; background:#f5f5f5; cursor:pointer;">
-                        Cerca
-                    </button>
+                           value="{{ request('nome') }}">
+                    <button id="searchBtn" type="submit">Cerca</button>
                 </form>
             </div>
         </div>
@@ -54,11 +44,8 @@
         <span id="welcome-message">Benvenuto, {{$username ?? ''}}</span>
     </nav>
 
-    
-
-
     <main>
-        <div id="result" style="margin:20px; padding:10px;"></div>
+        <div id="result"></div>
         @yield('content')
     </main>
 
@@ -72,14 +59,12 @@
             </div>
             <div class="footer-block-right">
                 <span class="spotify-label">Ascolta su <img src="{{ url('assets/common/spotify.jpg') }}" alt="Spotify" class="spotify-track-text"></span>
-                @if(isset($track))
-                    <div class="spotify-track-info">
-                        <a href="{{ $track['url'] }}" target="_blank" class="spotify-track-link">
-                            <img src="{{ $track['image'] }}" alt="Copertina brano" class="spotify-track-img">
-                            <span class="spotify-track-text">{{ $track['title'] }}<br>{{ $track['artist'] }}</span>
-                        </a>
-                    </div>
-                @endif
+                <div class="spotify-track-info">
+                    <a href="{{ url('spotify') }}" class="spotify-track-link">
+                        <img src="https://i.scdn.co/image/ab67616d0000b2738863bc11d2aa12b54f5aeb36" alt="Copertina brano" class="spotify-track-img">
+                        <span class="spotify-track-text">Blinding Lights<br>The Weeknd</span>
+                    </a>
+                </div>
             </div>
         </div>
         <div class="footer-center">
@@ -93,9 +78,7 @@
         window.csrfToken = document.querySelector('meta[name=csrf-token]').getAttribute('content');
     </script>
 
-    <!-- Script specifici della pagina -->
     @yield('scripts')
-    <!-- Script globali -->
     <script src="{{ url('js/home.js') }}" defer></script>
     <script src="{{ url('js/shopping.js') }}" defer></script>
 </body>

@@ -1,14 +1,28 @@
 /* /* /* Footer layout globale */
-/* .site-footer {
+/* html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+main {
+    flex: 1 0 auto;
+}
+.site-footer {
+    flex-shrink: 0;
     width: 100%;
     background: #f7f7f7;
     padding: 20px 0 0 0;
     color: #888;
+    box-shadow: 0 -2px 8px rgba(0,0,0,0.03);
+    margin-top: 40px;
     position: relative;
     left: 0;
     bottom: 0;
-    margin-top: 40px;
-    box-shadow: 0 -2px 8px rgba(0,0,0,0.03);
 }
 .footer-flex {
     display: flex;

@@ -44,7 +44,13 @@ class CartController extends BaseController
         if ($request->ajax() || $request->wantsJson()) {
             return response()->json(['cart' => $prodotti, 'totale' => $totale]);
         }
-        return view('shopping', ['cart' => $prodotti, 'totale' => $totale]);
+        $track = [
+            'title' => 'Blinding Lights',
+            'artist' => 'The Weeknd',
+            'image' => 'https://i.scdn.co/image/ab67616d0000b2738863bc11d2aa12b54f5aeb36',
+            'url' => 'spotify'
+        ];
+        return view('shopping', ['cart' => $prodotti, 'totale' => $totale, 'track' => $track]);
     }
 
 
@@ -98,7 +104,7 @@ class CartController extends BaseController
             return response()->json(['error' => 'Utente non autenticato'], 401);
         }
         $carrello = Carrello::where('utente_id', $utenteId)->first();
-        $prodottoId = $request->query('prodotto_id');
+        $prodottoId = $request->input('prodotto_id', $request->query('prodotto_id'));
         if ($carrello && $prodottoId) {
             CarrelloProdotti::where('carrello_id', $carrello->id)
                 ->where('prodotto_id', $prodottoId)

@@ -31,14 +31,13 @@ document.addEventListener('DOMContentLoaded', function () {
                     }
 
                     card.innerHTML = `
-                        <a href="${BASE_URL}/prodotto/${prodotto.id}" class="dettaglio-link">
+                        <a href="${BASE_URL}/prodotto/${prodotto.id}" class="dettaglio-link"">
                             ${immaginiHtml}
-                            <h3>${prodotto.nome}</h3>
-                            <p>${prodotto.descrizione}</p>
-                            <strong>${prodotto.prezzo} €</strong>
+                            <div class="prodotto-nome">${prodotto.nome}</div>
+                            <div class="prodotto-prezzo">${prodotto.prezzo} €</div>
+                            <div class="prodotto-desc">${prodotto.descrizione || ''}</div>
                         </a>
-                        <br>
-                        <button class="add-to-cart-btn" data-id="${prodotto.id}">Aggiungi al carrello</button>
+                        <button class="prodotto-btn add-to-cart-btn" data-id="${prodotto.id}">Aggiungi al carrello</button>
                     `;
                     row.appendChild(card);
                 });
@@ -70,12 +69,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
 
                 dettaglioContainer.innerHTML = `
-                    <img src="${BASE_URL}/${prodotto.immagine_url}" alt="${prodotto.nome}" class="prodotto-img">
-                    <h2>${prodotto.nome}</h2>
-                    <p>${prodotto.descrizione}</p>
-                    <strong>${prodotto.prezzo} €</strong>
-                    <br>
-                    <button class="add-to-cart-btn" data-id="${prodotto.id}">Aggiungi al carrello</button>
+                    <div class="prodotto-card prodotto-card-center">
+                        <img src="${BASE_URL}/${prodotto.immagine_url}" alt="${prodotto.nome}" class="prodotto-img">
+                        <div class="prodotto-nome prodotto-nome-big">${prodotto.nome}</div>
+                        <div class="prodotto-prezzo prodotto-prezzo-big">${prodotto.prezzo} €</div>
+                        <div class="prodotto-desc">${prodotto.descrizione || ''}</div>
+                        <button class="prodotto-btn add-to-cart-btn" data-id="${prodotto.id}">Aggiungi al carrello</button>
+                    </div>
                 `;
 
                 const addBtn = dettaglioContainer.querySelector('.add-to-cart-btn');
