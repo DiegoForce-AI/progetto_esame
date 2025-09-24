@@ -1,3 +1,26 @@
+/* Fix navbar responsive: elimina spazio a destra su schermi piccoli senza !important */
+nav {
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0 24px;
+    min-height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    position: relative;
+    z-index: 10;
+}
+/* Fix footer responsive: elimina spazio a destra su schermi piccoli */
+footer, .footer-flex {
+    width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+
+
+
 html, body {
     height: 100%;
     margin: 0;
@@ -20,18 +43,6 @@ main {
     position: relative;
     left: 0;
     bottom: 0;
-}
-
-nav {
-    background: #fff;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: inherit;
-    font-style: normal;
-    position: relative;
-    z-index: 10;
 }
 
 nav a img {
@@ -759,6 +770,22 @@ and (min-height: 734px) {
     }
 }
 
+@media (max-width: 900px) {
+    .footer-flex {
+        flex-direction: column;
+        align-items: center;
+        width: 100vw !important;
+        margin: 0 !important;
+        box-sizing: border-box;
+    }
+    .footer-block-fakestore, .footer-block-right {
+        width: 100% !important;
+        margin: 0 0 18px 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+    }
+}
+
 #result {
     margin: 20px;
     padding: 10px;
@@ -821,17 +848,9 @@ and (min-height: 734px) {
 }
 
 
-.peppe-mangiu {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.footer-block-right,
+.footer-block-fakestore {
+    left: 0;
+    right: 0;
+    position: relative;
 }
-
-.scandura {
-    display: flex;
-    justify-content: space-between
-    ;
-    align-items: center;
-    flex-direction: column;
-}
-
