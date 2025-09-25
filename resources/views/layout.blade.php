@@ -12,13 +12,14 @@
 <body class = @yield('body-class', '')>
     
     <nav>
-        <a href="{{ url('home') }}"><img src="{{ url('assets/logo.svg') }}" alt="Apple Logo"></a>
-        <a href="{{ url('prodotti') }}">Store</a>
-        <a href="#">Mac</a>
-        <a href="#">iPad</a>
-        <a href="#">iPhone</a>
-        <a href="{{ url('spotify') }}">Spotify</a>
-        <a href="{{ url('fakestore') }}">FakeStore</a>
+    <a href="{{ url('home') }}"><img src="{{ url('assets/logo.svg') }}" alt="Apple Logo"></a>
+    <a href="{{ url('prodotti') }}">Store</a>
+    <a href="{{ url('mac') }}">Mac</a>
+    <a href="{{ url('ipad') }}">iPad</a>
+    <a href="{{ url('iphone') }}">iPhone</a>
+    <a href="{{ url('airpods') }}">Airpods</a>
+    <a href="{{ url('spotify') }}">Spotify</a>
+    <a href="{{ url('fakestore') }}">FakeStore</a>
 
         <div class="dropdown-account">
             <div class="account">

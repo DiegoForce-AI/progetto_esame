@@ -10,17 +10,29 @@ document.addEventListener('DOMContentLoaded', function () {
         fetch(window.BASE_URL + '/prodotti/json')
             .then(response => response.json())
             .then(prodotti => {
+                // Filtra per categoria se richiesto
+                let filtered = prodotti;
+                if (window.PRODOTTI_FILTER) {
+                    let filterId = null;
+                    if (window.PRODOTTI_FILTER === 'mac') filterId = 1;
+                    if (window.PRODOTTI_FILTER === 'iphone') filterId = 2;
+                    if (window.PRODOTTI_FILTER === 'ipad') filterId = 3;
+                    if (window.PRODOTTI_FILTER === 'airpods') filterId = 4;
+                    if (window.PRODOTTI_FILTER === 'mac-ipad-airpods') {
+                        filtered = prodotti.filter(p => [1,3,4].includes(p.categoria_id));
+                    } else if (filterId !== null) {
+                        filtered = prodotti.filter(p => p.categoria_id == filterId);
+                    }
+                }
                 let row;
-                prodotti.forEach((prodotto, index) => {
+                filtered.forEach((prodotto, index) => {
                     if (index % 3 === 0) {
                         row = document.createElement('div');
                         row.className = 'prodotti-row';
                         listaContainer.appendChild(row);
                     }
-
                     const card = document.createElement('div');
                     card.className = 'prodotto-card';
-
                     let immaginiHtml = '';
                     if (prodotto.immagini && prodotto.immagini.length > 0) {
                         prodotto.immagini.forEach(img => {
@@ -29,7 +41,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     } else if (prodotto.immagine_url) {
                         immaginiHtml = `<img src="${IMG_BASE}${prodotto.immagine_url}" alt="${prodotto.nome}" class="prodotto-img">`;
                     }
-
                     card.innerHTML = `
                         <a href="${window.BASE_URL}/prodotto/${prodotto.id}" class="dettaglio-link"">
                             ${immaginiHtml}

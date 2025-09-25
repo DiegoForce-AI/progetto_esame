@@ -32,7 +32,13 @@ class ProdottoController extends BaseController
             'image' => 'https://i.scdn.co/image/ab67616d0000b2738863bc11d2aa12b54f5aeb36',
             'url' => 'spotify'
         ];
-        return view('prodotto')->with(['prodotto' => $prodotto, 'track' => $track]);
+        $backUrl = 'prodotti';
+        if(isset($prodotto->categoria_id)) {
+            if($prodotto->categoria_id == 1) $backUrl = 'mac';
+            elseif($prodotto->categoria_id == 2) $backUrl = 'iphone';
+            elseif($prodotto->categoria_id == 3) $backUrl = 'ipad';
+        }
+        return view('prodotto')->with(['prodotto' => $prodotto, 'track' => $track, 'backUrl' => $backUrl]);
     }
 
     public function showJson($id)

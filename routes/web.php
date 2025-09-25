@@ -1,3 +1,5 @@
+
+
 <?php
 
 use Illuminate\Support\Facades\Route;
@@ -55,4 +57,25 @@ Route::post('/checkout', [App\Http\Controllers\CheckoutController::class, 'proce
 /* API FAKESTORE */
 Route::get('/fakestore', function() {
     return view('fakestore');
+});
+
+
+// Pagine dedicate Mac, iPad, iPhone, Airpods   
+Route::get('/mac', function() {
+    return view('mac');
+});
+Route::get('/ipad', function() {
+    return view('ipad');
+});
+Route::get('/iphone', function() {
+    return view('iphone');
+});
+
+Route::get('/airpods', function() {
+    return view('airpods');
+});
+
+// Pagina con tutti i prodotti Mac, iPad, Airpods
+Route::get('/acquista-tutto', function() {
+    return view('acquista-tutto');
 });
