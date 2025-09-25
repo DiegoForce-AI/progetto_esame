@@ -1,4 +1,11 @@
-/* Fix navbar responsive: elimina spazio a destra su schermi piccoli senza !important */
+.home-page nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+
 nav {
     width: 100%;
     box-sizing: border-box;
@@ -12,7 +19,7 @@ nav {
     position: relative;
     z-index: 10;
 }
-/* Fix footer responsive: elimina spazio a destra su schermi piccoli */
+
 footer, .footer-flex {
     width: 100%;
     box-sizing: border-box;
@@ -99,20 +106,6 @@ nav img {
     position: relative;
 }
 
-
-.account-dropdown {
-    display: none;
-    position: absolute;
-    right: 0;
-    top: 100%;
-    background: #fff;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    min-width: 180px;
-    z-index: 1000;
-    padding: 12px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
-}
 
 .account img {
     width: 24px;
@@ -802,12 +795,13 @@ and (min-height: 734px) {
     right: 0;
     top: 100%;
     background: #fff;
-    border: 1px solid #ccc;
-    border-radius: 6px;
+    border: 2px solid #0071e3;
+    border-radius: 12px;
     min-width: 180px;
     z-index: 1000;
-    padding: 12px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    box-shadow: 0 8px 32px rgba(0,113,227,0.13);
+    font-size: 1.08em;
+    transition: box-shadow 0.2s, border 0.2s;
 }
 .account-dropdown form {
     margin: 0;
@@ -823,16 +817,44 @@ and (min-height: 734px) {
     position: absolute;
     right: 0;
     background: #fff;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    min-width: 240px;
+    border: 2px solid #0071e3;
+    border-radius: 12px;
+    min-width: 260px;
     z-index: 1000;
-    padding: 10px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    padding: 18px 20px;
+    box-shadow: 0 8px 32px rgba(0,113,227,0.13);
+    font-size: 1.08em;
+    transition: box-shadow 0.2s, border 0.2s;
 }
 #search-form {
     margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
+#search-input {
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1.5px solid #0071e3;
+    width: 180px;
+    font-size: 1.08em;
+}
+#searchBtn {
+    padding: 8px 16px;
+    border-radius: 6px;
+    border: 1.5px solid #0071e3;
+    background: #0071e3;
+    color: #fff;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1.08em;
+    transition: background 0.2s;
+}
+#searchBtn:hover {
+    background: #005bb5;
+}
+
+
 #search-input {
     padding: 4px 8px;
     border-radius: 4px;
@@ -843,7 +865,6 @@ and (min-height: 734px) {
     padding: 4px 10px;
     border-radius: 4px;
     border: 1px solid #ccc;
-    background: #f5f5f5;
     cursor: pointer;
 }
 

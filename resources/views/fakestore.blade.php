@@ -3,11 +3,15 @@
 
 @section('head')
     <title>FakeStore</title>
+    <link rel="stylesheet" href="{{ url('css/fakestore.css') }}">
 @endsection
 
 @section('content')
-    <h1>Prodotti</h1>
+    <div class="fakestore-title">
+        <h1>FakeStore - Prodotti</h1>
+    </div>
+    </div>
 
-    <div id="fakestore-products"></div>
-    <div id="fakestore-cart"></div>
+    <div id="fakestore-products" class="fakestore-products"></div>
+    <div id="fakestore-cart" class="fakestore-cart"></div>
 @endsection

@@ -7,7 +7,10 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 
-<body>
+
+
+<body class = @yield('body-class', '')>
+    
     <nav>
         <a href="{{ url('home') }}"><img src="{{ url('assets/logo.svg') }}" alt="Apple Logo"></a>
         <a href="{{ url('prodotti') }}">Store</a>

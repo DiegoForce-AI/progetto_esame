@@ -4,9 +4,11 @@
     <link rel="stylesheet" href="{{ url('css/home.css') }}">
 @endsection
 
+@section('body-class', 'home-page')
+
 @section('content')
    <div class='hero'>
-    <a href="#"><img src="{{ url('assets/common/sfondo apple.png') }}" alt="sfondo" class="wallpaper"></a>
+    <img src="{{ url('assets/common/sfondo apple.png') }}" alt="sfondo" class="wallpaper">
         <div class="hero-content">
             <div class="bubble-wrapper">
                 <div class='hero-title'>
@@ -42,7 +44,7 @@
         <div class='hero-iphone-description'>
             <p>Ti presentiamo la famiglia iPhone 16.</p>
         </div>
-    <a href="#"><img src="{{ url('assets/common/hero_iphone_family__fuz5j2v5xx6y_largetall.jpg') }}" alt="iphone"></a>
+    <img src="{{ url('assets/common/hero_iphone_family__fuz5j2v5xx6y_largetall.jpg') }}" alt="iphone">
         <div class='hero-iphone-button'>
             <div class="button">
                 <button class='btn'>Scopri di più</button>
