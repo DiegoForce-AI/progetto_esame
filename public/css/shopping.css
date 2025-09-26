@@ -217,17 +217,14 @@ input[type="number"][name="quantita"]:focus {
     .cart-product-img {
         margin-bottom: 8px;
     }
-    .cart-checkout-btn {
-        width: 100%;
-        margin-top: 18px;
-    }
+    
 }
 @media (max-width: 600px) {
     #checkout-cart {
         padding: 18px 8px 10px 8px;
     }
     #checkout-form .btn-success {
-        width: 100%;
+        width: 40%;
         padding: 14px 0;
     }
 }

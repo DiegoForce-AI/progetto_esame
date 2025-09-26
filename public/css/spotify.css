@@ -2,11 +2,10 @@ main {
     margin-top: 56px !important;
 }
 
-@media (min-width: 1024px) {
-    main {
-        margin-top: 64px !important;
-    }
-}
+
+
+
+
 .spotify-search-form-centered {
     display: flex;
     justify-content: center;
@@ -388,4 +387,21 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+@media (min-width: 1024px) {
+    main {
+        margin-top: 64px !important;
+    }
+}
+
+@media (max-width: 425px) {
+    .spotify-album-card{
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 24px;
+        gap: 24px;
+        min-width: 280px;
+    }
 }

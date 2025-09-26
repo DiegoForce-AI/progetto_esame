@@ -7,6 +7,8 @@
 }
 
 
+
+
 nav {
     width: 100%;
     box-sizing: border-box;
@@ -623,10 +625,18 @@ footer img {
     font-size: 14px;
     padding: 0.7em 0 0.4em 0;
 }
-
 #result {
-    margin: 20px;
-    padding: 10px;
+    background-color: #f9f9f9; 
+    border: 1px solid #ddd; 
+    border-radius: 8px; 
+    padding: 40px 0 0 0;
+    margin: 10px auto; 
+    max-width: 800px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: "Inter", sans-serif; 
+    color: #333; 
+    text-align: center; 
+    
 }
 
 /* Dropdown account */

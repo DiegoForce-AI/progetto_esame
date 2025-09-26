@@ -3,6 +3,7 @@
 @section('head')
     <title>Spotify</title>
     <link rel="stylesheet" href="{{ url('css/spotify.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 @endsection
 @section('content')
     <div class="spotify-hero">
