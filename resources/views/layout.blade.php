@@ -3,6 +3,8 @@
 <head>
     <link rel="stylesheet" href="{{ url('css/home.css') }}">
     <link rel="stylesheet" href="{{ url('css/shopping.css') }}">
+    <link rel="stylesheet" href="{{ url('css/homequery.css') }}">
+    <meta name ="viewport" content="width=device-width, initial-scale=1">
     @yield('head')
     <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
@@ -12,15 +14,19 @@
 <body class = @yield('body-class', '')>
     
     <nav>
-    <a href="{{ url('home') }}"><img src="{{ url('assets/logo.svg') }}" alt="Apple Logo"></a>
-    <a href="{{ url('prodotti') }}">Store</a>
-    <a href="{{ url('mac') }}">Mac</a>
-    <a href="{{ url('ipad') }}">iPad</a>
-    <a href="{{ url('iphone') }}">iPhone</a>
-    <a href="{{ url('airpods') }}">Airpods</a>
-    <a href="{{ url('spotify') }}">Spotify</a>
-    <a href="{{ url('fakestore') }}">FakeStore</a>
-
+        <a href="{{ url('home') }}" class="nav-logo"><img src="{{ url('assets/logo.svg') }}" alt="Apple Logo"></a>
+        <button class="hamburger" id="hamburger-btn" aria-label="Menu" aria-expanded="false">
+            <span class="hamburger-icon">&#9776;</span>
+        </button>
+        <div class="nav-links" id="nav-links">
+            <a href="{{ url('prodotti') }}">Store</a>
+            <a href="{{ url('mac') }}">Mac</a>
+            <a href="{{ url('ipad') }}">iPad</a>
+            <a href="{{ url('iphone') }}">iPhone</a>
+            <a href="{{ url('airpods') }}">Airpods</a>
+            <a href="{{ url('spotify') }}">Spotify</a>
+            <a href="{{ url('fakestore') }}">FakeStore</a>
+        </div>
         <div class="dropdown-account">
             <div class="account">
                 <a href="#" id="account-btn"><img src="{{ url('assets/account.png') }}" alt="profilo"></a>
@@ -31,7 +37,6 @@
                 </form>
             </div>
         </div>
-
         <div class="search-dropdown-wrapper">
             <a href="#" id="search-btn"><img src="{{ url('assets/search.svg') }}" alt="lente"></a>
             <div id="search-dropdown" class="search-dropdown">
@@ -42,9 +47,7 @@
                 </form>
             </div>
         </div>
-
         <a href="{{ url('/shopping') }}" id="shopping-btn"><img src="{{ url('assets/shopping.svg') }}" alt="shopping"></a>
-
         <span id="welcome-message">Benvenuto, {{$username ?? ''}}</span>
     </nav>
 
@@ -54,7 +57,7 @@
     </main>
 
     <footer class="site-footer">
-        <div class="footer-flex">
+        <div class="footer-flex" id="footer-flex">
             <div class="footer-block-fakestore">
                 <span class="fakestore-label">Continua ad acquistare su FakeStore</span>
                 <a href="{{ url('fakestore') }}">
@@ -70,6 +73,20 @@
                     </a>
                 </div>
             </div>
+        </div>
+        <!-- Footer hamburger per mobile/tablet -->
+        <button class="footer-hamburger" id="footer-hamburger" aria-label="Menu API">
+            &#9776; 
+        </button>
+        <div class="footer-api-menu" id="footer-api-menu">
+            <a href="{{ url('spotify') }}" class="footer-api-link">
+                <img src="{{ url('assets/common/spotify.jpg') }}" alt="Spotify"> Spotify 
+            </a>
+            <div class = "fakestore-info">
+            <a href="{{ url('fakestore') }}" class="footer-api-link">
+                <img src="{{ url('assets/common/fakestore.png') }}" alt="FakeStore"> FakeStore 
+            </a>
+        </div>
         </div>
         <div class="footer-center">
             <p>&copy; {{ date('Y') }} <span>Apple</span>. Tutti i diritti riservati.<br>

@@ -3,6 +3,8 @@
 <head>
     <link rel="stylesheet" href="{{ url('css/register.css') }}">
     <link rel="stylesheet" href="{{ url('css/common.css') }}">
+    <meta name ="viewport" content="width=device-width, initial-scale=1">
+
     <script src="{{ url('js/register.js') }}" defer></script>
 </head>
 

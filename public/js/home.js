@@ -2,6 +2,36 @@ window.BASE_URL = window.BASE_URL || 'http://localhost/progetto_esame/public';
 const BASE_URL = window.BASE_URL;
 
 document.addEventListener('DOMContentLoaded', function () {
+    // Hamburger menu toggle
+    const hamburgerBtn = document.getElementById('hamburger-btn');
+    const navLinks = document.getElementById('nav-links');
+        const hamburgerIcon = hamburgerBtn ? hamburgerBtn.querySelector('.hamburger-icon') : null;
+    if (hamburgerBtn && navLinks) {
+        hamburgerBtn.addEventListener('click', function () {
+            const expanded = hamburgerBtn.getAttribute('aria-expanded') === 'true';
+            hamburgerBtn.setAttribute('aria-expanded', !expanded);
+            navLinks.classList.toggle('open');
+                if (hamburgerIcon) {
+                    if (!expanded) {
+                        // Menu aperto, mostra X
+                        hamburgerIcon.innerHTML = '&#10005;';
+                    } else {
+                        // Menu chiuso, mostra hamburger
+                        hamburgerIcon.innerHTML = '&#9776;';
+                    }
+                }
+        });
+        // Optional: close menu when clicking outside
+        document.addEventListener('click', function (e) {
+            if (!hamburgerBtn.contains(e.target) && !navLinks.contains(e.target)) {
+                navLinks.classList.remove('open');
+                hamburgerBtn.setAttribute('aria-expanded', false);
+                    if (hamburgerIcon) {
+                        hamburgerIcon.innerHTML = '&#9776;';
+                    }
+            }
+        });
+    }
     // Profilo utente
     const btn = document.getElementById('account-btn');
     const dropdown = document.getElementById('account-dropdown');
@@ -65,5 +95,19 @@ document.addEventListener('DOMContentLoaded', function () {
         // Nascondi il div result all'avvio
         const resultDiv = document.getElementById('result');
         if (resultDiv) resultDiv.style.display = 'none';
+    }
+
+    // Footer hamburger toggle
+    const footerHamburger = document.getElementById('footer-hamburger');
+    const footerApiMenu = document.getElementById('footer-api-menu');
+    if (footerHamburger && footerApiMenu) {
+        footerHamburger.addEventListener('click', function () {
+            footerApiMenu.classList.toggle('open');
+        });
+        document.addEventListener('click', function (e) {
+            if (!footerHamburger.contains(e.target) && !footerApiMenu.contains(e.target)) {
+                footerApiMenu.classList.remove('open');
+            }
+        });
     }
 });

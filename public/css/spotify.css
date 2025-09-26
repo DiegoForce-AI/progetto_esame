@@ -1,3 +1,12 @@
+main {
+    margin-top: 56px !important;
+}
+
+@media (min-width: 1024px) {
+    main {
+        margin-top: 64px !important;
+    }
+}
 .spotify-search-form-centered {
     display: flex;
     justify-content: center;
