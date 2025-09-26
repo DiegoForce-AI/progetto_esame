@@ -1,3 +1,83 @@
+/* Messaggio aggiunta al carrello */
+.carrello-msg {
+    position: fixed;
+    top: 54px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    min-width: 220px;
+    max-width: 90vw;
+    padding: 16px 32px;
+    border-radius: 16px;
+    font-size: 1.18em;
+    font-family: 'Inter', Arial, sans-serif;
+    font-weight: 600;
+    color: #fff;
+    text-align: center;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.13);
+    opacity: 0.97;
+    pointer-events: none;
+    transition: opacity 0.3s;
+}
+.carrello-msg-success {
+    background: linear-gradient(90deg, #00c853 0%, #43e97b 100%);
+}
+.carrello-msg-errore {
+    background: linear-gradient(90deg, #e53935 0%, #ff5252 100%);
+}
+@media (max-width: 1023px) {
+    #hamburger-search-error {
+        color: #e53935;
+        font-size: 1em;
+        margin: 8px 0 8px 0;
+        text-align: center;
+        font-family: 'Inter', Arial, sans-serif;
+        font-weight: 500;
+        background: #fff6f6;
+        border-radius: 8px;
+        padding: 8px 0 6px 0;
+        box-shadow: 0 2px 8px rgba(229,57,53,0.07);
+        max-width: 95%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+/* Mostra i bottoni hamburger-extra-buttons solo su mobile/tablet quando il menu è aperto */
+#hamburger-extra-buttons {
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+@media (max-width: 1023px) {
+    .nav-links.open #hamburger-extra-buttons {
+        display: flex;
+    }
+}
+
+@media (min-width: 1024px) {
+    #hamburger-extra-buttons {
+        display: none !important;
+    }
+}
+@media (min-width: 1024px) {
+    /* Nascondi solo hamburger-extra-buttons su desktop */
+    #hamburger-extra-buttons {
+        display: none !important;
+    }
+    /* Mostra la search bar desktop su desktop */
+    .search-dropdown-wrapper {
+        display: inline-block !important;
+    }
+}
+
+@media (max-width: 1023px) {
+    /* Nascondi la search bar desktop su mobile/tablet */
+    .search-dropdown-wrapper {
+        display: none !important;
+    }
+}
 
 .home-page nav {
     position: fixed;
@@ -722,7 +802,6 @@ footer img {
     border: 1px solid #ccc;
     cursor: pointer;
 }
-
 
 .footer-block-right,
 .footer-block-fakestore {

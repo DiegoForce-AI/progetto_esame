@@ -1,4 +1,3 @@
-
 window.BASE_URL = window.BASE_URL || 'http://localhost/progetto_esame/public';
 // Usa sempre window.BASE_URL nel codice
 const IMG_BASE = '/progetto_esame/public/';
@@ -7,25 +6,18 @@ document.addEventListener('DOMContentLoaded', function () {
     // LISTA PRODOTTI
     const listaContainer = document.getElementById('prodotti-container');
     if (listaContainer) {
-        fetch(window.BASE_URL + '/prodotti/json')
+        const filter = window.PRODOTTI_FILTER || ''; // Ottieni il filtro
+
+        fetch(`${window.BASE_URL}/prodotti/json?filter=${filter}`)
             .then(response => response.json())
-            .then(prodotti => {
-                // Filtra per categoria se richiesto
-                let filtered = prodotti;
-                if (window.PRODOTTI_FILTER) {
-                    let filterId = null;
-                    if (window.PRODOTTI_FILTER === 'mac') filterId = 1;
-                    if (window.PRODOTTI_FILTER === 'iphone') filterId = 2;
-                    if (window.PRODOTTI_FILTER === 'ipad') filterId = 3;
-                    if (window.PRODOTTI_FILTER === 'airpods') filterId = 4;
-                    if (window.PRODOTTI_FILTER === 'mac-ipad-airpods') {
-                        filtered = prodotti.filter(p => [1,3,4].includes(p.categoria_id));
-                    } else if (filterId !== null) {
-                        filtered = prodotti.filter(p => p.categoria_id == filterId);
-                    }
+            .then(data => {
+                if (!data.success) {
+                    listaContainer.innerHTML = `<div class="prodotti-errore" style="color:red;font-size:1.2em;text-align:center;margin:32px 0;">${data.message || 'Errore nel caricamento dei prodotti.'}</div>`;
+                    return;
                 }
+                const prodotti = data.prodotti;
                 let row;
-                filtered.forEach((prodotto, index) => {
+                prodotti.forEach((prodotto, index) => {
                     if (index % 3 === 0) {
                         row = document.createElement('div');
                         row.className = 'prodotti-row';
@@ -42,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         immaginiHtml = `<img src="${IMG_BASE}${prodotto.immagine_url}" alt="${prodotto.nome}" class="prodotto-img">`;
                     }
                     card.innerHTML = `
-                        <a href="${window.BASE_URL}/prodotto/${prodotto.id}" class="dettaglio-link"">
+                        <a href="${window.BASE_URL}/prodotto/${prodotto.id}" class="dettaglio-link">
                             ${immaginiHtml}
                             <div class="prodotto-nome">${prodotto.nome}</div>
                             <div class="prodotto-prezzo">${prodotto.prezzo} €</div>
@@ -52,6 +44,9 @@ document.addEventListener('DOMContentLoaded', function () {
                     `;
                     row.appendChild(card);
                 });
+            })
+            .catch(() => {
+                listaContainer.innerHTML = `<div class="prodotti-errore" style="color:red;font-size:1.2em;text-align:center;margin:32px 0;">Errore di rete nel caricamento dei prodotti.</div>`;
             });
 
         // Listener unico per "Aggiungi al carrello"
@@ -111,10 +106,25 @@ function aggiungiAlCarrello(prodottoId) {
         .then(response => response.json())
         .then(data => {
             if (data.error) {
-                alert('Errore: ' + data.error);
+                mostraMessaggioCarrello('Errore: ' + data.error, true);
             } else {
-                alert('Prodotto aggiunto al carrello!');
+                mostraMessaggioCarrello('Prodotto aggiunto al carrello!', false);
             }
         })
-        .catch(() => alert('Errore di rete.'));
+        .catch(() => mostraMessaggioCarrello('Errore di rete.', true));
+}
+
+function mostraMessaggioCarrello(msg, isError) {
+    let msgDiv = document.getElementById('carrello-msg');
+    if (!msgDiv) {
+        msgDiv = document.createElement('div');
+        msgDiv.id = 'carrello-msg';
+        document.body.appendChild(msgDiv);
+    }
+    msgDiv.textContent = msg;
+    msgDiv.className = isError ? 'carrello-msg carrello-msg-errore' : 'carrello-msg carrello-msg-success';
+    msgDiv.style.display = 'block';
+    setTimeout(() => {
+        msgDiv.style.display = 'none';
+    }, 2000);
 }

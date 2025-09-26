@@ -2,6 +2,36 @@ window.BASE_URL = window.BASE_URL || 'http://localhost/progetto_esame/public';
 const BASE_URL = window.BASE_URL;
 
 document.addEventListener('DOMContentLoaded', function () {
+    // Ricerca prodotti nell'hamburger menu (mobile)
+    const hamburgerSearchForm = document.getElementById('hamburger-search-form');
+    const hamburgerSearchInput = hamburgerSearchForm ? hamburgerSearchForm.querySelector('input[name="nome"]') : null;
+    if (hamburgerSearchForm && hamburgerSearchInput) {
+        hamburgerSearchForm.addEventListener('submit', async function (e) {
+            e.preventDefault();
+            // Rimuovi eventuale messaggio precedente
+            let errorDiv = document.getElementById('hamburger-search-error');
+            if (errorDiv) errorDiv.remove();
+
+            const name = hamburgerSearchInput.value;
+            try {
+                const response = await fetch(`${BASE_URL}/prodotti/search?nome=${encodeURIComponent(name)}`);
+                const data = await response.json();
+                if (data.success && data.product && data.product.id) {
+                    window.location.href = window.location.origin + '/progetto_esame/public/prodotto/' + data.product.id;
+                } else {
+                    errorDiv = document.createElement('div');
+                    errorDiv.id = 'hamburger-search-error';
+                    errorDiv.textContent = data.message || 'Prodotto non trovato';
+                    hamburgerSearchForm.insertAdjacentElement('afterend', errorDiv);
+                }
+            } catch (err) {
+                let errorDiv = document.createElement('div');
+                errorDiv.id = 'hamburger-search-error';
+                errorDiv.textContent = 'Errore durante la ricerca.';
+                hamburgerSearchForm.insertAdjacentElement('afterend', errorDiv);
+            }
+        });
+    }
     // Hamburger menu toggle
     const hamburgerBtn = document.getElementById('hamburger-btn');
     const navLinks = document.getElementById('nav-links');
@@ -107,6 +137,23 @@ document.addEventListener('DOMContentLoaded', function () {
         document.addEventListener('click', function (e) {
             if (!footerHamburger.contains(e.target) && !footerApiMenu.contains(e.target)) {
                 footerApiMenu.classList.remove('open');
+            }
+        });
+    }
+
+    // Mostra/nasconde i bottoni hamburger solo quando il menu è aperto e solo su mobile
+    const hamburgerExtras = document.getElementById('hamburger-extra-buttons');
+    if (hamburgerBtn && hamburgerExtras) {
+        function updateHamburgerExtras() {
+            const isMobile = window.innerWidth < 1024;
+            const isOpen = navLinks.classList.contains('open');
+            hamburgerExtras.style.display = (isMobile && isOpen) ? 'block' : 'none';
+        }
+        hamburgerBtn.addEventListener('click', updateHamburgerExtras);
+        window.addEventListener('resize', updateHamburgerExtras);
+        document.addEventListener('click', function (e) {
+            if (!hamburgerBtn.contains(e.target) && !navLinks.contains(e.target)) {
+                hamburgerExtras.style.display = 'none';
             }
         });
     }

@@ -79,3 +79,6 @@ Route::get('/airpods', function() {
 Route::get('/acquista-tutto', function() {
     return view('acquista-tutto');
 });
+
+//Filtro prodotti
+Route::get('/prodotti/json', [ProdottoController::class, 'getProdotti']);

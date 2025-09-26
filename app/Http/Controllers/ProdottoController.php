@@ -4,9 +4,52 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Prodotto;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Support\Facades\DB;
 
 class ProdottoController extends BaseController
 {
+    public function getProdotti(Request $request)
+    {
+        $filter = $request->input('filter'); // Ottieni il filtro dalla richiesta
+        $query = DB::table('prodotti'); // Tabella dei prodotti
+
+        $validFilters = [
+            'mac' => [1],
+            'iphone' => [2],
+            'ipad' => [3],
+            'airpods' => [4],
+            'mac-ipad-airpods' => [1, 3, 4],
+        ];
+
+        if ($filter !== null) {
+            if (!array_key_exists($filter, $validFilters)) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Filtro non valido.'
+                ], 400);
+            }
+            $categorie = $validFilters[$filter];
+            if (count($categorie) === 1) {
+                $query->where('categoria_id', $categorie[0]);
+            } else {
+                $query->whereIn('categoria_id', $categorie);
+            }
+        }
+
+        $prodotti = $query->get(); // Esegui la query e ottieni i risultati
+
+        if ($prodotti->isEmpty()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Nessun prodotto trovato per il filtro richiesto.'
+            ], 404);
+        }
+
+        return response()->json([
+            'success' => true,
+            'prodotti' => $prodotti
+        ]);
+    }
 
     public function index()
     {
@@ -33,10 +76,13 @@ class ProdottoController extends BaseController
             'url' => 'spotify'
         ];
         $backUrl = 'prodotti';
-        if(isset($prodotto->categoria_id)) {
-            if($prodotto->categoria_id == 1) $backUrl = 'mac';
-            elseif($prodotto->categoria_id == 2) $backUrl = 'iphone';
-            elseif($prodotto->categoria_id == 3) $backUrl = 'ipad';
+        if (isset($prodotto->categoria_id)) {
+            if ($prodotto->categoria_id == 1)
+                $backUrl = 'mac';
+            elseif ($prodotto->categoria_id == 2)
+                $backUrl = 'iphone';
+            elseif ($prodotto->categoria_id == 3)
+                $backUrl = 'ipad';
         }
         return view('prodotto')->with(['prodotto' => $prodotto, 'track' => $track, 'backUrl' => $backUrl]);
     }

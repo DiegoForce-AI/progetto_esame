@@ -17,9 +17,9 @@
                 <li>
                     @php
                         $img = null;
-                        if(isset($prodotto->immagini) && count($prodotto->immagini) > 0) {
+                        if (isset($prodotto->immagini) && count($prodotto->immagini) > 0) {
                             $img = $prodotto->immagini[0]->url;
-                        } elseif(isset($prodotto->immagine_url)) {
+                        } elseif (isset($prodotto->immagine_url)) {
                             $img = $prodotto->immagine_url;
                         }
                     @endphp
