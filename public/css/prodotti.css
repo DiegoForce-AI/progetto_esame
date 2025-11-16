@@ -107,12 +107,9 @@ nav {
     font-size: 1.18em;
 }
 .prodotto-hero {
-    background: linear-gradient(90deg, #eaf4fb 0%, #f7fafd 100%);
-    
     text-align: center;
     margin-bottom: 18px;
     border-radius: 0 0 18px 18px;
-    box-shadow: 4px -13px 12px rgba(0,113,227,0.07);
 }
 .prodotto-title {
     font-size: 2em;

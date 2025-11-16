@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model; 
+use Illuminate\Database\Eloquent\Model;
 
 
 class Ordine extends Model
@@ -16,9 +16,8 @@ class Ordine extends Model
         return $this->belongsTo(User::class, 'utente_id');
     }
 
-    public function prodotti()
+    public function ordineProdotti()
     {
-        return $this->belongsToMany(Prodotto::class, 'ordine_prodotti', 'ordine_id', 'prodotto_id')
-                    ->withPivot('quantita', 'prezzo_unitario');
+        return $this->hasMany(OrdineProdotti::class, 'ordine_id');
     }
 }

@@ -7,6 +7,10 @@
 
 @endsection
 
+@section('scripts')
+    <script src ='{{ url("js/home.js") }}'defer></script>
+@endsection
+
 @section('body-class', 'home-page')
 
 @section('content')
@@ -75,6 +79,6 @@
 
 @endsection
 
-@section('scripts')
-    <script src ='{{ url("js/home.js") }}' defer></script>
-@endsection
+
+
+

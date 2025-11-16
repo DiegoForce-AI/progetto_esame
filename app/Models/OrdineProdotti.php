@@ -15,13 +15,13 @@ class OrdineProdotti extends Model
         'prezzo_unitario'
     ];
 
-    // Relazione con Ordine
+   
     public function ordine()
     {
         return $this->belongsTo(Ordine::class, 'ordine_id');
     }
 
-    // Relazione con Prodotto
+    
     public function prodotto()
     {
         return $this->belongsTo(Prodotto::class, 'prodotto_id');

@@ -14,13 +14,23 @@ class Prodotto extends Model
         'prezzo'
     ];
 
-    public function immagini() {
+    public function immagini()
+    {
         return $this->hasMany(ImmagineProdotto::class, 'prodotto_id');
     }
 
-    public function carrello()
+    public function carrelloProdotti()
     {
-        return $this->belongsToMany(Carrello::class, 'carrello_prodotti', 'prodotto_id', 'carrello_id')
-                    ->withPivot('quantita');
+        return $this->hasMany(CarrelloProdotti::class, 'prodotto_id');
     }
+
+    public function categoria()
+    {
+        return $this->belongsTo(Categoria::class, 'categoria_id');
+    }
+    public function ordineProdotti()
+    {
+        return $this->hasMany(OrdineProdotti::class, 'prodotto_id');
+    }
+
 }

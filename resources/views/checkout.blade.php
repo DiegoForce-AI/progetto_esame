@@ -1,7 +1,19 @@
 @extends('layout')
+@section('head')
 <link rel="stylesheet" href="{{ url('css/checkout.css') }}">
-
-<script src="{{ url('js/home.js') }}"></script>
+<!-- Faccio questa modifica qui stesso per evitare che mi compaia il div result 
+ nella pagina di checkout
+ -->
+ <style>
+    #result {
+        display: none !important;
+    }
+</style>
+@endsection
+@section('scripts')
+    <script src="{{ url('js/checkout.js') }}" defer></script>
+@endsection
+<script src="{{ url('js/home.js') }}" defer></script>
 @section('content')
     <h2 class="checkout-title">Checkout</h2>
     @if(session('error'))
@@ -37,5 +49,4 @@
         @csrf
         <button type="submit" class="btn btn-success">Conferma ordine</button>
     </form>
-    <script src="{{ url('js/checkout.js') }}"></script>
 @endsection

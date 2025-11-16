@@ -1,6 +1,7 @@
-const BASE_URL = 'http://localhost/progetto_esame/public'
+const BASE_URL = 'http://127.0.0.1:8000'
 
-document.addEventListener('DOMContentLoaded', function () {
+// try catch per gestire eventuali errori imprevisti
+try {
     const form = document.getElementById('checkout-form');
     if (form) {
         form.addEventListener('submit', function (e) {
@@ -38,4 +39,6 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
     }
-});
+} catch (error) {
+    console.error('Errore durante il checkout:', error);
+}

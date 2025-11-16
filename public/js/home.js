@@ -1,7 +1,6 @@
-window.BASE_URL = window.BASE_URL || 'http://localhost/progetto_esame/public';
+window.BASE_URL = window.BASE_URL || 'http://127.0.0.1:8000';
 const BASE_URL = window.BASE_URL;
 
-document.addEventListener('DOMContentLoaded', function () {
     // Ricerca prodotti nell'hamburger menu (mobile)
     const hamburgerSearchForm = document.getElementById('hamburger-search-form');
     const hamburgerSearchInput = hamburgerSearchForm ? hamburgerSearchForm.querySelector('input[name="nome"]') : null;
@@ -17,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 const response = await fetch(`${BASE_URL}/prodotti/search?nome=${encodeURIComponent(name)}`);
                 const data = await response.json();
                 if (data.success && data.product && data.product.id) {
-                    window.location.href = window.location.origin + '/progetto_esame/public/prodotto/' + data.product.id;
+                    window.location.href = window.location.origin + '/prodotto/' + data.product.id;
                 } else {
                     errorDiv = document.createElement('div');
                     errorDiv.id = 'hamburger-search-error';
@@ -106,7 +105,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 const response = await fetch(`${BASE_URL}/prodotti/search?nome=${encodeURIComponent(name)}`);
                 const data = await response.json();
                 if (data.success && data.product && data.product.id) {
-                    window.location.href = window.location.origin + '/progetto_esame/public/prodotto/' + data.product.id;
+                    window.location.href = window.location.origin + '/prodotto/' + data.product.id;
                 } else {
                     const resultDiv = document.getElementById('result');
                     if (resultDiv) {
@@ -157,4 +156,3 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     }
-});

@@ -10,11 +10,11 @@
     padding: 16px 32px;
     border-radius: 16px;
     font-size: 1.18em;
-    font-family: 'Inter', Arial, sans-serif;
+    font-family: "Inter", Arial, sans-serif;
     font-weight: 600;
     color: #fff;
     text-align: center;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.13);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.13);
     opacity: 0.97;
     pointer-events: none;
     transition: opacity 0.3s;
@@ -31,12 +31,12 @@
         font-size: 1em;
         margin: 8px 0 8px 0;
         text-align: center;
-        font-family: 'Inter', Arial, sans-serif;
+        font-family: "Inter", Arial, sans-serif;
         font-weight: 500;
         background: #fff6f6;
         border-radius: 8px;
         padding: 8px 0 6px 0;
-        box-shadow: 0 2px 8px rgba(229,57,53,0.07);
+        box-shadow: 0 2px 8px rgba(229, 57, 53, 0.07);
         max-width: 95%;
         margin-left: auto;
         margin-right: auto;
@@ -86,9 +86,6 @@
     z-index: 1000;
 }
 
-
-
-
 nav {
     width: 100%;
     box-sizing: border-box;
@@ -103,15 +100,15 @@ nav {
     z-index: 10;
 }
 
-footer, .footer-flex {
+footer,
+.footer-flex {
     width: 100%;
     box-sizing: border-box;
     overflow-x: hidden;
 }
 
-
-
-html, body {
+html,
+body {
     height: 100%;
     margin: 0;
     padding: 0;
@@ -129,7 +126,7 @@ main {
     width: 100%;
     padding: 20px 0 0 0;
     color: #888;
-    box-shadow: 0 -2px 8px rgba(0,0,0,0.03);
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.03);
     position: relative;
     left: 0;
     bottom: 0;
@@ -157,12 +154,13 @@ nav a {
 }
 
 /* Effetto hover solo su link testuali, non sulle icone */
-nav a:not(:has(img)):hover, nav a:not(:has(img)):focus {
+nav a:not(:has(img)):hover,
+nav a:not(:has(img)):focus {
     color: #0071e3;
 }
 
 nav a:not(:has(img))::after {
-    content: '';
+    content: "";
     display: block;
     width: 0;
     height: 2px;
@@ -173,7 +171,8 @@ nav a:not(:has(img))::after {
     bottom: 0;
 }
 
-nav a:not(:has(img)):hover::after, nav a:not(:has(img)):focus::after {
+nav a:not(:has(img)):hover::after,
+nav a:not(:has(img)):focus::after {
     width: 100%;
 }
 
@@ -188,7 +187,6 @@ nav img {
     display: inline-block;
     position: relative;
 }
-
 
 .account img {
     width: 24px;
@@ -215,9 +213,8 @@ nav img {
     font-weight: bold;
     font-size: 14px;
     margin-left: 20px;
-    color:#1d1d1f  ;
+    color: #1d1d1f;
 }
-
 
 body {
     font-family: "Inter", sans-serif;
@@ -250,6 +247,7 @@ header {
 .bubble-wrapper {
     background-color: #007aff;
     color: white;
+    right: 59px;
     border-radius: 40px;
     position: relative;
     display: inline-block;
@@ -279,7 +277,6 @@ header {
     text-align: left;
     font-size: 2.5em;
     font-weight: 600;
-
 }
 
 .hero-background {
@@ -294,13 +291,17 @@ header {
 }
 
 .sticker .img1 {
+    position: relative;
     width: 142px;
+    right: 57px;
     height: 107px;
     z-index: 2;
 }
 
 .sticker .img2 {
+    position: relative;
     width: 83px;
+    right: 53px;
     height: 95px;
     margin-top: -20px;
     z-index: 1;
@@ -311,7 +312,7 @@ header {
     flex-direction: column;
     position: absolute;
     left: 80%;
-    top: 8%
+    top: 8%;
 }
 
 .hero-overlay {
@@ -329,7 +330,7 @@ header {
     position: absolute;
     z-index: 1;
     width: 50px;
-    right: 282px;
+    right: 344px;
     bottom: 191px;
 }
 
@@ -340,26 +341,24 @@ header {
     color: #1d1d1f;
     z-index: 2;
     margin: 0px;
-    background: linear-gradient(94deg, #0090F7, #BA62FC, #F2416B, #F55600);
+    background: linear-gradient(94deg, #0090f7, #ba62fc, #f2416b, #f55600);
     background-clip: text;
     color: transparent;
     display: inline-block;
 }
 
-
 .hero-bottom .button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-top: 60px;
+    position: relative;
+    padding-top: 40px;
+    left: 40px;
 }
 
 .btn {
     background: transparent;
-    color: #06C;
+    color: #06c;
     border-radius: 40px;
     font-weight: 100;
-    border: 1px solid #06C;
+    border: 1px solid #06c;
     padding: 12px 24px;
     font-size: 16px;
     cursor: pointer;
@@ -368,10 +367,10 @@ header {
 }
 
 .btn2 {
-    background: #0071E3;
+    background: #0071e3;
     color: white;
     border-radius: 40px;
-    border: 1px solid #06C;
+    border: 1px solid #06c;
     padding: 12px 24px;
     font-size: 16px;
     cursor: pointer;
@@ -404,7 +403,7 @@ header {
 .hero-iphone-title p {
     position: absolute;
     top: 50px;
-    left: 46%;
+    left: 43%;
     font-size: 56px;
     font-weight: 600;
     color: black;
@@ -415,10 +414,10 @@ header {
 .hero-iphone-description p {
     position: absolute;
     top: 130px;
-    left: 39%;
+    left: 36%;
     font-size: 26px;
     font-weight: 400;
-    letter-spacing: .007em;
+    letter-spacing: 0.007em;
     color: #1d1d1f;
     z-index: 2;
     margin: 0px;
@@ -427,9 +426,9 @@ header {
 .hero-iphone-button .btn {
     position: absolute;
     top: 180px;
-    left: 47%;
+    left: 44%;
     z-index: 2;
-    background: #0071E3;
+    background: #0071e3;
     color: white;
 }
 
@@ -453,19 +452,18 @@ header {
 }
 
 .hero-iphone-subdescription p {
-    position: absolute;
+        position: absolute;
     top: 240px;
-    left: 43%;
+    left: 40%;
     font-size: 21px;
     font-weight: 500;
     letter-spacing: 0;
     color: #1d1d1f;
     z-index: 2;
     margin: 0px;
-    background: linear-gradient(94deg, #0090F7, #BA62FC, #F2416B, #F55600);
+    background: linear-gradient(94deg, #0090f7, #ba62fc, #f2416b, #f55600);
     background-clip: text;
     color: transparent;
-    display: inline-block;
 }
 
 .hero-macbook {
@@ -481,10 +479,10 @@ header {
     position: absolute;
     text-align: center;
     bottom: 97px;
-    left: 47%;
+    left: 44%;
     z-index: 2;
     border-color: rgba(0, 0, 0, 0);
-     background: #0071E3;
+    background: #0071e3;
     color: white;
 }
 
@@ -506,7 +504,12 @@ header {
     font-size: 56px;
     font-weight: 600;
     color: transparent;
-    background: radial-gradient(at center top, rgb(110, 205, 255) 20%, rgb(23, 69, 239) 70%) text;
+    background: radial-gradient(
+            at center top,
+            rgb(110, 205, 255) 20%,
+            rgb(23, 69, 239) 70%
+        )
+        text;
     z-index: 2;
     margin: 0px;
 }
@@ -515,7 +518,7 @@ header {
     position: absolute;
     text-align: center;
     bottom: 103px;
-    left: 42%;
+    left: 39%;
     font-size: 31px;
     font-weight: 600;
     color: white;
@@ -523,7 +526,7 @@ header {
     margin: 0px;
 }
 
-.hero-macbook-subdescription p{
+.hero-macbook-subdescription p {
     position: absolute;
     text-align: center;
     bottom: 180px;
@@ -533,7 +536,7 @@ header {
     color: #1d1d1f;
     z-index: 2;
     margin: 0px;
-    background: linear-gradient(94deg, #0090F7, #BA62FC, #F2416B, #F55600);
+    background: linear-gradient(94deg, #0090f7, #ba62fc, #f2416b, #f55600);
     background-clip: text;
     color: transparent;
     display: inline-block;
@@ -560,7 +563,7 @@ header {
     margin-top: 4px;
 }
 
-.homepage>div {
+.homepage > div {
     flex: 0 0 49.4%;
     display: flex;
     position: relative;
@@ -578,7 +581,6 @@ footer {
     color: #fff;
     text-align: center;
     padding: 2em 1em;
-
 }
 footer p {
     margin: 0;
@@ -586,7 +588,6 @@ footer p {
     line-height: 1.4;
     font-weight: bold;
 }
-
 
 footer a {
     color: #1db954;
@@ -597,7 +598,6 @@ footer a {
     display: flex;
     align-items: center;
     justify-content: right;
-   
 }
 
 footer img {
@@ -607,7 +607,7 @@ footer img {
 .spotify-label {
     font-size: 1.18em;
     font-weight: 500;
-    color: #1DB954;
+    color: #1db954;
     margin-bottom: 7px;
     display: flex;
     align-items: center;
@@ -616,27 +616,27 @@ footer img {
 }
 
 /* Stile per l'immagine della traccia Spotify nel footer */
- .spotify-track-img {
+.spotify-track-img {
     height: 56px;
     width: 56px;
     object-fit: cover;
     border-radius: 12px;
-    box-shadow: 0 2px 12px rgba(30,215,96,0.18);
-    border: 2px solid #1DB954;
+    box-shadow: 0 2px 12px rgba(30, 215, 96, 0.18);
+    border: 2px solid #1db954;
     margin-right: 12px;
     vertical-align: middle;
     transition: transform 0.2s;
 }
 .spotify-track-img:hover {
     transform: scale(1.08) rotate(-2deg);
-    box-shadow: 0 4px 18px rgba(30,215,96,0.28);
+    box-shadow: 0 4px 18px rgba(30, 215, 96, 0.28);
 }
 
 /* Stile per il testo della traccia Spotify */
- .spotify-track-text {
+.spotify-track-text {
     font-size: 1.15em;
     font-weight: 500;
-    color: #1DB954;
+    color: #1db954;
     vertical-align: middle;
 }
 
@@ -649,7 +649,6 @@ footer img {
     justify-content: flex-start;
     gap: 8px;
     width: 60%;
-   
 }
 
 .footer-flex {
@@ -689,14 +688,14 @@ footer img {
     width: 54px;
     object-fit: cover;
     border-radius: 12px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.12);
     border: 2px solid #ffb300;
     margin-top: 0;
     transition: transform 0.2s, box-shadow 0.2s;
 }
 .fakestore-img:hover {
     transform: scale(1.08) rotate(2deg);
-    box-shadow: 0 4px 18px rgba(255,179,0,0.22);
+    box-shadow: 0 4px 18px rgba(255, 179, 0, 0.22);
 }
 .footer-center {
     width: 100%;
@@ -706,17 +705,16 @@ footer img {
     padding: 0.7em 0 0.4em 0;
 }
 #result {
-    background-color: #f9f9f9; 
-    border: 1px solid #ddd; 
-    border-radius: 8px; 
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
     padding: 40px 0 0 0;
-    margin: 10px auto; 
-    max-width: 800px; 
+    margin: 10px auto;
+    max-width: 800px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    font-family: "Inter", sans-serif; 
-    color: #333; 
-    text-align: center; 
-    
+    font-family: "Inter", sans-serif;
+    color: #333;
+    text-align: center;
 }
 
 /* Dropdown account */
@@ -734,7 +732,7 @@ footer img {
     border-radius: 12px;
     min-width: 180px;
     z-index: 1000;
-    box-shadow: 0 8px 32px rgba(0,113,227,0.13);
+    box-shadow: 0 8px 32px rgba(0, 113, 227, 0.13);
     font-size: 1.08em;
     transition: box-shadow 0.2s, border 0.2s;
 }
@@ -757,7 +755,7 @@ footer img {
     min-width: 260px;
     z-index: 1000;
     padding: 18px 20px;
-    box-shadow: 0 8px 32px rgba(0,113,227,0.13);
+    box-shadow: 0 8px 32px rgba(0, 113, 227, 0.13);
     font-size: 1.08em;
     transition: box-shadow 0.2s, border 0.2s;
 }
@@ -788,7 +786,6 @@ footer img {
 #searchBtn:hover {
     background: #005bb5;
 }
-
 
 #search-input {
     padding: 4px 8px;

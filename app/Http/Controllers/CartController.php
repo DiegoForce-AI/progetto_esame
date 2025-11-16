@@ -20,7 +20,7 @@ class CartController extends BaseController
         if (!$carrello) {
             $carrello = Carrello::create(['utente_id' => $utenteId]);
         }
-        $prodotti = $carrello->prodotti()->with(['immagini'])->get()
+        $prodotti = $carrello->prodotti()->with(relations: ['immagini'])->get()
             ->map(function ($prodotto) {
                 $foto = null;
                 if ($prodotto->immagini && $prodotto->immagini->count() > 0) {

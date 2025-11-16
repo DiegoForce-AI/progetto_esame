@@ -20,7 +20,7 @@
     display: none;
 }
 
-/* --- Riepilogo custom checkout-summary-custom --- */
+/* Riepilogo custom checkout-summary-custom */
 .checkout-summary-custom {
     margin: 40px auto 0 auto;
     max-width: 500px;
@@ -125,7 +125,7 @@
     }
 }
 
-/* --- Checkout mobile only (max-width: 425px) --- */
+
 .checkout-mobile-wrapper {
     display: none;
 }
@@ -276,7 +276,7 @@
     background: #005bb5;
 }
 
-/***** Shopping cart table styles *****/
+
 .shopping-cart-table {
     width: 100%;
     max-width: 900px;

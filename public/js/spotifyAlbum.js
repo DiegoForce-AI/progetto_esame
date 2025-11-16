@@ -18,7 +18,6 @@ async function fetchAlbumData(albumId) {
     }
 }
 
-document.addEventListener('DOMContentLoaded', async function () {
     const container = document.getElementById('album-container');
     container.style.display = 'none'; // Nascondi di default
     // Crea form di ricerca
@@ -98,7 +97,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             container.innerHTML = '<p>Nessun album trovato.</p>';
         }
     });
-});
+
 
 async function searchAlbums(query) {
     const token = await requestToken();

@@ -10,6 +10,10 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 
+ @yield('scripts')
+    <script src="{{ url('js/home.js') }}" defer></script>
+    <script src="{{ url('js/shopping.js') }}" defer></script>
+
 <body class=@yield('body-class', '')>
 
     <nav>
@@ -117,9 +121,7 @@
         window.csrfToken = document.querySelector('meta[name=csrf-token]').getAttribute('content');
     </script>
 
-    @yield('scripts')
-    <script src="{{ url('js/home.js') }}" defer></script>
-    <script src="{{ url('js/shopping.js') }}" defer></script>
+
 
 </body>
 

@@ -18,7 +18,6 @@ async function fetchTrackData(trackId) {
     }
 }
 
-document.addEventListener('DOMContentLoaded', async function () {
     const container = document.getElementById('song-container');
     // Crea form di ricerca
     const searchForm = document.createElement('form');
@@ -135,7 +134,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             container.innerHTML = '<p>Nessuna canzone trovata.</p>';
         }
     });
-});
+
 
 async function searchTracks(query) {
     const token = await requestToken();

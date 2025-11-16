@@ -1,11 +1,10 @@
 // Base URL dinamico
 if (!window.BASE_URL) {
-    window.BASE_URL = 'http://localhost/progetto_esame/public';
+    window.BASE_URL = 'http://127.0.0.1:8000';
 }
-window.BASE_URL = 'http://localhost/progetto_esame/public';
+window.BASE_URL = 'http://127.0.0.1:8000';
 const shoppingItemsDiv = document.getElementById('shopping-items');
 
-document.addEventListener('DOMContentLoaded', function () {
     // Funzione per caricare i prodotti del carrello tramite index del CartController
     async function index() {
         try {
@@ -83,4 +82,3 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Chiamala all'avvio per mostrare il carrello
     index();
-});

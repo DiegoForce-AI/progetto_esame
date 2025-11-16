@@ -1,4 +1,3 @@
-document.addEventListener('DOMContentLoaded', function () {
   const form = document.getElementById('login-form');
   const msg = document.getElementById('msg');
   const username = document.getElementById('username');
@@ -33,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
         msg.textContent = 'Errore di connessione.';
       });
   });
-});
+
 
 function checkInputs() {
   const submitBtn = document.getElementById('submit');

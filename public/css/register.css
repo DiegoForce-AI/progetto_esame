@@ -165,7 +165,7 @@ body {
 @media (max-width: 425px) {
   .register-container {
     font-size: 1.08em;
-    padding: 0.7rem 2.2rem 2.7rem 2.2rem;
+    padding: 2.7rem 3.2rem 3.7rem 3.2rem;
     max-width: 350px;
     border-radius: 16px;
   }

@@ -1,4 +1,3 @@
-document.addEventListener('DOMContentLoaded', async function () {
     const productsDiv = document.getElementById('fakestore-products');
     const cartDiv = document.getElementById('fakestore-cart');
     let cart = [];
@@ -18,7 +17,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             </div>
         `).join('');
     }
-
+    
     // Mostra carrello
     function renderCart() {
         if (cart.length === 0) {
@@ -64,4 +63,4 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     await loadProducts();
     renderCart();
-});
+

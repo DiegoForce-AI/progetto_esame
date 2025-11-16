@@ -4,7 +4,6 @@
     <link rel="stylesheet" href="{{ url('css/login.css') }}">
     <link rel="stylesheet" href="{{ url('css/homequery.css') }}">
     <meta name ="viewport" content="width=device-width, initial-scale=1">
-
     <script src="{{ url('js/login.js') }}" defer></script>
 </head>
 

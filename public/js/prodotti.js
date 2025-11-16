@@ -1,8 +1,7 @@
-window.BASE_URL = window.BASE_URL || 'http://localhost/progetto_esame/public';
+window.BASE_URL = window.BASE_URL || 'http://127.0.0.1:8000';
 // Usa sempre window.BASE_URL nel codice
-const IMG_BASE = '/progetto_esame/public/';
+const IMG_BASE = 'http://127.0.0.1:8000/';
 
-document.addEventListener('DOMContentLoaded', function () {
     // LISTA PRODOTTI
     const listaContainer = document.getElementById('prodotti-container');
     if (listaContainer) {
@@ -90,7 +89,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
             });
     }
-});
+
 
 // FUNZIONE COMUNE
 function aggiungiAlCarrello(prodottoId) {

@@ -1,7 +1,6 @@
 //Validazione lato client della registrazione dell'utente
-const BASE_URL = 'http://localhost/progetto_esame/public';
+const BASE_URL = 'http://127.0.0.1:8000';
 
-document.addEventListener('DOMContentLoaded', function () {
   const msgElem = document.getElementById('msg');
   document.getElementById('username').addEventListener('input', function () {
     if (msgElem.textContent) {
@@ -49,5 +48,5 @@ document.addEventListener('DOMContentLoaded', function () {
       document.getElementById('msg').textContent = msg;
     }
   });
-});
+
 
