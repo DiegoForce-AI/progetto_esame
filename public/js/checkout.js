@@ -3,6 +3,8 @@ const BASE_URL = 'http://127.0.0.1:8000'
 // try catch per gestire eventuali errori imprevisti
 try {
     const form = document.getElementById('checkout-form');
+    // const form1 = document.querySelector('checkout-form').dataset
+    // const form2 = document.dataset('checkout-form')
     if (form) {
         form.addEventListener('submit', function (e) {
             e.preventDefault();
