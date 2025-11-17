@@ -27,6 +27,7 @@
 }
 @media (max-width: 1023px) {
     #hamburger-search-error {
+        display: block;
         color: #e53935;
         font-size: 1em;
         margin: 8px 0 8px 0;

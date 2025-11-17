@@ -1,118 +1,266 @@
 import { requestToken } from './spotifyToken.js';
 
-async function fetchAlbumData(albumId) {
-    const token = await requestToken();
-    try {
-        const response = await fetch(`https://api.spotify.com/v1/albums/${albumId}`, {
-            headers: {
-                'Authorization': 'Bearer ' + token
-            }
-        });
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        const data = await response.json();
-        return data;
-    } catch (error) {
-        console.error('Error:', error);
+const container = document.querySelector('#album-container');
+
+// --- 1. Creazione Form di Ricerca (DOM) ---
+const searchForm = document.createElement('form');
+searchForm.classList.add('spotify-search-form-centered');
+
+const input = document.createElement('input');
+input.type = 'text';
+input.id = 'album-id-input';
+input.classList.add('spotify-search-input');
+input.placeholder = 'Cerca album...';
+input.required = true;
+
+const button = document.createElement('button');
+button.type = 'submit';
+button.classList.add('spotify-search-btn');
+button.textContent = 'Cerca';
+
+searchForm.appendChild(input);
+searchForm.appendChild(button);
+
+if (container && container.parentNode) {
+    container.parentNode.insertBefore(searchForm, container);
+    container.style.display = 'none';
+}
+
+// --- 2. Funzioni Supporto Fetch (Slide 25 file 08) ---
+
+function onResponse(response) {
+    if (!response.ok) {
+        console.log('Risposta non valida'); 
+        return null; 
+    }
+    return response.json();
+}
+
+function onError(error) {
+    console.log('Error: ' + error);
+    if (container) {
+        container.innerHTML = '';
+        const p = document.createElement('p');
+        p.textContent = 'Errore di connessione: ' + error;
+        p.style.color = 'red';
+        container.appendChild(p);
     }
 }
 
-    const container = document.getElementById('album-container');
-    container.style.display = 'none'; // Nascondi di default
-    // Crea form di ricerca
-    const searchForm = document.createElement('form');
-    searchForm.classList.add('spotify-search-form-centered');
-    searchForm.innerHTML = `
-        <input type="text" id="album-id-input" class="spotify-search-input" placeholder="Cerca album..." required>
-        <button type="submit" class="spotify-search-btn">Cerca</button>
-    `;
-    container.parentNode.insertBefore(searchForm, container);
+// --- 3. Logica Ricerca Album ---
 
-    // Mostra #album-container solo dopo submit valido
-    const albumInput = searchForm.querySelector('#album-id-input');
+function onSearchJson(data) {
+    container.innerHTML = ''; 
+    container.style.display = 'block';
 
-    searchForm.addEventListener('submit', async function (e) {
-        e.preventDefault();
-        const query = albumInput.value.trim();
-        if (!query) {
-            container.style.display = 'none';
-            return;
+    if (!data || !data.albums || !data.albums.items.length) {
+        const p = document.createElement('p');
+        p.textContent = 'Nessun album trovato.';
+        container.appendChild(p);
+        return;
+    }
+
+    const h3 = document.createElement('h3');
+    h3.textContent = 'Risultati:';
+    container.appendChild(h3);
+
+    const listDiv = document.createElement('div');
+    listDiv.classList.add('spotify-result-list');
+
+    const albums = data.albums.items;
+    // Iterazione (Slide 34 file 05)
+    for (const album of albums) {
+        const card = document.createElement('div');
+        card.classList.add('spotify-result-card');
+        // Salviamo ID nel dataset (Slide 34 file 06)
+        card.dataset.albumId = album.id; 
+
+        // Immagine
+        const img = document.createElement('img');
+        if (album.images && album.images.length > 0) {
+            img.src = album.images[0].url;
         }
-        container.style.display = '';
-        container.innerHTML = '<p>Caricamento...</p>';
-        const albums = await searchAlbums(query);
-        if (albums && albums.length > 0) {
-            // Mostra lista album trovati
-            let listHtml = '<h3>Risultati:</h3><div class="spotify-result-list">';
-            albums.forEach(album => {
-                listHtml += `<div class="spotify-result-card" data-album-id="${album.id}">
-                    <img src="${album.images[0]?.url}" alt="${album.name}" class="spotify-result-img"> 
-                    <div class="spotify-result-info">
-                        <div class="spotify-result-title">${album.name}</div>
-                        <div class="spotify-result-artist">${album.artists.map(a=>a.name).join(', ')}</div>
-                        <div class="spotify-result-meta">${album.release_date}</div>
-                    </div>
-                </div>`;
-            });
-            listHtml += '</div>';
-            container.innerHTML = listHtml;
+        img.alt = album.name;
+        img.classList.add('spotify-result-img');
+        card.appendChild(img);
 
-            // Aggiungi click per mostrare dettagli album
-            container.querySelectorAll('.spotify-result-card[data-album-id]').forEach(card => {
-                card.addEventListener('click', async function () {
-                    const albumId = card.getAttribute('data-album-id');
-                    container.innerHTML = '<p>Caricamento album...</p>';
-                    const albumData = await fetchAlbumData(albumId);
-                    if (albumData) {
-                        let tracksHtml = '';
-                        albumData.tracks.items.forEach(track => {
-                            tracksHtml += `<li>${track.track_number}. ${track.name} (${Math.floor(track.duration_ms / 60000)}:${String(Math.floor((track.duration_ms % 60000) / 1000)).padStart(2, '0')})</li>`;
-                        });
-                        container.innerHTML = `
-                        <a id="backBtn" class="spotify-back-btn" href="#">Torna ai risultati</a>
-                            <div class="spotify-album-card">
-                                <div class="spotify-album-info">
-                                    <div class="spotify-album-title">${albumData.name}</div>
-                                    <div class="spotify-album-meta">Artista: ${albumData.artists.map(artist => artist.name).join(', ')}</div>
-                                    <div class="spotify-album-meta">Data di rilascio: ${albumData.release_date}</div>
-                                </div>
-                                <img src="${albumData.images[0]?.url}" alt="${albumData.name}" class="spotify-album-cover">
-                            </div>
-                            <div class="spotify-album-tracks">
-                                <div class="spotify-album-tracks-title">Tracce:</div>
-                                <ul class="spotify-album-tracks-list">${tracksHtml}</ul>
-                            </div>
-                            
-                        `;
-                        document.getElementById('backBtn').onclick = () => {
-                            searchForm.dispatchEvent(new Event('submit'));
-                        };
-                    } else {
-                        container.innerHTML = '<p>Album non trovato.</p>';
-                    }
-                });
-            });
-        } else {
-            container.innerHTML = '<p>Nessun album trovato.</p>';
+        // Info Container
+        const infoDiv = document.createElement('div');
+        infoDiv.classList.add('spotify-result-info');
+
+        const titleDiv = document.createElement('div');
+        titleDiv.classList.add('spotify-result-title');
+        titleDiv.textContent = album.name;
+        infoDiv.appendChild(titleDiv);
+
+        const artistDiv = document.createElement('div');
+        artistDiv.classList.add('spotify-result-artist');
+        let artistNames = [];
+        for (const artist of album.artists) {
+            artistNames.push(artist.name);
         }
-    });
+        artistDiv.textContent = artistNames.join(', ');
+        infoDiv.appendChild(artistDiv);
 
+        const dateDiv = document.createElement('div');
+        dateDiv.classList.add('spotify-result-meta');
+        dateDiv.textContent = album.release_date;
+        infoDiv.appendChild(dateDiv);
 
-async function searchAlbums(query) {
-    const token = await requestToken();
-    try {
-        const response = await fetch(`https://api.spotify.com/v1/search?q=${encodeURIComponent(query)}&type=album`, {
+        card.appendChild(infoDiv);
+        
+        // Event Listener Click (Slide 53 file 05)
+        card.addEventListener('click', onCardClick);
+        
+        listDiv.appendChild(card);
+    }
+    container.appendChild(listDiv);
+}
+
+function searchAlbums(query) {
+    requestToken().then(function(token) {
+        // URL UFFICIALE SPOTIFY (Sostituisce il proxy numerico)
+        // Slide 43 file 09: Esempio ricerca album
+        const url = 'https://api.spotify.com/v1/search?type=album&q=' + encodeURIComponent(query);
+        
+        fetch(url, {
             headers: {
                 'Authorization': 'Bearer ' + token
             }
-        });
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        const data = await response.json();
-        return data.albums.items;
-    } catch (error) {
-        console.error('Error:', error);
+        })
+        .then(onResponse, onError)
+        .then(onSearchJson);
+    });
+}
+
+function onSubmit(e) {
+    e.preventDefault();
+    const query = input.value.trim();
+    if (!query) {
+        container.style.display = 'none';
+        return;
     }
+    
+    container.style.display = 'block';
+    container.textContent = 'Caricamento...';
+    
+    searchAlbums(query);
+}
+
+searchForm.addEventListener('submit', onSubmit);
+
+
+// --- 4. Logica Dettaglio Album ---
+
+function onAlbumDetailsJson(data) {
+    // FIX CRITICO: Se data è null (errore fetch), mostriamo errore invece di bloccarci
+    if (!data) {
+        container.innerHTML = '';
+        const p = document.createElement('p');
+        p.textContent = 'Impossibile caricare i dettagli dell\'album.';
+        container.appendChild(p);
+        return;
+    }
+
+    container.innerHTML = ''; // Pulizia
+
+    // Tasto Indietro
+    const backBtn = document.createElement('a');
+    backBtn.href = '#';
+    backBtn.classList.add('spotify-back-btn');
+    backBtn.textContent = 'Torna ai risultati';
+    backBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        searchForm.dispatchEvent(new Event('submit')); // Ricarica ricerca
+    });
+    container.appendChild(backBtn);
+
+    // Card Dettaglio
+    const albumCard = document.createElement('div');
+    albumCard.classList.add('spotify-album-card');
+
+    const infoDiv = document.createElement('div');
+    infoDiv.classList.add('spotify-album-info');
+
+    const titleDiv = document.createElement('div');
+    titleDiv.classList.add('spotify-album-title');
+    titleDiv.textContent = data.name;
+    infoDiv.appendChild(titleDiv);
+
+    const metaArtist = document.createElement('div');
+    metaArtist.classList.add('spotify-album-meta');
+    let artists = [];
+    if (data.artists) {
+        for(const art of data.artists) artists.push(art.name);
+    }
+    metaArtist.textContent = 'Artista: ' + artists.join(', ');
+    infoDiv.appendChild(metaArtist);
+
+    const metaDate = document.createElement('div');
+    metaDate.classList.add('spotify-album-meta');
+    metaDate.textContent = 'Data di rilascio: ' + data.release_date;
+    infoDiv.appendChild(metaDate);
+
+    albumCard.appendChild(infoDiv);
+
+    // Cover
+    if (data.images && data.images.length > 0) {
+        const cover = document.createElement('img');
+        cover.src = data.images[0].url;
+        cover.alt = data.name;
+        cover.classList.add('spotify-album-cover');
+        albumCard.appendChild(cover);
+    }
+    container.appendChild(albumCard);
+
+    // Lista Tracce
+    const tracksContainer = document.createElement('div');
+    tracksContainer.classList.add('spotify-album-tracks');
+
+    const tracksTitle = document.createElement('div');
+    tracksTitle.classList.add('spotify-album-tracks-title');
+    tracksTitle.textContent = 'Tracce:';
+    tracksContainer.appendChild(tracksTitle);
+
+    const ul = document.createElement('ul');
+    ul.classList.add('spotify-album-tracks-list');
+
+    if (data.tracks && data.tracks.items) {
+        for (const track of data.tracks.items) {
+            const li = document.createElement('li');
+            
+            const minutes = Math.floor(track.duration_ms / 60000);
+            let seconds = Math.floor((track.duration_ms % 60000) / 1000);
+            const secondsStr = seconds < 10 ? '0' + seconds : seconds;
+
+            li.textContent = track.track_number + '. ' + track.name + ' (' + minutes + ':' + secondsStr + ')';
+            ul.appendChild(li);
+        }
+    }
+    tracksContainer.appendChild(ul);
+    container.appendChild(tracksContainer);
+}
+
+function onCardClick(event) {
+    const card = event.currentTarget; 
+    const albumId = card.dataset.albumId;
+
+    container.innerHTML = '';
+    const p = document.createElement('p');
+    p.textContent = 'Caricamento album...';
+    container.appendChild(p);
+
+    requestToken().then(function(token) {
+        // URL UFFICIALE SPOTIFY per Dettaglio Album
+        // Sostituisce il proxy ".../0" che probabilmente dava problemi
+        const url = 'https://api.spotify.com/v1/albums/' + albumId;
+
+        fetch(url, {
+            headers: {
+                'Authorization': 'Bearer ' + token
+            }
+        })
+        .then(onResponse, onError)
+        .then(onAlbumDetailsJson);
+    });
 }

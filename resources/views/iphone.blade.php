@@ -6,9 +6,7 @@
 
 @section('scripts')
     <script src="{{ url('js/prodotti.js') }}" defer></script>
-    <script>
-        window.PRODOTTI_FILTER = 'iphone';
-    </script>
+    
 @endsection
 
 @section('content')

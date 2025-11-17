@@ -5,9 +5,7 @@
 @endsection
 @section('scripts')
     <script src="{{ url('js/prodotti.js') }}" defer></script>
-    <script>
-        window.PRODOTTI_FILTER = 'mac';
-    </script>
+   
 @endsection
 
 @section('content')

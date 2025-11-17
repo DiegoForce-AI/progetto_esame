@@ -23,10 +23,6 @@
         </button>
         <div class="nav-links" id="nav-links">
             <a href="{{ url('prodotti') }}">Store</a>
-            <a href="{{ url('mac') }}">Mac</a>
-            <a href="{{ url('ipad') }}">iPad</a>
-            <a href="{{ url('iphone') }}">iPhone</a>
-            <a href="{{ url('airpods') }}">Airpods</a>
             <a href="{{ url('spotify') }}">Spotify</a>
             <a href="{{ url('fakestore') }}">FakeStore</a>
 

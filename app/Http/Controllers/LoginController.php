@@ -95,11 +95,7 @@ class LoginController extends BaseController
         $user->username = request('username');
         $user->password = password_hash(request('password'), PASSWORD_BCRYPT);
         $user->save();
-
-        //Login manuale
-        Session::put('user_id', $user->id);
-        Session::put('username', $user->username);
-        return redirect('home');
+        return redirect('login');
     }
     public function logout()
     {

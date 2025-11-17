@@ -1,3 +1,32 @@
+/* Messaggio aggiunta al carrello */
+.carrello-msg {
+    position: fixed;
+    top: 54px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    min-width: 220px;
+    max-width: 90vw;
+    padding: 16px 32px;
+    border-radius: 16px;
+    font-size: 1.18em;
+    font-family: "Inter", Arial, sans-serif;
+    font-weight: 600;
+    color: #fff;
+    text-align: center;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.13);
+    opacity: 0.97;
+    pointer-events: none;
+    transition: opacity 0.3s;
+}
+.carrello-msg-success {
+    background: linear-gradient(90deg, #00c853 0%, #43e97b 100%);
+}
+.carrello-msg-errore {
+    background: linear-gradient(90deg, #e53935 0%, #ff5252 100%);
+}
+
+
 nav {
     width: 100%;
     box-sizing: border-box;

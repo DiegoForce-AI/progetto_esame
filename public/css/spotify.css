@@ -179,6 +179,8 @@ main {
 }
 .spotify-back-btn {
     display: inline-block;
+    position: relative;
+    bottom: 49px;
     margin-top: 28px;
     background: #1db954;
     color: #fff;
