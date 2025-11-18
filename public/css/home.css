@@ -1,83 +1,38 @@
-/* Messaggio aggiunta al carrello */
-.carrello-msg {
-    position: fixed;
-    top: 54px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 9999;
-    min-width: 220px;
-    max-width: 90vw;
-    padding: 16px 32px;
-    border-radius: 16px;
-    font-size: 1.18em;
+/* =========================================
+   1. BASE & RESET
+   ========================================= */
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
     font-family: "Inter", Arial, sans-serif;
-    font-weight: 600;
-    color: #fff;
-    text-align: center;
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.13);
-    opacity: 0.97;
-    pointer-events: none;
-    transition: opacity 0.3s;
+    color: #1d1d1f;
 }
-.carrello-msg-success {
-    background: linear-gradient(90deg, #00c853 0%, #43e97b 100%);
-}
-.carrello-msg-errore {
-    background: linear-gradient(90deg, #e53935 0%, #ff5252 100%);
-}
-@media (max-width: 1023px) {
-    #hamburger-search-error {
-        display: block;
-        color: #e53935;
-        font-size: 1em;
-        margin: 8px 0 8px 0;
-        text-align: center;
-        font-family: "Inter", Arial, sans-serif;
-        font-weight: 500;
-        background: #fff6f6;
-        border-radius: 8px;
-        padding: 8px 0 6px 0;
-        box-shadow: 0 2px 8px rgba(229, 57, 53, 0.07);
-        max-width: 95%;
-        margin-left: auto;
-        margin-right: auto;
-    }
-}
-/* Mostra i bottoni hamburger-extra-buttons solo su mobile/tablet quando il menu è aperto */
-#hamburger-extra-buttons {
-    display: none;
+
+body {
+    min-height: 100vh;
+    display: flex;
     flex-direction: column;
-    gap: 10px;
-    margin-top: 20px;
+    background: #f5f5f7;
 }
 
-@media (max-width: 1023px) {
-    .nav-links.open #hamburger-extra-buttons {
-        display: flex;
-    }
+main {
+    flex: 1 0 auto;
 }
 
-@media (min-width: 1024px) {
-    #hamburger-extra-buttons {
-        display: none !important;
-    }
-}
-@media (min-width: 1024px) {
-    /* Nascondi solo hamburger-extra-buttons su desktop */
-    #hamburger-extra-buttons {
-        display: none !important;
-    }
-    /* Mostra la search bar desktop su desktop */
-    .search-dropdown-wrapper {
-        display: inline-block !important;
-    }
+a {
+    text-decoration: none;
 }
 
-@media (max-width: 1023px) {
-    /* Nascondi la search bar desktop su mobile/tablet */
-    .search-dropdown-wrapper {
-        display: none !important;
-    }
+/* =========================================
+   2. HEADER & NAVIGATION
+   ========================================= */
+header {
+    background: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
 .home-page nav {
@@ -101,50 +56,8 @@ nav {
     z-index: 10;
 }
 
-footer,
-.footer-flex {
-    width: 100%;
-    box-sizing: border-box;
-    overflow-x: hidden;
-}
-
-html,
-body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-}
-body {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-}
-main {
-    flex: 1 0 auto;
-}
-.site-footer {
-    flex-shrink: 0;
-    width: 100%;
-    padding: 20px 0 0 0;
-    color: #888;
-    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.03);
-    position: relative;
-    left: 0;
-    bottom: 0;
-}
-
-nav a img {
-    width: 30px;
-    height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0px;
-}
-
 nav a {
     color: #222;
-    text-decoration: none;
     font-weight: 500;
     margin: 0 12px;
     padding: 4px 0;
@@ -154,29 +67,7 @@ nav a {
     text-align: center;
 }
 
-/* Effetto hover solo su link testuali, non sulle icone */
-nav a:not(:has(img)):hover,
-nav a:not(:has(img)):focus {
-    color: #0071e3;
-}
-
-nav a:not(:has(img))::after {
-    content: "";
-    display: block;
-    width: 0;
-    height: 2px;
-    background: #0071e3;
-    transition: width 0.25s;
-    position: absolute;
-    left: 0;
-    bottom: 0;
-}
-
-nav a:not(:has(img)):hover::after,
-nav a:not(:has(img)):focus::after {
-    width: 100%;
-}
-
+/* Immagini dentro la nav */
 nav img {
     vertical-align: middle;
     height: 32px;
@@ -184,9 +75,54 @@ nav img {
     transition: none;
 }
 
-.dropdown-account {
+nav a img {
+    width: 30px;
+    height: 44px;
+    padding: 0;
+    /* Reset flex properties if purely purely decorative inside link */
+    display: inline-flex; 
+    align-items: center;
+}
+
+
+
+/* Messaggio di benvenuto */
+#welcome-message {
+    font-weight: bold;
+    font-size: 14px;
+    margin-left: 20px;
+    color: #1d1d1f;
+}
+
+/* =========================================
+   3. DROPDOWNS & FORMS (Search/Account)
+   ========================================= */
+/* Wrapper base */
+.dropdown-account,
+.search-dropdown-wrapper {
     display: inline-block;
     position: relative;
+}
+
+/* Stili condivisi dropdown */
+.account-dropdown,
+.search-dropdown {
+    display: none; /* Gestito via JS */
+    position: absolute;
+    right: 0;
+    background: #fff;
+    border: 2px solid #0071e3;
+    border-radius: 12px;
+    z-index: 1000;
+    box-shadow: 0 8px 32px rgba(0, 113, 227, 0.13);
+    font-size: 1.08em;
+    transition: box-shadow 0.2s, border 0.2s;
+}
+
+/* Account Specifics */
+.account-dropdown {
+    top: 100%;
+    min-width: 180px;
 }
 
 .account img {
@@ -210,34 +146,105 @@ nav img {
     cursor: pointer;
 }
 
-#welcome-message {
-    font-weight: bold;
-    font-size: 14px;
-    margin-left: 20px;
-    color: #1d1d1f;
+/* Search Specifics */
+.search-dropdown {
+    min-width: 260px;
+    padding: 18px 20px;
 }
 
-body {
-    font-family: "Inter", sans-serif;
+#search-form {
+    position: relative; /* Fondamentale: blocca i figli assoluti al suo interno */
+    align-items: center;
     margin: 0;
-    background: #f5f5f7;
-    color: #1d1d1f;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 
-header {
-    background: #fff;
-    color: #1d1d1f;
-    position: sticky;
-    top: 0;
-    z-index: 100;
+#search-input {
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1.5px solid #0071e3;
+    width: 180px; /* o 100% se preferisci che riempia il container */
+    font-size: 1.08em;
 }
 
-.center p {
-    margin: 0px;
-    font-size: 40px;
-    font-weight: 500;
+#searchBtn {
+    padding: 8px 16px;
+    border-radius: 6px;
+    border: 1.5px solid #0071e3;
+    background: #0071e3;
+    color: #fff;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1.08em;
+    transition: background 0.2s;
 }
 
+#searchBtn:hover {
+    background: #005bb5;
+}
+
+/* =========================================
+   4. MESSAGGI (Carrello & Errori)
+   ========================================= */
+.carrello-msg {
+    position: fixed;
+    top: 54px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    min-width: 220px;
+    max-width: 90vw;
+    padding: 16px 32px;
+    border-radius: 16px;
+    font-size: 1.18em;
+    font-weight: 600;
+    color: #fff;
+    text-align: center;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.13);
+    opacity: 0.97;
+    pointer-events: none;
+    transition: opacity 0.3s;
+}
+
+.carrello-msg-success {
+    background: linear-gradient(90deg, #00c853 0%, #43e97b 100%);
+}
+
+.carrello-msg-errore {
+    background: linear-gradient(90deg, #e53935 0%, #ff5252 100%);
+}
+
+/* Risultato generico */
+#result.search-result-error{
+    position: absolute;
+    top: 100%;          /* Si sposta esattamente sotto la form */
+    left: 0;
+    width: 100%;        /* Occupa ESATTAMENTE la larghezza della form (input + bottone) */
+    z-index: 10000;     /* Sopra tutto */
+    
+    /* Spaziatura */
+    margin-top: 12px;   /* Un po' di aria sotto la barra */
+    
+    /* Aspetto Grafico (Dropdown) */
+    background-color: #fff; 
+    border: 1px solid #e53935; /* Bordo rosso errore */
+    border-radius: 12px;       /* Arrotondato come i box Apple */
+    padding: 16px;
+    box-sizing: border-box;    /* Il padding non allarga il box */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15); /* Ombra per effetto galleggiante */
+    
+    /* Testo */
+    color: #d32f2f;
+    font-weight: 600;
+    text-align: center;
+    font-size: 0.95em;
+}
+
+/* =========================================
+   5. HERO SECTION & HOME
+   ========================================= */
 .hero {
     display: flex;
     position: relative;
@@ -245,23 +252,22 @@ header {
     height: 692px;
 }
 
-.bubble-wrapper {
-    background-color: #007aff;
-    color: white;
-    right: 59px;
-    border-radius: 40px;
-    position: relative;
-    display: inline-block;
-    padding: 24px;
-    line-height: 38px;
+.center {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: 100%;
 }
 
-.edu-container {
-    padding: 0px 7px 0px 8px;
-}
-
-.hero-content p {
-    margin: 0;
+.center p {
+    margin: 0px;
+    font-size: 40px;
+    font-weight: 500;
 }
 
 .hero-content {
@@ -280,6 +286,10 @@ header {
     font-weight: 600;
 }
 
+.hero-content p {
+    margin: 0;
+}
+
 .hero-background {
     position: relative;
     margin-top: 18px;
@@ -289,6 +299,31 @@ header {
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+.hero-overlay {
+    padding: 10px 0;
+    font-size: 30px;
+}
+
+/* Bubbles & Stickers */
+.bubble-wrapper {
+    background-color: #007aff;
+    color: white;
+    right: 59px;
+    border-radius: 40px;
+    position: relative;
+    display: inline-block;
+    padding: 24px;
+    line-height: 38px;
+}
+
+.sticker {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    left: 80%;
+    top: 8%;
 }
 
 .sticker .img1 {
@@ -308,25 +343,6 @@ header {
     z-index: 1;
 }
 
-.sticker {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    left: 80%;
-    top: 8%;
-}
-
-.hero-overlay {
-    padding: 10px 0;
-    font-size: 30px;
-}
-
-.edu {
-    padding: 0px 7px 0px 8px;
-    font-size: 24px;
-    width: 280px;
-}
-
 .genmoij {
     position: absolute;
     z-index: 1;
@@ -335,17 +351,69 @@ header {
     bottom: 191px;
 }
 
+/* Text Styles */
 .colorful-text {
     font-size: 21px;
     font-weight: 500;
     letter-spacing: 0;
-    color: #1d1d1f;
-    z-index: 2;
     margin: 0px;
     background: linear-gradient(94deg, #0090f7, #ba62fc, #f2416b, #f55600);
     background-clip: text;
     color: transparent;
     display: inline-block;
+    z-index: 2;
+}
+
+.edu {
+    padding: 0px 7px 0px 8px;
+    font-size: 24px;
+    width: 280px;
+}
+
+.edu-container {
+    padding: 0px 7px 0px 8px;
+}
+
+.description p {
+    text-align: center;
+    font-size: 21px;
+    line-height: 1.19;
+    font-weight: 400;
+    letter-spacing: 0.011em;
+    margin-top: 4px;
+}
+
+/* Buttons */
+.btn, .btn2 {
+    border-radius: 40px;
+    padding: 12px 24px;
+    font-size: 16px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+
+.btn {
+    background: transparent;
+    color: #06c;
+    border: 1px solid #06c;
+    font-weight: 100;
+}
+
+.btn:hover {
+    background: rgb(0, 119, 237);
+    color: white;
+}
+
+.btn2 {
+    background: #0071e3;
+    color: white;
+    border: 1px solid #06c;
+}
+
+.btn2:hover {
+    background: rgb(0, 119, 237);
+    color: white;
 }
 
 .hero-bottom .button {
@@ -354,39 +422,7 @@ header {
     left: 40px;
 }
 
-.btn {
-    background: transparent;
-    color: #06c;
-    border-radius: 40px;
-    font-weight: 100;
-    border: 1px solid #06c;
-    padding: 12px 24px;
-    font-size: 16px;
-    cursor: pointer;
-    text-decoration: none;
-    transition: background 0.2s;
-}
-
-.btn2 {
-    background: #0071e3;
-    color: white;
-    border-radius: 40px;
-    border: 1px solid #06c;
-    padding: 12px 24px;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-.btn2:hover {
-    background: rgb(0, 119, 237);
-    color: white;
-}
-
-.btn:hover {
-    background: rgb(0, 119, 237);
-    color: white;
-}
-
+/* Hero iPhone Section */
 .hero-iphone {
     display: flex;
     flex-direction: column;
@@ -424,6 +460,20 @@ header {
     margin: 0px;
 }
 
+.hero-iphone-subdescription p {
+    position: absolute;
+    top: 240px;
+    left: 40%;
+    font-size: 21px;
+    font-weight: 500;
+    letter-spacing: 0;
+    z-index: 2;
+    margin: 0px;
+    background: linear-gradient(94deg, #0090f7, #ba62fc, #f2416b, #f55600);
+    background-clip: text;
+    color: transparent;
+}
+
 .hero-iphone-button .btn {
     position: absolute;
     top: 180px;
@@ -452,21 +502,7 @@ header {
     color: white;
 }
 
-.hero-iphone-subdescription p {
-        position: absolute;
-    top: 240px;
-    left: 40%;
-    font-size: 21px;
-    font-weight: 500;
-    letter-spacing: 0;
-    color: #1d1d1f;
-    z-index: 2;
-    margin: 0px;
-    background: linear-gradient(94deg, #0090f7, #ba62fc, #f2416b, #f55600);
-    background-clip: text;
-    color: transparent;
-}
-
+/* Hero Macbook Section */
 .hero-macbook {
     display: flex;
     flex-direction: column;
@@ -474,22 +510,6 @@ header {
     position: relative;
     flex: 1;
     overflow: hidden;
-}
-
-.hero-macbook-button .btn {
-    position: absolute;
-    text-align: center;
-    bottom: 97px;
-    left: 44%;
-    z-index: 2;
-    border-color: rgba(0, 0, 0, 0);
-    background: #0071e3;
-    color: white;
-}
-
-.hero-macbook-button .btn:hover {
-    color: black;
-    background: white;
 }
 
 .hero-macbook img {
@@ -534,7 +554,6 @@ header {
     font-size: 22px;
     font-weight: 500;
     letter-spacing: 0;
-    color: #1d1d1f;
     z-index: 2;
     margin: 0px;
     background: linear-gradient(94deg, #0090f7, #ba62fc, #f2416b, #f55600);
@@ -543,27 +562,23 @@ header {
     display: inline-block;
 }
 
-.center {
+.hero-macbook-button .btn {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    height: 100%;
-}
-
-.description p {
     text-align: center;
-    font-size: 21px;
-    line-height: 1.19;
-    font-weight: 400;
-    letter-spacing: 0.011em;
-    margin-top: 4px;
+    bottom: 97px;
+    left: 44%;
+    z-index: 2;
+    border-color: rgba(0, 0, 0, 0);
+    background: #0071e3;
+    color: white;
 }
 
+.hero-macbook-button .btn:hover {
+    color: black;
+    background: white;
+}
+
+/* Homepage Grid */
 .homepage > div {
     flex: 0 0 49.4%;
     display: flex;
@@ -577,12 +592,34 @@ header {
     object-fit: contain;
 }
 
+/* =========================================
+   6. FOOTER
+   ========================================= */
+.site-footer {
+    flex-shrink: 0;
+    width: 100%;
+    padding: 20px 0 0 0;
+    color: #888;
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.03);
+    position: relative;
+    left: 0;
+    bottom: 0;
+}
+
+footer,
+.footer-flex {
+    width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+
 footer {
     background: #161617cc;
     color: #fff;
     text-align: center;
     padding: 2em 1em;
 }
+
 footer p {
     margin: 0;
     font-size: 14px;
@@ -591,8 +628,7 @@ footer p {
 }
 
 footer a {
-    color: #1db954;
-    text-decoration: none;
+    color: #1db954; /* Spotify green as default in footer a */
     font-size: 20px;
     line-height: 1.4;
     font-weight: bold;
@@ -605,6 +641,53 @@ footer img {
     width: 10%;
 }
 
+.footer-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.5em;
+    min-height: 110px;
+}
+
+.footer-center {
+    width: 100%;
+    text-align: center;
+    margin-top: 24px;
+    font-size: 14px;
+    padding: 0.7em 0 0.4em 0;
+}
+
+/* Blocchi Destra e Sinistra (FakeStore / Spotify) */
+.footer-block-right,
+.footer-block-fakestore {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    justify-content: flex-start;
+    left: 0;
+    right: 0;
+}
+
+.footer-block-right {
+    gap: 8px;
+    width: 60%;
+    bottom: 6px;
+}
+
+.footer-block-fakestore {
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.footer-block-fakestore a {
+    display: inline-block;
+    width: auto;
+    max-width: 100%;
+}
+
+/* Stili Specifici Spotify */
 .spotify-label {
     font-size: 1.18em;
     font-weight: 500;
@@ -616,7 +699,6 @@ footer img {
     gap: 8px;
 }
 
-/* Stile per l'immagine della traccia Spotify nel footer */
 .spotify-track-img {
     height: 56px;
     width: 56px;
@@ -628,12 +710,12 @@ footer img {
     vertical-align: middle;
     transition: transform 0.2s;
 }
+
 .spotify-track-img:hover {
     transform: scale(1.08) rotate(-2deg);
     box-shadow: 0 4px 18px rgba(30, 215, 96, 0.28);
 }
 
-/* Stile per il testo della traccia Spotify */
 .spotify-track-text {
     font-size: 1.15em;
     font-weight: 500;
@@ -641,49 +723,14 @@ footer img {
     vertical-align: middle;
 }
 
-.footer-block-right {
-    display: flex;
-    position: relative;
-    right: 200px;
-    bottom: 6px;
-    flex-direction: column;
-    justify-content: flex-start;
-    gap: 8px;
-    width: 60%;
-}
-
-.footer-flex {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    max-width: 1100px;
-    width: 100%;
-    margin: 0 auto;
-    padding: 0 1.5em;
-    min-height: 110px;
-    box-sizing: border-box;
-}
-.footer-block-fakestore {
-    display: flex;
-    position: relative;
-    right: 200px;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    gap: 8px;
-}
-
-.footer-block-fakestore a {
-    display: inline-block;
-    width: auto;
-    max-width: 100%;
-}
+/* Stili Specifici FakeStore */
 .fakestore-label {
     font-size: 1.18em;
     font-weight: 500;
     color: #ffb300;
     margin-bottom: 7px;
 }
+
 .fakestore-img {
     height: 54px;
     width: 54px;
@@ -694,116 +741,67 @@ footer img {
     margin-top: 0;
     transition: transform 0.2s, box-shadow 0.2s;
 }
+
 .fakestore-img:hover {
     transform: scale(1.08) rotate(2deg);
     box-shadow: 0 4px 18px rgba(255, 179, 0, 0.22);
 }
-.footer-center {
-    width: 100%;
-    text-align: center;
-    margin-top: 24px;
-    font-size: 14px;
-    padding: 0.7em 0 0.4em 0;
-}
-#result {
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 40px 0 0 0;
-    margin: 10px auto;
-    max-width: 800px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    font-family: "Inter", sans-serif;
-    color: #333;
-    text-align: center;
-}
 
-/* Dropdown account */
-.dropdown-account {
-    display: inline-block;
-    position: relative;
-}
-.account-dropdown {
+/* Base state per Extra Buttons (menu hamburger) */
+#hamburger-extra-buttons {
     display: none;
-    position: absolute;
-    right: 0;
-    top: 100%;
-    background: #fff;
-    border: 2px solid #0071e3;
-    border-radius: 12px;
-    min-width: 180px;
-    z-index: 1000;
-    box-shadow: 0 8px 32px rgba(0, 113, 227, 0.13);
-    font-size: 1.08em;
-    transition: box-shadow 0.2s, border 0.2s;
-}
-.account-dropdown form {
-    margin: 0;
-}
-
-/* Dropdown search */
-.search-dropdown-wrapper {
-    display: inline-block;
-    position: relative;
-}
-.search-dropdown {
-    display: none;
-    position: absolute;
-    right: 0;
-    background: #fff;
-    border: 2px solid #0071e3;
-    border-radius: 12px;
-    min-width: 260px;
-    z-index: 1000;
-    padding: 18px 20px;
-    box-shadow: 0 8px 32px rgba(0, 113, 227, 0.13);
-    font-size: 1.08em;
-    transition: box-shadow 0.2s, border 0.2s;
-}
-#search-form {
-    margin: 0;
-    display: flex;
     flex-direction: column;
-    gap: 12px;
-}
-#search-input {
-    padding: 8px 12px;
-    border-radius: 6px;
-    border: 1.5px solid #0071e3;
-    width: 180px;
-    font-size: 1.08em;
-}
-#searchBtn {
-    padding: 8px 16px;
-    border-radius: 6px;
-    border: 1.5px solid #0071e3;
-    background: #0071e3;
-    color: #fff;
-    cursor: pointer;
-    font-weight: 600;
-    font-size: 1.08em;
-    transition: background 0.2s;
-}
-#searchBtn:hover {
-    background: #005bb5;
+    gap: 10px;
+    margin-top: 20px;
 }
 
-#search-input {
-    padding: 4px 8px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    width: 160px;
-}
-#searchBtn {
-    padding: 4px 10px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    cursor: pointer;
+/* =========================================
+   7. MEDIA QUERIES
+   ========================================= */
+
+/* --- DESKTOP (Min Width 1024px) --- */
+@media (min-width: 1024px) {
+    /* Forza nascondiglio extra buttons su desktop */
+    #hamburger-extra-buttons {
+        display: none !important;
+    }
+    
+    /* Mostra la search bar su desktop */
+    .search-dropdown-wrapper {
+        display: inline-block !important;
+    }
 }
 
-.footer-block-right,
-.footer-block-fakestore {
-    left: 0;
-    right: 0;
-    position: relative;
+/* --- MOBILE & TABLET (Max Width 1023px) --- */
+@media (max-width: 1023px) {
+    /* Nascondi la search bar desktop */
+    .search-dropdown-wrapper {
+        display: none !important;
+    }
+
+    /* Mostra gli extra button quando il menu è aperto */
+    .nav-links.open #hamburger-extra-buttons {
+        display: flex;
+    }
+
+    /* Box errore ricerca su mobile */
+    #hamburger-search-error {
+    display: block; /* Garantisce che vada a capo come blocco */
+    width: 100%;    /* Tende a prendere la larghezza del genitore */
+    
+    color: #e53935;
+    font-size: 1em;
+    
+    /* Centramento e margini */
+    margin: 8px auto; 
+    text-align: center;
+    font-weight: 500;
+    
+    background: #fff6f6;
+    border-radius: 8px;
+    padding: 8px 0 6px 0;
+    box-shadow: 0 2px 8px rgba(229, 57, 53, 0.07);
+    
+    max-width: 95%; /* Limita l'errore per farlo rientrare nel menu */
+}
 }

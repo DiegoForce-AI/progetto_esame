@@ -18,35 +18,37 @@ const hamburgerSearchForm = document.querySelector('#hamburger-search-form'); //
 
 if (hamburgerSearchForm) {
     const hamburgerSearchInput = hamburgerSearchForm.querySelector('input[name="nome"]');
-
-    function onHamburgerJson(data) {
+function onHamburgerJson(data) {
         // Rimuovi eventuale messaggio precedente
         const oldError = document.querySelector('#hamburger-search-error');
         if (oldError) {
-            oldError.remove(); // [cite: 1443]
+            oldError.remove(); // Rimuovere elementi [cite: 1399]
         }
 
-        // Gestione dati null (errore fetch)
+        const errorDiv = document.createElement('div'); // Creazione elemento [cite: 1391]
+        errorDiv.id = 'hamburger-search-error';
+
+        // Logica errore/successo
         if (!data) {
-             const errorDiv = document.createElement('div'); // 
-             errorDiv.id = 'hamburger-search-error';
-             errorDiv.textContent = 'Errore durante la ricerca.'; // [cite: 1422]
-             hamburgerSearchForm.appendChild(errorDiv); // [cite: 1436]
-             return;
-        }
-
-        // Verifica logica dei dati ricevuti
-        if (data.success && data.product && data.product.id) {
-            // Reindirizzamento (window.location standard JS)
+             errorDiv.textContent = 'Errore durante la ricerca.'; // Imposta contenuto testuale [cite: 1378]
+        } else if (data.success && data.product && data.product.id) {
+            // Reindirizzamento in caso di successo
             window.location.href = window.location.origin + '/prodotto/' + data.product.id;
+            return; // Esci dopo il reindirizzamento
         } else {
-            const errorDiv = document.createElement('div');
-            errorDiv.id = 'hamburger-search-error';
             errorDiv.textContent = data.message; 
-            // Fallback se il messaggio è vuoto
             if (!errorDiv.textContent) errorDiv.textContent = 'Prodotto non trovato';
-            hamburgerSearchForm.appendChild(errorDiv);
         }
+        
+        // --- LA MODIFICA CHIAVE BASATA SULLE SLIDE ---
+        const parent = hamburgerSearchForm.parentNode; // Trova il genitore 
+        
+        // Inserisce l'elemento errorDiv come fratello, subito DOPO hamburgerSearchForm
+        // Inserisci l'errore PRIMA del prossimo elemento (nextSibling), che in pratica è DOPO l'elemento di riferimento.
+        if (parent) {
+             parent.insertBefore(errorDiv, hamburgerSearchForm.nextSibling); 
+        }
+        // ---------------------------------------------
     }
 
     function handleHamburgerSubmit(e) {
@@ -71,7 +73,7 @@ if (hamburgerBtn && navLinks) {
     const hamburgerIcon = hamburgerBtn.querySelector('.hamburger-icon');
 
     function toggleMenu() {
-        // Toggle della classe CSS
+        // Toggle della classe CSS 
         navLinks.classList.toggle('open'); // [cite: 1372] (implicito toggle, slide mostra add/remove)
         
         const isOpen = navLinks.classList.contains('open');
@@ -156,13 +158,21 @@ if (searchForm && searchInput) {
     if (resultDiv) resultDiv.style.display = 'none'; // [cite: 1465]
 
     function onSearchJson(data) {
+        // Puliamo sempre all'inizio
+        if (resultDiv) {
+            resultDiv.innerHTML = ''; 
+            resultDiv.classList.remove('search-result-error');
+        }
+
         if (!data) { 
             if (resultDiv) {
                 resultDiv.style.display = 'block';
-                resultDiv.innerHTML = ''; 
-                const p = document.createElement('p');
-                p.style.color = 'red';
+                // Usiamo un singolo elemento <p> per il testo
+                const p = document.createElement('p'); 
                 p.textContent = 'Errore durante la ricerca.';
+                
+                // 💡 Aggiungiamo la classe CSS per lo stile e lo z-index
+                resultDiv.classList.add('search-result-error'); 
                 resultDiv.appendChild(p);
             }
             return;
@@ -173,11 +183,12 @@ if (searchForm && searchInput) {
         } else {
             if (resultDiv) {
                 resultDiv.style.display = 'block';
-                resultDiv.innerHTML = '';
                 const p = document.createElement('p');
-                p.style.color = 'red';
                 p.textContent = data.message;
                 if(!p.textContent) p.textContent = 'Prodotto non trovato';
+                
+                // 💡 Aggiungiamo la classe CSS per lo stile e lo z-index
+                resultDiv.classList.add('search-result-error'); 
                 resultDiv.appendChild(p);
             }
         }

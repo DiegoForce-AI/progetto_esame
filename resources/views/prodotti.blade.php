@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="{{ url('css/prodotti.css') }}">
 @endsection
 
+
+
 @section('content')
     <div class="prodotti-hero">
         <div class="prodotti-title">Store</div>

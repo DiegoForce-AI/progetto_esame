@@ -1,50 +1,45 @@
 @extends('layout')
+
 @section('head')
-<link rel="stylesheet" href="{{ url('css/checkout.css') }}">
-<!-- Faccio questa modifica qui stesso per evitare che mi compaia il div result 
- nella pagina di checkout
- -->
- <style>
-    #result {
-        display: none !important;
-    }
-</style>
+    <link rel="stylesheet" href="{{ url('css/checkout.css') }}">
 @endsection
+
 @section('scripts')
     <script src="{{ url('js/checkout.js') }}" defer></script>
 @endsection
 <script src="{{ url('js/home.js') }}" defer></script>
+
 @section('content')
     <h2 class="checkout-title">Checkout</h2>
+
     @if(session('error'))
         <div class="alert alert-danger">{{ session('error') }}</div>
     @endif
+
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
+
     <div id="checkout-cart">
-        <h4>Riepilogo carrello</h4>
-        <ul>
-            @forelse($cart as $prodotto)
+    <h4>Riepilogo carrello</h4>
+    <ul>
+        {{-- Controlliamo se la collection ha elementi --}}
+        @if($cart->count() > 0)
+            @foreach($cart as $prodotto)
                 <li>
-                    @php
-                        $img = null;
-                        if (isset($prodotto->immagini) && count($prodotto->immagini) > 0) {
-                            $img = $prodotto->immagini[0]->url;
-                        } elseif (isset($prodotto->immagine_url)) {
-                            $img = $prodotto->immagine_url;
-                        }
-                    @endphp
-                    @if($img)
-                        <img src="{{ url($img) }}" alt="{{ $prodotto->nome }}" class="checkout-thumb">
+                    @if($prodotto->copertina)
+                        <img src="{{ url($prodotto->copertina) }}" alt="{{ $prodotto->nome }}" class="checkout-thumb">
                     @endif
                     <strong>{{ $prodotto->nome }}</strong> x {{ $prodotto->pivot->quantita }} - {{ $prodotto->prezzo }} €
                 </li>
-            @empty
-                <li>Carrello vuoto</li>
-            @endforelse
-        </ul>
-    </div>
+            @endforeach
+        @else
+            {{-- Cosa mostrare se è vuoto --}}
+            <li>Carrello vuoto</li>
+        @endif
+    </ul>
+</div>
+
     <form id="checkout-form" action="{{ url('checkout') }}" method="POST">
         @csrf
         <button type="submit" class="btn btn-success">Conferma ordine</button>

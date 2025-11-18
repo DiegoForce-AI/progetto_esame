@@ -58,6 +58,14 @@
     color: #1a7f37;
     border: 1px solid #b3ffb3;
 }
+
+ #result {
+        display: none ;
+    }
+
+    
+
+
 /* Messaggio successo ordine */
 .ordine-successo-msg {
     max-width: 480px;

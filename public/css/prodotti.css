@@ -1,5 +1,6 @@
 /* Messaggio aggiunta al carrello */
-.carrello-msg {
+#carrello-msg {
+    opacity: 1;
     position: fixed;
     top: 54px;
     left: 50%;
@@ -15,10 +16,14 @@
     color: #fff;
     text-align: center;
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.13);
-    opacity: 0.97;
     pointer-events: none;
     transition: opacity 0.3s;
 }
+
+.carrello-msg.show{
+    opacity: 1;
+}
+
 .carrello-msg-success {
     background: linear-gradient(90deg, #00c853 0%, #43e97b 100%);
 }

@@ -10,50 +10,70 @@ use App\Models\CarrelloProdotti;
 class CartController extends BaseController
 {
     // Mostra la shopping bag
-    public function index(Request $request)
-    {
-        $utenteId = \Session::get('user_id');
-        if (!$utenteId) {
-            return response()->json(['error' => 'Utente non autenticato'], 401);
-        }
-        $carrello = Carrello::where('utente_id', $utenteId)->first();
-        if (!$carrello) {
-            $carrello = Carrello::create(['utente_id' => $utenteId]);
-        }
-        $prodotti = $carrello->prodotti()->with(relations: ['immagini'])->get()
-            ->map(function ($prodotto) {
-                $foto = null;
-                if ($prodotto->immagini && $prodotto->immagini->count() > 0) {
-                    $foto = $prodotto->immagini->first()->url;
-                } else if (!empty($prodotto->immagine_url)) {
-                    $foto = $prodotto->immagine_url;
-                }
-                $prezzo = $prodotto->prezzo;
-                $quantita = $prodotto->pivot->quantita;
-                $subtotale = $prezzo * $quantita;
-                return [
-                    'id' => $prodotto->id,
-                    'nome' => $prodotto->nome,
-                    'quantita' => $quantita,
-                    'foto' => $foto,
-                    'prezzo' => $prezzo,
-                    'subtotale' => $subtotale,
-                ];
-            });
-        $totale = $prodotti->sum('subtotale');
-        if ($request->ajax() || $request->wantsJson()) {
-            return response()->json(['cart' => $prodotti, 'totale' => $totale]);
-        }
-        $track = [
-            'title' => 'Blinding Lights',
-            'artist' => 'The Weeknd',
-            'image' => 'https://i.scdn.co/image/ab67616d0000b2738863bc11d2aa12b54f5aeb36',
-            'url' => 'spotify'
-        ];
-        return view('shopping', ['cart' => $prodotti, 'totale' => $totale, 'track' => $track]);
+   public function index(Request $request)
+{
+    $utenteId = \Session::get('user_id');
+
+    if (!$utenteId) {
+        return response()->json(['error' => 'Utente non autenticato'], 401);
     }
 
+    $carrello = Carrello::where('utente_id', $utenteId)->first();
 
+    if (!$carrello) {
+        $carrello = Carrello::create(['utente_id' => $utenteId]);
+    }
+
+    // Recuperiamo i prodotti "grezzi" dal database
+    $prodottiGrezzi = $carrello->prodotti()->with(['immagini'])->get();
+
+    // Prepariamo le variabili per il risultato
+    $prodotti = [];
+    $totale = 0;
+
+    // Iteriamo con un foreach invece di usare map
+    foreach ($prodottiGrezzi as $prodotto) {
+        
+        // Logica per l'immagine
+        $foto = null;
+        if ($prodotto->immagini && $prodotto->immagini->count() > 0) {
+            $foto = $prodotto->immagini->first()->url;
+        } else if (!empty($prodotto->immagine_url)) {
+            $foto = $prodotto->immagine_url;
+        }
+
+        // Calcoli matematici
+        $prezzo = $prodotto->prezzo;
+        $quantita = $prodotto->pivot->quantita;
+        $subtotale = $prezzo * $quantita;
+
+        // Aggiungiamo al totale generale (così evitiamo di rifare sum() dopo)
+        $totale += $subtotale;
+
+        // Aggiungiamo l'array formattato alla lista finale
+        $prodotti[] = [
+            'id' => $prodotto->id,
+            'nome' => $prodotto->nome,
+            'quantita' => $quantita,
+            'foto' => $foto,
+            'prezzo' => $prezzo,
+            'subtotale' => $subtotale,
+        ];
+    }
+
+    if ($request->ajax() || $request->wantsJson()) {
+        return response()->json(['cart' => $prodotti, 'totale' => $totale]);
+    }
+
+    $track = [
+        'title' => 'Blinding Lights',
+        'artist' => 'The Weeknd',
+        'image' => 'https://i.scdn.co/image/ab67616d0000b2738863bc11d2aa12b54f5aeb36',
+        'url' => 'spotify'
+    ];
+
+    return view('shopping', ['cart' => $prodotti, 'totale' => $totale, 'track' => $track]);
+}
 
     // Aggiungi prodotto
     public function add(Request $request)

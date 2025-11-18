@@ -81,4 +81,4 @@ Route::get('/acquista-tutto', function() {
 });
 
 //Filtro prodotti
-Route::get('/prodotti/json', [ProdottoController::class, 'getProdotti']);
+Route::get(uri: '/prodotti/json', action: [ProdottoController::class, 'getProdotti']);

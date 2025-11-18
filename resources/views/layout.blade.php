@@ -57,6 +57,7 @@
                 <form id="search-form" action="{{ url('prodotti') }}" method="get">
                     <input type="text" name="nome" id="search-input" placeholder="Cerca prodotti..."
                         value="{{ request('nome') }}">
+                        <div id = "result"></div>
                     <button id="searchBtn" type="submit">Cerca</button>
                 </form>
             </div>

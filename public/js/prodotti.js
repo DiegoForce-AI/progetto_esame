@@ -162,7 +162,7 @@ if (listaContainer) {
             btn.classList.add('add-to-cart-btn');
             btn.textContent = 'Aggiungi al carrello';
             btn.dataset.id = prodotto.id; // Dataset (Slide 34 file 06)
-
+            
             card.appendChild(btn);
             
             if (row) {
