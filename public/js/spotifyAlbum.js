@@ -2,7 +2,6 @@ import { requestToken } from './spotifyToken.js';
 
 const container = document.querySelector('#album-container');
 
-// --- 1. Creazione Form di Ricerca (DOM) ---
 const searchForm = document.createElement('form');
 searchForm.classList.add('spotify-search-form-centered');
 
@@ -23,10 +22,9 @@ searchForm.appendChild(button);
 
 if (container && container.parentNode) {
     container.parentNode.insertBefore(searchForm, container);
-    container.classList.add('hidden'); // Uso classe CSS come richiesto
+    container.classList.add('hidden'); 
 }
 
-// --- 2. Funzioni Supporto Fetch ---
 
 function onResponse(response) {
     if (!response.ok) {
@@ -46,7 +44,6 @@ function onError(error) {
     }
 }
 
-// --- 3. Logica Ricerca Album ---
 
 function onSearchJson(data) {
     container.innerHTML = ''; 
@@ -111,9 +108,8 @@ function onSearchJson(data) {
     container.appendChild(listDiv);
 }
 
-// --- REFACTORING QUI: Uso di funzione nominata interna ---
 function searchAlbums(query) {
-    // Definiamo la funzione "handler" qui dentro così può vedere 'query'
+
     function onTokenReceived(token) {
         const url = 'https://api.spotify.com/v1/search?type=album&q=' + encodeURIComponent(query);
         
@@ -126,7 +122,6 @@ function searchAlbums(query) {
         .then(onSearchJson);
     }
 
-    // Ora la chiamata è pulita come nelle slide: .then(nomeFunzione)
     requestToken().then(onTokenReceived);
 }
 
@@ -147,7 +142,6 @@ function onSubmit(e) {
 searchForm.addEventListener('submit', onSubmit);
 
 
-// --- 4. Logica Dettaglio Album ---
 
 function onAlbumDetailsJson(data) {
     if (!data) {
@@ -165,7 +159,6 @@ function onAlbumDetailsJson(data) {
     backBtn.classList.add('spotify-back-btn');
     backBtn.textContent = 'Torna ai risultati';
     
-    // Anche qui potremmo estrarre la funzione, ma è un event listener, non una promise chain
     backBtn.addEventListener('click', function(e) {
         e.preventDefault();
         searchForm.dispatchEvent(new Event('submit'));
@@ -235,7 +228,6 @@ function onAlbumDetailsJson(data) {
     container.appendChild(tracksContainer);
 }
 
-// --- REFACTORING QUI: Uso di funzione nominata interna ---
 function onCardClick(event) {
     const card = event.currentTarget; 
     const albumId = card.dataset.albumId;
@@ -245,7 +237,6 @@ function onCardClick(event) {
     p.textContent = 'Caricamento album...';
     container.appendChild(p);
 
-    // Funzione nominata per gestire il token ricevuto
     function onTokenReceived(token) {
         const url = 'https://api.spotify.com/v1/albums/' + albumId;
 
@@ -258,6 +249,5 @@ function onCardClick(event) {
         .then(onAlbumDetailsJson);
     }
 
-    // Chiamata pulita
     requestToken().then(onTokenReceived);
 }

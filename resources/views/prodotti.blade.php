@@ -15,7 +15,7 @@
         <div class="prodotti-title">Store</div>
         <div class="prodotti-desc">Scopri tutti i prodotti disponibili nello store.</div>
     </div>
-<div id="prodotti-container" class="prodotti-list" data-filter="{{ $filter ?? '' }}">
+<div id="prodotti-container" class="prodotti-list">
          <!-- I prodotti verranno inseriti dinamicamente da prodotti.js -->
 </div>          
 @endsection

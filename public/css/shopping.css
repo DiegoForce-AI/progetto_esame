@@ -15,12 +15,10 @@
     }
 }
 
-/* Di default il riepilogo custom è nascosto su desktop */
 .checkout-summary-custom {
     display: none;
 }
 
-/* Riepilogo custom checkout-summary-custom */
 .checkout-summary-custom {
     margin: 40px auto 0 auto;
     max-width: 500px;

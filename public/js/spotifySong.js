@@ -2,7 +2,6 @@
 
 const container = document.querySelector('#song-container');
 
-// --- 1. Creazione Form Ricerca ---
 const searchForm = document.createElement('form');
 searchForm.classList.add('spotify-search-form');
 
@@ -23,11 +22,9 @@ searchForm.appendChild(button);
 
 if (container && container.parentNode) {
     container.parentNode.insertBefore(searchForm, container);
-    // Best Practice: Nascondi il contenitore all'avvio usando le classi CSS
     container.classList.add('hidden');
 }
 
-// --- 2. Funzioni Supporto Fetch ---
 
 function onResponse(response) {
     if (!response.ok) {
@@ -43,16 +40,15 @@ function onError(error) {
         container.innerHTML = ''; 
         const p = document.createElement('p');
         p.textContent = 'Errore di connessione: ' + error;
-        p.classList.add('error-msg'); // Uso classe CSS per coerenza
+        p.classList.add('error-msg'); 
         container.appendChild(p);
     }
 }
 
-// --- 3. Logica Risultati Ricerca ---
 
 function onSearchJson(data) {
+
     container.innerHTML = ''; 
-    // Mostriamo il contenitore rimuovendo la classe hidden
     container.classList.remove('hidden');
 
     if (!data || !data.tracks || !data.tracks.items.length) {
@@ -75,7 +71,6 @@ function onSearchJson(data) {
         card.classList.add('spotify-result-card');
         card.dataset.trackId = track.id; 
 
-        // Immagine
         const img = document.createElement('img');
         if (track.album.images && track.album.images.length > 0) {
             img.src = track.album.images[0].url;
@@ -84,7 +79,6 @@ function onSearchJson(data) {
         img.classList.add('spotify-result-img');
         card.appendChild(img);
 
-        // Info
         const infoDiv = document.createElement('div');
         infoDiv.classList.add('spotify-result-info');
 
@@ -102,7 +96,6 @@ function onSearchJson(data) {
 
         card.appendChild(infoDiv);
 
-        // Evento Click
         card.addEventListener('click', onTrackClick);
 
         listDiv.appendChild(card);
@@ -110,11 +103,10 @@ function onSearchJson(data) {
     container.appendChild(listDiv);
 }
 
-// --- REFACTORING: Funzione nominata interna ---
 function searchTracks(query) {
-    // Definiamo l'handler qui per mantenere l'accesso a 'query' (Closure)
+
     function onTokenReceived(token) {
-        // URL per la ricerca tracce (confermato proxy .../9 per search track)
+        
         const url = 'https://api.spotify.com/v1/search?q=' + encodeURIComponent(query) + '&type=track';
         
         fetch(url, {
@@ -126,7 +118,7 @@ function searchTracks(query) {
         .then(onSearchJson);
     }
 
-    // Chiamata pulita
+    
     requestToken().then(onTokenReceived);
 }
 
@@ -151,7 +143,7 @@ function onSubmit(e) {
 searchForm.addEventListener('submit', onSubmit);
 
 
-// --- 4. Logica Dettaglio Canzone ---
+
 
 function onTrackDetailJson(data) {
     if (!data) {
@@ -170,13 +162,13 @@ function onTrackDetailJson(data) {
     const infoDiv = document.createElement('div');
     infoDiv.classList.add('spotify-album-info');
 
-    // Titolo
+    
     const title = document.createElement('div');
     title.classList.add('spotify-album-title');
     title.textContent = data.name;
     infoDiv.appendChild(title);
 
-    // Artista
+    
     const metaArtist = document.createElement('div');
     metaArtist.classList.add('spotify-album-meta');
     let artists = [];
@@ -186,13 +178,13 @@ function onTrackDetailJson(data) {
     metaArtist.textContent = 'Artista: ' + artists.join(', ');
     infoDiv.appendChild(metaArtist);
 
-    // Album
+    
     const metaAlbum = document.createElement('div');
     metaAlbum.classList.add('spotify-album-meta');
     metaAlbum.textContent = 'Album: ' + (data.album ? data.album.name : 'N/A');
     infoDiv.appendChild(metaAlbum);
 
-    // Durata
+    
     const metaDuration = document.createElement('div');
     metaDuration.classList.add('spotify-album-meta');
     const minutes = Math.floor(data.duration_ms / 60000);
@@ -203,7 +195,7 @@ function onTrackDetailJson(data) {
 
     albumCard.appendChild(infoDiv);
 
-    // Immagine Grande
+  
     if (data.album && data.album.images && data.album.images.length > 0) {
         const img = document.createElement('img');
         img.src = data.album.images[0].url;
@@ -213,7 +205,6 @@ function onTrackDetailJson(data) {
     }
     container.appendChild(albumCard);
 
-    // Tasto Indietro
     const backBtn = document.createElement('a');
     backBtn.href = '#';
     backBtn.classList.add('spotify-back-btn');
@@ -225,7 +216,6 @@ function onTrackDetailJson(data) {
     container.appendChild(backBtn);
 }
 
-// --- REFACTORING: Funzione nominata interna ---
 function onTrackClick(event) {
     const card = event.currentTarget;
     const trackId = card.dataset.trackId;
@@ -235,9 +225,8 @@ function onTrackClick(event) {
     p.textContent = 'Caricamento canzone...';
     container.appendChild(p);
 
-    // Funzione handler per il token
     function onTokenReceived(token) {
-        // URL per dettaglio traccia (confermato proxy .../10)
+
         const url = 'https://api.spotify.com/v1/tracks/' + trackId;
         
         fetch(url, {
@@ -249,6 +238,5 @@ function onTrackClick(event) {
         .then(onTrackDetailJson);
     }
 
-    // Chiamata pulita
     requestToken().then(onTokenReceived);
 }
