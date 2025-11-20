@@ -185,6 +185,10 @@ nav a img {
     background: #005bb5;
 }
 
+.show{
+    display: block;
+}
+
 /* =========================================
    4. MESSAGGI (Carrello & Errori)
    ========================================= */

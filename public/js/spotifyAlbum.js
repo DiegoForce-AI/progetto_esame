@@ -23,10 +23,10 @@ searchForm.appendChild(button);
 
 if (container && container.parentNode) {
     container.parentNode.insertBefore(searchForm, container);
-    container.style.display = 'none';
+    container.classList.add('hidden'); // Uso classe CSS come richiesto
 }
 
-// --- 2. Funzioni Supporto Fetch (Slide 25 file 08) ---
+// --- 2. Funzioni Supporto Fetch ---
 
 function onResponse(response) {
     if (!response.ok) {
@@ -42,7 +42,6 @@ function onError(error) {
         container.innerHTML = '';
         const p = document.createElement('p');
         p.textContent = 'Errore di connessione: ' + error;
-        p.style.color = 'red';
         container.appendChild(p);
     }
 }
@@ -51,7 +50,7 @@ function onError(error) {
 
 function onSearchJson(data) {
     container.innerHTML = ''; 
-    container.style.display = 'block';
+    container.classList.remove('hidden');
 
     if (!data || !data.albums || !data.albums.items.length) {
         const p = document.createElement('p');
@@ -68,14 +67,12 @@ function onSearchJson(data) {
     listDiv.classList.add('spotify-result-list');
 
     const albums = data.albums.items;
-    // Iterazione (Slide 34 file 05)
+    
     for (const album of albums) {
         const card = document.createElement('div');
         card.classList.add('spotify-result-card');
-        // Salviamo ID nel dataset (Slide 34 file 06)
         card.dataset.albumId = album.id; 
 
-        // Immagine
         const img = document.createElement('img');
         if (album.images && album.images.length > 0) {
             img.src = album.images[0].url;
@@ -84,7 +81,6 @@ function onSearchJson(data) {
         img.classList.add('spotify-result-img');
         card.appendChild(img);
 
-        // Info Container
         const infoDiv = document.createElement('div');
         infoDiv.classList.add('spotify-result-info');
 
@@ -108,8 +104,6 @@ function onSearchJson(data) {
         infoDiv.appendChild(dateDiv);
 
         card.appendChild(infoDiv);
-        
-        // Event Listener Click (Slide 53 file 05)
         card.addEventListener('click', onCardClick);
         
         listDiv.appendChild(card);
@@ -117,10 +111,10 @@ function onSearchJson(data) {
     container.appendChild(listDiv);
 }
 
+// --- REFACTORING QUI: Uso di funzione nominata interna ---
 function searchAlbums(query) {
-    requestToken().then(function(token) {
-        // URL UFFICIALE SPOTIFY (Sostituisce il proxy numerico)
-        // Slide 43 file 09: Esempio ricerca album
+    // Definiamo la funzione "handler" qui dentro così può vedere 'query'
+    function onTokenReceived(token) {
         const url = 'https://api.spotify.com/v1/search?type=album&q=' + encodeURIComponent(query);
         
         fetch(url, {
@@ -130,18 +124,21 @@ function searchAlbums(query) {
         })
         .then(onResponse, onError)
         .then(onSearchJson);
-    });
+    }
+
+    // Ora la chiamata è pulita come nelle slide: .then(nomeFunzione)
+    requestToken().then(onTokenReceived);
 }
 
 function onSubmit(e) {
     e.preventDefault();
     const query = input.value.trim();
     if (!query) {
-        container.style.display = 'none';
+        container.classList.add('hidden');
         return;
     }
     
-    container.style.display = 'block';
+    container.classList.remove('hidden');
     container.textContent = 'Caricamento...';
     
     searchAlbums(query);
@@ -153,7 +150,6 @@ searchForm.addEventListener('submit', onSubmit);
 // --- 4. Logica Dettaglio Album ---
 
 function onAlbumDetailsJson(data) {
-    // FIX CRITICO: Se data è null (errore fetch), mostriamo errore invece di bloccarci
     if (!data) {
         container.innerHTML = '';
         const p = document.createElement('p');
@@ -162,20 +158,20 @@ function onAlbumDetailsJson(data) {
         return;
     }
 
-    container.innerHTML = ''; // Pulizia
+    container.innerHTML = ''; 
 
-    // Tasto Indietro
     const backBtn = document.createElement('a');
     backBtn.href = '#';
     backBtn.classList.add('spotify-back-btn');
     backBtn.textContent = 'Torna ai risultati';
+    
+    // Anche qui potremmo estrarre la funzione, ma è un event listener, non una promise chain
     backBtn.addEventListener('click', function(e) {
         e.preventDefault();
-        searchForm.dispatchEvent(new Event('submit')); // Ricarica ricerca
+        searchForm.dispatchEvent(new Event('submit'));
     });
     container.appendChild(backBtn);
 
-    // Card Dettaglio
     const albumCard = document.createElement('div');
     albumCard.classList.add('spotify-album-card');
 
@@ -203,7 +199,6 @@ function onAlbumDetailsJson(data) {
 
     albumCard.appendChild(infoDiv);
 
-    // Cover
     if (data.images && data.images.length > 0) {
         const cover = document.createElement('img');
         cover.src = data.images[0].url;
@@ -213,7 +208,6 @@ function onAlbumDetailsJson(data) {
     }
     container.appendChild(albumCard);
 
-    // Lista Tracce
     const tracksContainer = document.createElement('div');
     tracksContainer.classList.add('spotify-album-tracks');
 
@@ -241,6 +235,7 @@ function onAlbumDetailsJson(data) {
     container.appendChild(tracksContainer);
 }
 
+// --- REFACTORING QUI: Uso di funzione nominata interna ---
 function onCardClick(event) {
     const card = event.currentTarget; 
     const albumId = card.dataset.albumId;
@@ -250,9 +245,8 @@ function onCardClick(event) {
     p.textContent = 'Caricamento album...';
     container.appendChild(p);
 
-    requestToken().then(function(token) {
-        // URL UFFICIALE SPOTIFY per Dettaglio Album
-        // Sostituisce il proxy ".../0" che probabilmente dava problemi
+    // Funzione nominata per gestire il token ricevuto
+    function onTokenReceived(token) {
         const url = 'https://api.spotify.com/v1/albums/' + albumId;
 
         fetch(url, {
@@ -262,5 +256,8 @@ function onCardClick(event) {
         })
         .then(onResponse, onError)
         .then(onAlbumDetailsJson);
-    });
+    }
+
+    // Chiamata pulita
+    requestToken().then(onTokenReceived);
 }

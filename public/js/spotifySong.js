@@ -1,4 +1,4 @@
-import { requestToken } from './spotifyToken.js';
+ import { requestToken } from './spotifyToken.js';
 
 const container = document.querySelector('#song-container');
 
@@ -23,9 +23,11 @@ searchForm.appendChild(button);
 
 if (container && container.parentNode) {
     container.parentNode.insertBefore(searchForm, container);
+    // Best Practice: Nascondi il contenitore all'avvio usando le classi CSS
+    container.classList.add('hidden');
 }
 
-// --- 2. Funzioni Supporto Fetch (Slide 25 file 08) ---
+// --- 2. Funzioni Supporto Fetch ---
 
 function onResponse(response) {
     if (!response.ok) {
@@ -38,10 +40,10 @@ function onResponse(response) {
 function onError(error) {
     console.log('Error: ' + error);
     if (container) {
-        container.innerHTML = ''; // Pulisce "Caricamento..."
+        container.innerHTML = ''; 
         const p = document.createElement('p');
         p.textContent = 'Errore di connessione: ' + error;
-        p.style.color = 'red'; // Opzionale per evidenziare l'errore
+        p.classList.add('error-msg'); // Uso classe CSS per coerenza
         container.appendChild(p);
     }
 }
@@ -50,6 +52,8 @@ function onError(error) {
 
 function onSearchJson(data) {
     container.innerHTML = ''; 
+    // Mostriamo il contenitore rimuovendo la classe hidden
+    container.classList.remove('hidden');
 
     if (!data || !data.tracks || !data.tracks.items.length) {
         const p = document.createElement('p');
@@ -69,7 +73,7 @@ function onSearchJson(data) {
     for (const track of tracks) {
         const card = document.createElement('div');
         card.classList.add('spotify-result-card');
-        card.dataset.trackId = track.id; // Slide 34 file 06
+        card.dataset.trackId = track.id; 
 
         // Immagine
         const img = document.createElement('img');
@@ -98,7 +102,7 @@ function onSearchJson(data) {
 
         card.appendChild(infoDiv);
 
-        // Evento Click per Dettaglio
+        // Evento Click
         card.addEventListener('click', onTrackClick);
 
         listDiv.appendChild(card);
@@ -106,27 +110,36 @@ function onSearchJson(data) {
     container.appendChild(listDiv);
 }
 
+// --- REFACTORING: Funzione nominata interna ---
 function searchTracks(query) {
-    requestToken().then(function(token) {
-        // URL Ufficiale Spotify per la ricerca
-        // Il proxy ".../1" spesso equivale a questo, ma l'ufficiale è più sicuro
+    // Definiamo l'handler qui per mantenere l'accesso a 'query' (Closure)
+    function onTokenReceived(token) {
+        // URL per la ricerca tracce (confermato proxy .../9 per search track)
         const url = 'https://api.spotify.com/v1/search?q=' + encodeURIComponent(query) + '&type=track';
         
         fetch(url, {
             headers: {
-                'Authorization': 'Bearer ' + token // Slide 43 file 09
+                'Authorization': 'Bearer ' + token
             }
         })
         .then(onResponse, onError)
         .then(onSearchJson);
-    });
+    }
+
+    // Chiamata pulita
+    requestToken().then(onTokenReceived);
 }
 
 function onSubmit(e) {
     e.preventDefault();
     const query = input.value.trim();
-    if (!query) return;
+    
+    if (!query) {
+        container.classList.add('hidden');
+        return;
+    }
 
+    container.classList.remove('hidden');
     container.innerHTML = '';
     const p = document.createElement('p');
     p.textContent = 'Caricamento...';
@@ -141,7 +154,6 @@ searchForm.addEventListener('submit', onSubmit);
 // --- 4. Logica Dettaglio Canzone ---
 
 function onTrackDetailJson(data) {
-    // FIX: Se data è null (errore precedente), puliamo la vista e mostriamo errore
     if (!data) {
         container.innerHTML = '';
         const p = document.createElement('p');
@@ -152,7 +164,6 @@ function onTrackDetailJson(data) {
 
     container.innerHTML = '';
 
-    // Card Dettaglio
     const albumCard = document.createElement('div');
     albumCard.classList.add('spotify-album-card');
 
@@ -214,8 +225,8 @@ function onTrackDetailJson(data) {
     container.appendChild(backBtn);
 }
 
+// --- REFACTORING: Funzione nominata interna ---
 function onTrackClick(event) {
-    // Usa currentTarget per prendere il div corretto anche se clicchi sull'immagine interna
     const card = event.currentTarget;
     const trackId = card.dataset.trackId;
 
@@ -224,9 +235,9 @@ function onTrackClick(event) {
     p.textContent = 'Caricamento canzone...';
     container.appendChild(p);
 
-    requestToken().then(function(token) {
-        // FIX: URL Ufficiale per i dettagli della traccia
-        // Il proxy ".../10" probabilmente non funzionava
+    // Funzione handler per il token
+    function onTokenReceived(token) {
+        // URL per dettaglio traccia (confermato proxy .../10)
         const url = 'https://api.spotify.com/v1/tracks/' + trackId;
         
         fetch(url, {
@@ -236,5 +247,8 @@ function onTrackClick(event) {
         })
         .then(onResponse, onError)
         .then(onTrackDetailJson);
-    });
+    }
+
+    // Chiamata pulita
+    requestToken().then(onTokenReceived);
 }

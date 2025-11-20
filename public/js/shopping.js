@@ -30,6 +30,20 @@ function onError(error) {
     }
 }
 
+function onRemoveSuccess(data) {
+    if (data) {
+        loadCart();
+    }
+}
+
+// Gestisce il successo dell'aggiornamento quantità
+function onUpdateSuccess(data) {
+    if (data) {
+        // Debounce simulato
+        setTimeout(loadCart, 500);
+    }
+}
+
 
 // --- 2. Costruzione del DOM (Senza stili inline) ---
 
@@ -141,12 +155,7 @@ if (shoppingItemsDiv) {
                 }
             })
             .then(onResponse, onError)
-            .then(function(data) {
-                // Se l'operazione è andata a buon fine, ricarichiamo il carrello
-                if (data) {
-                    loadCart();
-                }
-            });
+            .then(onRemoveSuccess);
         }
     });
 
@@ -176,12 +185,7 @@ if (shoppingItemsDiv) {
                     body: bodyData
                 })
                 .then(onResponse, onError)
-                .then(function(data) {
-                    if (data) {
-                        // Debounce: ricarichiamo dopo 500ms per evitare "salti" mentre si scrive
-                        setTimeout(loadCart, 500);
-                    }
-                });
+                .then(onUpdateSuccess);
             }
         }
     });

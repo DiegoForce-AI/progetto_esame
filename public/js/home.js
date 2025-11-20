@@ -1,3 +1,6 @@
+//SISTEMATO
+
+
 // Funzione generica per gestire la risposta fetch (Slide 24, 25)
 function onResponse(response) {
     // Verifichiamo se lo stato è ok
@@ -33,7 +36,7 @@ function onHamburgerJson(data) {
              errorDiv.textContent = 'Errore durante la ricerca.'; // Imposta contenuto testuale [cite: 1378]
         } else if (data.success && data.product && data.product.id) {
             // Reindirizzamento in caso di successo
-            window.location.href = window.location.origin + '/prodotto/' + data.product.id;
+            location.href = location.origin + '/prodotto/' + data.product.id;
             return; // Esci dopo il reindirizzamento
         } else {
             errorDiv.textContent = data.message; 
@@ -110,16 +113,12 @@ if (accountBtn && accountDropdown) {
     accountBtn.addEventListener('click', function(e) {
         e.preventDefault();
         // Modifica stile direttamente per valori dinamici/toggle (Slide 29)
-        if (accountDropdown.style.display === 'block') { // [cite: 739]
-            accountDropdown.style.display = 'none';
-        } else {
-            accountDropdown.style.display = 'block';
-        }
+        accountDropdown.classList.toggle('show');
     });
 
     document.addEventListener('click', function(e) {
         if (!accountBtn.contains(e.target) && !accountDropdown.contains(e.target)) {
-            accountDropdown.style.display = 'none';
+            accountDropdown.classList.remove('show');
         }
     });
 }
@@ -133,17 +132,17 @@ const searchInput = document.querySelector('#search-input');
 if (searchBtn && searchDropdown && searchInput) {
     searchBtn.addEventListener('click', function(e) {
         e.preventDefault();
-        if (searchDropdown.style.display === 'block') {
-            searchDropdown.style.display = 'none';
-        } else {
-            searchDropdown.style.display = 'block';
-            searchInput.focus();
-        }
+        
+        searchDropdown.classList.toggle('show');
+        
+if (searchDropdown.classList.contains('show')){
+    searchInput.focus();
+}
     });
 
     document.addEventListener('click', function(e) {
         if (!searchBtn.contains(e.target) && !searchDropdown.contains(e.target)) {
-            searchDropdown.style.display = 'none';
+            searchDropdown.classList.remove('show');
         }
     });
 }
@@ -155,7 +154,7 @@ const searchForm = document.querySelector('#search-form');
 if (searchForm && searchInput) {
     const resultDiv = document.querySelector('#result');
     // Nascondi div risultato all'avvio usando lo stile
-    if (resultDiv) resultDiv.style.display = 'none'; // [cite: 1465]
+    if (resultDiv) resultDiv.classList.add('hidden'); // [cite: 1465]
 
     function onSearchJson(data) {
         // Puliamo sempre all'inizio
@@ -166,7 +165,7 @@ if (searchForm && searchInput) {
 
         if (!data) { 
             if (resultDiv) {
-                resultDiv.style.display = 'block';
+                resultDiv.classList.remove('hidden');
                 // Usiamo un singolo elemento <p> per il testo
                 const p = document.createElement('p'); 
                 p.textContent = 'Errore durante la ricerca.';
@@ -179,10 +178,10 @@ if (searchForm && searchInput) {
         }
 
         if (data.success && data.product && data.product.id) {
-            window.location.href = window.location.origin + '/prodotto/' + data.product.id;
+            location.href = location.origin + '/prodotto/' + data.product.id;
         } else {
             if (resultDiv) {
-                resultDiv.style.display = 'block';
+                resultDiv.classList.remove('hidden');
                 const p = document.createElement('p');
                 p.textContent = data.message;
                 if(!p.textContent) p.textContent = 'Prodotto non trovato';
@@ -230,13 +229,13 @@ const hamburgerExtras = document.querySelector('#hamburger-extra-buttons');
 
 if (hamburgerBtn && hamburgerExtras) {
     function updateHamburgerExtras() {
-        const isMobile = window.innerWidth < 1024;
+        
         const isOpen = navLinks.classList.contains('open'); // [cite: 1369] (concetto di verificare classi)
         
         if (isMobile && isOpen) {
-            hamburgerExtras.style.display = 'block';
+            hamburgerExtras.classList.add('show')
         } else {
-            hamburgerExtras.style.display = 'none';
+            hamburgerExtras.classList.remove('show');
         }
     }
 
@@ -245,7 +244,7 @@ if (hamburgerBtn && hamburgerExtras) {
     
     document.addEventListener('click', function(e) {
         if (!hamburgerBtn.contains(e.target) && !navLinks.contains(e.target)) {
-            hamburgerExtras.style.display = 'none';
+            hamburgerExtras.classList.remove('show');
         }
     });
 }

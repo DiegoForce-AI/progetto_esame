@@ -1,3 +1,5 @@
+//SISTEMATO
+
 const BASE_URL = 'http://127.0.0.1:8000';
 
 // Selettore del form (Slide 50 file 05)
@@ -8,7 +10,7 @@ const checkoutForm = document.querySelector('#checkout-form');
 function onResponse(response) {
     // Gestione redirect del server (Slide 1188 concetto generale HTTP)
     if (response.redirected) {
-        window.location.href = response.url;
+        location.href = response.url;
         return null; // Interrompe la catena
     }
     
@@ -16,7 +18,7 @@ function onResponse(response) {
     if (!response.ok) {
         console.log('Risposta non valida');
         // Lanciamo un errore per finire nel blocco onError
-        throw new Error('Network response was not ok');
+        return null;
     }
     
     // Il server restituisce HTML (text), non JSON
@@ -46,7 +48,7 @@ function onHtml(html) {
     // Ricreazione script di redirect (Slide 75 file 05 - createElement)
     // Nota: gli script inseriti via innerHTML non vengono eseguiti automaticamente dal browser
     const redirectScript = document.createElement('script');
-    redirectScript.textContent = "setTimeout(function(){window.location.href='" + BASE_URL + "/home';},2000);";
+    redirectScript.textContent = "setTimeout(function(){location.href='" + BASE_URL + "/home';},2000);";
     document.body.appendChild(redirectScript); // Slide 76 file 05
 }
 

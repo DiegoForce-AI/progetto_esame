@@ -1,3 +1,5 @@
+//SISTEMATO
+
 // Selettori (Slide 50 file 05)
 const productsDiv = document.querySelector('#fakestore-products');
 const cartDiv = document.querySelector('#fakestore-cart');
@@ -69,7 +71,6 @@ function loadProducts() {
     fetch('https://fakestoreapi.com/products')
         .then(onResponse, onError)
         .then(onProductsJson);
-        renderCart();
 }
 
 // --- Gestione Aggiunta al Carrello ---
@@ -100,7 +101,7 @@ productsDiv.addEventListener('click', onProductClick);
 // --- Gestione Rendering Carrello ---
 
 function renderCart() {
-    cartDiv.style.display = 'block';
+    cartDiv.classList.remove('hidden');
     // 1. Pulisci tutto il contenuto precedente del div carrello
     cartDiv.innerHTML = '';
 
@@ -108,11 +109,13 @@ function renderCart() {
     if (cart.length === 0) {
         const emptyMsg = document.createElement('div');
         // Riutilizziamo la classe del titolo per avere il testo arancione e grande
+       
         emptyMsg.classList.add('fakestore-cart-title'); 
+        emptyMsg.classList.add('cart-empty-msg'); 
+
         emptyMsg.textContent = 'Carrello vuoto';
         
         // Tocco estetico: togliamo il margine sotto per centrarlo meglio nel box giallo
-        emptyMsg.style.marginBottom = '0'; 
         
         cartDiv.appendChild(emptyMsg);
         return; // Esce dalla funzione

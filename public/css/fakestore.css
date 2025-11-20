@@ -1,7 +1,6 @@
 /* --- CARRELLO --- */
 /* Nel JS usiamo l'ID #fakestore-cart per il contenitore principale */
 #fakestore-cart {
-    display: none;
     max-width: 570px;
     margin: 0 auto 38px auto;
     background: #fffde7; /* Giallo chiarissimo */
@@ -10,6 +9,14 @@
     padding: 24px 32px;
     /* max-width: 44%; <- Rimosso perché va in conflitto con max-width: 500px sopra */
     width: 100%; 
+}
+
+.cart-empty-msg{
+    margin-bottom: 0;
+}
+
+.hidden{
+    display: none;
 }
 
 .fakestore-title{

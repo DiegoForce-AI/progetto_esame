@@ -1,3 +1,5 @@
+//SISTEMATO
+
 // Selettori (Slide 50)
 const form = document.querySelector('form');
 const msgElem = document.querySelector('#msg');
@@ -67,7 +69,7 @@ function onRegisterJson(data) {
         }
         
         msgElem.textContent = messaggio;
-        msgElem.style.color = 'red';
+        
     }
 }
 

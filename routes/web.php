@@ -7,6 +7,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\CollectionController;
 use App\Http\Controllers\ProdottoController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\SpotifyController;
 
 Route::get('/', function () {
     return redirect('login');
@@ -45,6 +46,8 @@ Route::get('/spotify', function() {
     return view('spotify');
 });
 
+Route::get('/spotify/token', [SpotifyController::class, 'getToken']);
+
 Route::get('/spotify-canzoni', function() {
     return view('spotify-canzoni');
 });
@@ -60,25 +63,6 @@ Route::get('/fakestore', function() {
 });
 
 
-// Pagine dedicate Mac, iPad, iPhone, Airpods   
-Route::get('/mac', function() {
-    return view('mac');
-});
-Route::get('/ipad', function() {
-    return view('ipad');
-});
-Route::get('/iphone', function() {
-    return view('iphone');
-});
-
-Route::get('/airpods', function() {
-    return view('airpods');
-});
-
-// Pagina con tutti i prodotti Mac, iPad, Airpods
-Route::get('/acquista-tutto', function() {
-    return view('acquista-tutto');
-});
 
 //Filtro prodotti
 Route::get(uri: '/prodotti/json', action: [ProdottoController::class, 'getProdotti']);

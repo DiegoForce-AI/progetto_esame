@@ -13,5 +13,5 @@
     </div>
 
     <div id="fakestore-products" class="fakestore-products"></div>
-    <div id="fakestore-cart" class="fakestore-cart"></div>
+    <div id="fakestore-cart" class="hidden"></div>
 @endsection

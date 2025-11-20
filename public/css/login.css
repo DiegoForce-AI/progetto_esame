@@ -132,7 +132,6 @@ body {
 }
 
 #msg {
-  color: #d8000c;
   font-size: 1.25rem;
   margin-bottom: 1.2rem;
   text-align: center;
@@ -142,6 +141,27 @@ body {
 
 #msg:not(:empty) {
   display: block;
+}
+
+
+#submit {
+    opacity: 0.5;       /* Sostituisce submitBtn.style.opacity = '0.5' */
+    cursor: not-allowed;
+}
+
+
+#submit.enabled {
+    opacity: 1;         /* Sostituisce submitBtn.style.opacity = '1' */
+    cursor: pointer;
+}
+
+
+.success-msg {
+    color: green;       /* Sostituisce msg.style.color = 'green' */
+}
+
+.error-msg {
+    color: red;         /* Sostituisce msg.style.color = 'red' */
 }
 
 .login-container .btn-login {
