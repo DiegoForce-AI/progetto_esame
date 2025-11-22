@@ -1,13 +1,10 @@
-/* --- CARRELLO --- */
-/* Nel JS usiamo l'ID #fakestore-cart per il contenitore principale */
 #fakestore-cart {
     max-width: 570px;
     margin: 0 auto 38px auto;
-    background: #fffde7; /* Giallo chiarissimo */
+    background: #fffde7; 
     border-radius: 16px;
     box-shadow: 0 4px 18px rgba(255, 179, 0, 0.13);
     padding: 24px 32px;
-    /* max-width: 44%; <- Rimosso perché va in conflitto con max-width: 500px sopra */
     width: 100%; 
 }
 
@@ -28,7 +25,7 @@
 .fakestore-cart-title {
     font-size: 1.4em;
     font-weight: 800;
-    color: #d17b00; /* Arancione scuro */
+    color: #d17b00; 
     margin-bottom: 18px;
     text-align: center;
     letter-spacing: 0.5px;
@@ -45,7 +42,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 10px 0;
-    border-bottom: 1px solid #ffe7b3; /* Bordo giallo scuro */
+    border-bottom: 1px solid #ffe7b3; 
     font-size: 1.08em;
 }
 
@@ -71,9 +68,8 @@
     box-shadow: 0 2px 8px rgba(255, 179, 0, 0.18);
 }
 
-/* --- LISTA PRODOTTI (Classi generate dal JS) --- */
 
-/* Contenitore griglia prodotti */
+
 #fakestore-products {
     display: flex;
     flex-wrap: wrap;
@@ -82,15 +78,15 @@
     margin-bottom: 40px;
 }
 
-/* Card del singolo prodotto */
+
 .product-card {
-    border: 1px solid #ffe7b3; /* Adattato al tuo tema */
+    border: 1px solid #ffe7b3; 
     margin: 10px;
     padding: 15px;
-    border-radius: 16px; /* Arrotondato come il carrello */
+    border-radius: 16px; 
     background: #fff;
     text-align: center;
-    width: 220px; /* Larghezza fissa per la griglia */
+    width: 220px; 
     box-shadow: 0 2px 10px rgba(255, 179, 0, 0.05);
     display: flex;
     flex-direction: column;
@@ -98,7 +94,6 @@
     justify-content: space-between;
 }
 
-/* Immagine prodotto */
 .product-img {
     width: 100px;
     height: 100px;
@@ -106,29 +101,27 @@
     margin-bottom: 12px;
 }
 
-/* Titolo prodotto */
 .product-card h4 {
     font-size: 1em;
     color: #333;
     margin: 10px 0;
-    /* Taglia il testo se troppo lungo */
     overflow: hidden;
 }
 
-/* Prezzo prodotto */
+
 .product-card p {
     font-size: 1.1em;
     font-weight: 700;
-    color: #d17b00; /* Colore del tema */
+    color: #d17b00; 
     margin-bottom: 15px;
 }
 
-/* Bottone Aggiungi al carrello */
+
 .fakestore-add-btn button {
     margin-top: 0;
     display: inline-block;
-    background: #ffb300; /* Giallo/Arancio vivo */
-    color: #fff;         /* Aggiunto per leggibilità */
+    background: #ffb300; 
+    color: #fff;         
     border: none;
     border-radius: 6px;
     padding: 11px 29px;
@@ -140,10 +133,9 @@
 }
 
 .fakestore-add-btn button:hover {
-    background: #ffa000; /* Leggermente più scuro all'hover */
+    background: #ffa000; 
 }
 
-/* --- MEDIA QUERIES --- */
 @media (max-width: 425px) {
     #fakestore-cart {
         max-width: 90%;
@@ -151,6 +143,6 @@
     }
 
     .product-card {
-        width: 100%; /* Su mobile card a tutta larghezza */
+        width: 100%; 
     }
 }

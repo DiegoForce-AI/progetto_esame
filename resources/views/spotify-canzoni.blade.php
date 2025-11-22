@@ -10,7 +10,7 @@
 @section('content')
     <div class="spotify-hero">
         <img src="{{ url('assets/common/spotify.jpg') }}" alt="Spotify" class="spotify-hero-logo">
-        <h1 class="spotify-title">Spotify Music Search</h1>
+        <h1 class="spotify-title">Spotify Music </h1>
         <p class="spotify-desc">Cerca canzoni da Spotify!</p>
     </div>
     <div class="spotify-search-flex">

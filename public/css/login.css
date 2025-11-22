@@ -1,4 +1,3 @@
-/* Responsive font e input per login */
 .login-container {
   font-size: 1.1em;
 }
@@ -85,9 +84,7 @@
   display: none;
   margin-top: 0.5rem;
 }
-.msg:not(:empty) {
-  display: block;
-}
+
 body {
   font-family: "Segoe UI", Arial, sans-serif;
   background: #fff;
@@ -145,23 +142,23 @@ body {
 
 
 #submit {
-    opacity: 0.5;       /* Sostituisce submitBtn.style.opacity = '0.5' */
+    opacity: 0.5;       
     cursor: not-allowed;
 }
 
 
 #submit.enabled {
-    opacity: 1;         /* Sostituisce submitBtn.style.opacity = '1' */
+    opacity: 1;         
     cursor: pointer;
 }
 
 
 .success-msg {
-    color: green;       /* Sostituisce msg.style.color = 'green' */
+    color: green;       
 }
 
 .error-msg {
-    color: red;         /* Sostituisce msg.style.color = 'red' */
+    color: red;         
 }
 
 .login-container .btn-login {

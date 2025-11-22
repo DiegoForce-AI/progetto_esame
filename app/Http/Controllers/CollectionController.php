@@ -9,11 +9,9 @@ namespace App\Http\Controllers;
 {
 
     public function home() {
-        //Controllo se l'utente è loggato
     if(!Session::get('user_id')){
         return redirect('login');
     }
-    //Leggiamo username
     $user = User::find(Session::get('user_id'));
             $track = [
                 'title' => 'Blinding Lights',

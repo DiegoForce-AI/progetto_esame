@@ -1,6 +1,4 @@
-/* =========================================
-   1. BASE & RESET
-   ========================================= */
+
 html,
 body {
     height: 100%;
@@ -25,9 +23,8 @@ a {
     text-decoration: none;
 }
 
-/* =========================================
-   2. HEADER & NAVIGATION
-   ========================================= */
+
+
 header {
     background: #fff;
     position: sticky;
@@ -67,7 +64,6 @@ nav a {
     text-align: center;
 }
 
-/* Immagini dentro la nav */
 nav img {
     vertical-align: middle;
     height: 32px;
@@ -79,14 +75,12 @@ nav a img {
     width: 30px;
     height: 44px;
     padding: 0;
-    /* Reset flex properties if purely purely decorative inside link */
     display: inline-flex; 
     align-items: center;
 }
 
 
 
-/* Messaggio di benvenuto */
 #welcome-message {
     font-weight: bold;
     font-size: 14px;
@@ -94,20 +88,16 @@ nav a img {
     color: #1d1d1f;
 }
 
-/* =========================================
-   3. DROPDOWNS & FORMS (Search/Account)
-   ========================================= */
-/* Wrapper base */
+
 .dropdown-account,
 .search-dropdown-wrapper {
     display: inline-block;
     position: relative;
 }
 
-/* Stili condivisi dropdown */
 .account-dropdown,
 .search-dropdown {
-    display: none; /* Gestito via JS */
+    display: none; 
     position: absolute;
     right: 0;
     background: #fff;
@@ -119,7 +109,6 @@ nav a img {
     transition: box-shadow 0.2s, border 0.2s;
 }
 
-/* Account Specifics */
 .account-dropdown {
     top: 100%;
     min-width: 180px;
@@ -146,14 +135,13 @@ nav a img {
     cursor: pointer;
 }
 
-/* Search Specifics */
 .search-dropdown {
     min-width: 260px;
     padding: 18px 20px;
 }
 
 #search-form {
-    position: relative; /* Fondamentale: blocca i figli assoluti al suo interno */
+    position: relative; 
     align-items: center;
     margin: 0;
     display: flex;
@@ -165,7 +153,7 @@ nav a img {
     padding: 8px 12px;
     border-radius: 6px;
     border: 1.5px solid #0071e3;
-    width: 180px; /* o 100% se preferisci che riempia il container */
+    width: 180px; 
     font-size: 1.08em;
 }
 
@@ -189,9 +177,7 @@ nav a img {
     display: block;
 }
 
-/* =========================================
-   4. MESSAGGI (Carrello & Errori)
-   ========================================= */
+
 .carrello-msg {
     position: fixed;
     top: 54px;
@@ -220,35 +206,29 @@ nav a img {
     background: linear-gradient(90deg, #e53935 0%, #ff5252 100%);
 }
 
-/* Risultato generico */
 #result.search-result-error{
     position: absolute;
-    top: 100%;          /* Si sposta esattamente sotto la form */
+    top: 100%;          
     left: 0;
-    width: 100%;        /* Occupa ESATTAMENTE la larghezza della form (input + bottone) */
-    z-index: 10000;     /* Sopra tutto */
+    width: 100%;        
+    z-index: 10000;     
     
-    /* Spaziatura */
-    margin-top: 12px;   /* Un po' di aria sotto la barra */
+    margin-top: 12px;   
     
-    /* Aspetto Grafico (Dropdown) */
+   
     background-color: #fff; 
-    border: 1px solid #e53935; /* Bordo rosso errore */
-    border-radius: 12px;       /* Arrotondato come i box Apple */
+    border: 1px solid #e53935; 
+    border-radius: 12px;       
     padding: 16px;
-    box-sizing: border-box;    /* Il padding non allarga il box */
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15); /* Ombra per effetto galleggiante */
-    
-    /* Testo */
+    box-sizing: border-box;    
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15); 
     color: #d32f2f;
     font-weight: 600;
     text-align: center;
     font-size: 0.95em;
 }
 
-/* =========================================
-   5. HERO SECTION & HOME
-   ========================================= */
+
 .hero {
     display: flex;
     position: relative;
@@ -310,7 +290,6 @@ nav a img {
     font-size: 30px;
 }
 
-/* Bubbles & Stickers */
 .bubble-wrapper {
     background-color: #007aff;
     color: white;
@@ -355,7 +334,6 @@ nav a img {
     bottom: 191px;
 }
 
-/* Text Styles */
 .colorful-text {
     font-size: 21px;
     font-weight: 500;
@@ -387,7 +365,6 @@ nav a img {
     margin-top: 4px;
 }
 
-/* Buttons */
 .btn, .btn2 {
     border-radius: 40px;
     padding: 12px 24px;
@@ -506,7 +483,6 @@ nav a img {
     color: white;
 }
 
-/* Hero Macbook Section */
 .hero-macbook {
     display: flex;
     flex-direction: column;
@@ -582,13 +558,7 @@ nav a img {
     background: white;
 }
 
-/* Homepage Grid */
-.homepage > div {
-    flex: 0 0 49.4%;
-    display: flex;
-    position: relative;
-    justify-content: center;
-}
+
 
 .homepage img {
     max-width: 100%;
@@ -596,9 +566,7 @@ nav a img {
     object-fit: contain;
 }
 
-/* =========================================
-   6. FOOTER
-   ========================================= */
+
 .site-footer {
     flex-shrink: 0;
     width: 100%;
@@ -632,7 +600,7 @@ footer p {
 }
 
 footer a {
-    color: #1db954; /* Spotify green as default in footer a */
+    color: #1db954; 
     font-size: 20px;
     line-height: 1.4;
     font-weight: bold;
@@ -663,7 +631,6 @@ footer img {
     padding: 0.7em 0 0.4em 0;
 }
 
-/* Blocchi Destra e Sinistra (FakeStore / Spotify) */
 .footer-block-right,
 .footer-block-fakestore {
     display: flex;
@@ -691,7 +658,6 @@ footer img {
     max-width: 100%;
 }
 
-/* Stili Specifici Spotify */
 .spotify-label {
     font-size: 1.18em;
     font-weight: 500;
@@ -727,7 +693,6 @@ footer img {
     vertical-align: middle;
 }
 
-/* Stili Specifici FakeStore */
 .fakestore-label {
     font-size: 1.18em;
     font-weight: 500;
@@ -743,7 +708,6 @@ footer img {
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.12);
     border: 2px solid #ffb300;
     margin-top: 0;
-    transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .fakestore-img:hover {
@@ -751,7 +715,6 @@ footer img {
     box-shadow: 0 4px 18px rgba(255, 179, 0, 0.22);
 }
 
-/* Base state per Extra Buttons (menu hamburger) */
 #hamburger-extra-buttons {
     display: none;
     flex-direction: column;
@@ -759,44 +722,34 @@ footer img {
     margin-top: 20px;
 }
 
-/* =========================================
-   7. MEDIA QUERIES
-   ========================================= */
 
-/* --- DESKTOP (Min Width 1024px) --- */
 @media (min-width: 1024px) {
-    /* Forza nascondiglio extra buttons su desktop */
     #hamburger-extra-buttons {
         display: none !important;
     }
     
-    /* Mostra la search bar su desktop */
     .search-dropdown-wrapper {
         display: inline-block !important;
     }
 }
 
-/* --- MOBILE & TABLET (Max Width 1023px) --- */
 @media (max-width: 1023px) {
-    /* Nascondi la search bar desktop */
     .search-dropdown-wrapper {
         display: none !important;
     }
 
-    /* Mostra gli extra button quando il menu è aperto */
     .nav-links.open #hamburger-extra-buttons {
         display: flex;
     }
 
-    /* Box errore ricerca su mobile */
+   
     #hamburger-search-error {
-    display: block; /* Garantisce che vada a capo come blocco */
-    width: 100%;    /* Tende a prendere la larghezza del genitore */
+    display: block; 
+    width: 100%;    
     
     color: #e53935;
     font-size: 1em;
     
-    /* Centramento e margini */
     margin: 8px auto; 
     text-align: center;
     font-weight: 500;
@@ -805,7 +758,6 @@ footer img {
     border-radius: 8px;
     padding: 8px 0 6px 0;
     box-shadow: 0 2px 8px rgba(229, 57, 53, 0.07);
-    
-    max-width: 95%; /* Limita l'errore per farlo rientrare nel menu */
+    max-width: 95%; 
 }
 }

@@ -90,7 +90,6 @@ class LoginController extends BaseController
             return redirect('register')->withInput();
         }
 
-        //Creazione nuovo utente
         $user = new User();
         $user->username = request('username');
         $user->password = password_hash(request('password'), PASSWORD_BCRYPT);

@@ -11,7 +11,6 @@ class ProdottoController extends BaseController
 {
     public function getProdotti(Request $request)
     {
-        // Logica filtri rimossa. Prende tutti i prodotti.
         $prodotti = DB::table('prodotti')->get();
 
         if ($prodotti->isEmpty()) {
@@ -56,7 +55,6 @@ class ProdottoController extends BaseController
             'url' => 'spotify'
         ];
 
-        // Rimossa logica backUrl dinamica per categoria
         $backUrl = 'prodotti';
 
         return view('prodotto')->with(['prodotto' => $prodotto, 'track' => $track, 'backUrl' => $backUrl]);

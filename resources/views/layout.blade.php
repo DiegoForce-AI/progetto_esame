@@ -92,7 +92,8 @@
                 </div>
             </div>
         </div>
-        <!-- Footer hamburger per mobile/tablet -->
+
+        
         <button class="footer-hamburger" id="footer-hamburger" aria-label="Menu API">
             &#9776;
         </button>
@@ -113,10 +114,7 @@
         </div>
     </footer>
 
-    <script>
-        const API_SEARCH_URL = "{{ url('prodotti/search') }}";
-        window.csrfToken = document.querySelector('meta[name=csrf-token]').getAttribute('content');
-    </script>
+   
 
 
 

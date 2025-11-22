@@ -1,8 +1,4 @@
-/* Nascondi footer hamburger su desktop */
-.footer-hamburger,
-.footer-api-menu {
-    display: none;
-}
+
 
 @media (max-width: 1023px) {
     #hamburger-extra-buttons {
@@ -140,7 +136,6 @@
         flex: 1;
     }
 
-    /* Centra tutto il contenuto dei form hamburger */
     #hamburger-extra-buttons form {
         width: 100%;
         display: flex;
@@ -149,14 +144,12 @@
     }
 }
 
-/* Media queries per la responsività della home */
 @media (max-width: 1023px) {
     #search-btn-wrapper,
     #account-dropdown-wrapper {
         display: none !important;
     }
 
-    /* NAVBAR */
     .fakestore-info a {
         color: #ffb300;
     }
@@ -256,7 +249,6 @@
 }
 
 @media (max-width: 900px) {
-    /* FOOTER MOBILE */
     .footer-hamburger {
         background: #222;
         color: #fff;
@@ -323,7 +315,6 @@
 }
 
 @media (max-width: 700px) {
-    /* NAVBAR MOBILE */
     .nav-links {
         position: fixed;
         top: 56px;
@@ -369,7 +360,6 @@
         pointer-events: none;
     }
 
-    /* HERO CONTENT E TESTI */
     .hero-content {
         font-size: 1.5em;
         width: 220px;
@@ -452,9 +442,8 @@
 }
 
 @media (max-width: 440px) {
-    /* dimensioni estreme */
     nav {
-        position: fixe\d;
+        position: fixed;
         top: 0;
         left: 0;
         width: 100vw;
@@ -492,7 +481,6 @@
 }
 
 @media (max-width: 768px) {
-    /*   per evitare che si muova il footer da tablet */
     html,
     body {
         overflow-x: hidden;
@@ -575,15 +563,12 @@
         position: relative;
         width: 150px;
         margin: 16px auto 0;
-        /* Centra orizzontalmente */
         left: 0;
-        /* Rimuove il posizionamento assoluto */
     }
 
     .hero-button {
         display: block;
         margin: 16px auto;
-        /* Centra il bottone */
         text-align: center;
     }
 
@@ -823,7 +808,7 @@
 
 @media (min-width: 1024px) {
     .hamburger {
-        display: none !important;
+        display: none;
     }
 
     nav {
@@ -853,4 +838,10 @@
         align-items: center;
         gap: 0.7em;
     }
+}
+
+
+.footer-hamburger,
+.footer-api-menu {
+    display: none;
 }

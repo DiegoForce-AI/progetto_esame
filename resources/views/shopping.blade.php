@@ -1,9 +1,10 @@
 @extends('layout')
 <link rel="stylesheet" href="{{ url('css/shopping.css') }}">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=shopping_cart" />
 @section('content')
     @if(count($cart) === 0)
         <div class="empty-cart-message">
-            <span class="empty-cart-icon">🛒</span>
+<span class="material-symbols-outlined">shopping_cart</span>            
             <h3>Shopping bag vuota</h3>
             <p>Che ne dici di guardare qualcosa nello store?</p>
             <a href="{{ url('prodotti') }}" class="btn btn-primary empty-cart-btn">Vai allo store</a>
@@ -33,13 +34,13 @@
                 <td>{{ $prodotto['nome'] }}</td>
                 <td>{{ number_format($prodotto['prezzo'], 2) }} €</td>
                 <td>
-                    <form action="{{ url('shopping/update') }}" method="POST" class="cart-qty-form" style="display:inline-block;">
+                    <form action="{{ url('shopping/update') }}" method="POST" class="cart-qty-form">
                         @csrf
                         @method('PATCH')
                         <input type="hidden" name="prodotto_id" value="{{ $prodotto['id'] }}">
-                        <input type="number" name="quantita" value="{{ $prodotto['quantita'] }}" min="1" max="99" class="cart-qty-input" onchange="this.form.submit()">
+                        <input type="number" name="quantita" value="{{ $prodotto['quantita'] }}" min="1" max="99" class="cart-qty-input" >
                     </form>
-                    <form action="{{ url('shopping/remove') }}" method="POST" class="cart-remove-form" style="display:inline-block; margin-left:8px;">
+                    <form action="{{ url('shopping/remove') }}" method="POST" class="cart-remove-form">
                         @csrf
                         @method('DELETE')
                         <input type="hidden" name="prodotto_id" value="{{ $prodotto['id'] }}">
@@ -62,7 +63,7 @@
     </div>
 
 
-    <!-- Checkout mobile -->
+
     <div class="checkout-summary-custom" id="checkout-mobile">
         <h3>Riepilogo ordine</h3>
         <div class="checkout-summary-list">

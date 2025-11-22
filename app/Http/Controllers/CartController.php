@@ -75,7 +75,6 @@ class CartController extends BaseController
     return view('shopping', ['cart' => $prodotti, 'totale' => $totale, 'track' => $track]);
 }
 
-    // Aggiungi prodotto
     public function add(Request $request)
     {
         $utenteId = \Session::get('user_id');
@@ -116,7 +115,7 @@ class CartController extends BaseController
         return $this->index($request);
     }
 
-    // Rimuovi prodotto
+
     public function remove(Request $request)
     {
         $utenteId = \Session::get('user_id');
@@ -133,7 +132,8 @@ class CartController extends BaseController
         return $this->index($request);
     }
 
-    // Modifica quantità
+
+
     public function update(Request $request)
     {
         $utenteId = \Session::get('user_id');
@@ -144,12 +144,11 @@ class CartController extends BaseController
         if ($carrello) {
             $carrelloId = $carrello->id;
             $prodottoId = $request->input('prodotto_id');
-            $quantita = $request->input('quantita');
             $riga = CarrelloProdotti::where('carrello_id', $carrelloId)
                 ->where('prodotto_id', $prodottoId)
                 ->first();
             if ($riga) {
-                $nuovaQuantita = (int) $request->input('quantita');
+                $nuovaQuantita = $request->input('quantita');
                 if ($nuovaQuantita > 0) {
                     CarrelloProdotti::where('carrello_id', $carrelloId)
                         ->where('prodotto_id', $prodottoId)

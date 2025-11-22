@@ -66,7 +66,6 @@
     
 
 
-/* Messaggio successo ordine */
 .ordine-successo-msg {
     max-width: 480px;
     margin: 60px auto 0 auto;
@@ -161,7 +160,7 @@
         padding: 18px 8px 10px 8px;
     }
     #checkout-form .btn-success {
-        width: 100%;
+        width: 50%;
         padding: 14px 0;
     }
 }

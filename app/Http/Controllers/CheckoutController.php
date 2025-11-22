@@ -10,7 +10,6 @@ use App\Models\OrdineProdotti;
 
 class CheckoutController extends BaseController
 {
-    // Mostra la pagina di checkout
     public function showForm(Request $request)
     {
         $utenteId = \Session::get('user_id');
@@ -28,7 +27,6 @@ class CheckoutController extends BaseController
         return view('checkout', ['cart' => $prodotti, 'track' => $track]);
     }
 
-    // Finalizza l'ordine
     public function processOrder(Request $request)
     {
         $utenteId = \Session::get('user_id');
@@ -39,16 +37,15 @@ class CheckoutController extends BaseController
         if (!$carrello || $carrello->prodotti()->count() == 0) {
             return redirect('checkout')->with('error', 'Carrello vuoto');
         }
-        // Crea ordine
+
+
         $ordine = Ordine::create([
             'utente_id' => $utenteId,
             'totale' => $carrello->prodotti->sum(function($p) {
                 return $p->prezzo * $p->pivot->quantita;
             }),
             'data_ordine' => now(),
-            // 'indirizzo_spedizione' => $request->input('indirizzo_spedizione'), // opzionale
         ]);
-        // Aggiungi prodotti all'ordine
         foreach ($carrello->prodotti as $prodotto) {
             OrdineProdotti::create([
                 'ordine_id' => $ordine->id,
@@ -57,7 +54,8 @@ class CheckoutController extends BaseController
                 'prezzo_unitario' => isset($prodotto->prezzo) ? $prodotto->prezzo : 0
             ]);
         }
-    // Svuota carrello
+
+
     $carrello->prodotti()->detach();
     $track = [
         'title' => 'Blinding Lights',

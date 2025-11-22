@@ -1,4 +1,3 @@
-/* Stili identici a login.css per la pagina di registrazione */
 .msg {
   color: #d8000c;
   font-size: 1.25rem;
@@ -7,9 +6,7 @@
   display: none;
   margin-top: 0.5rem;
 }
-.msg:not(:empty) {
-  display: block;
-}
+
 body {
   font-family: "Segoe UI", Arial, sans-serif;
   background: #fff;
