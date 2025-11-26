@@ -9,7 +9,6 @@ use App\Models\CarrelloProdotti;
 
 class CartController extends BaseController
 {
-    // Mostra la shopping bag
    public function index(Request $request)
 {
     $utenteId = \Session::get('user_id');
@@ -24,17 +23,13 @@ class CartController extends BaseController
         $carrello = Carrello::create(['utente_id' => $utenteId]);
     }
 
-    // Recuperiamo i prodotti "grezzi" dal database
     $prodottiGrezzi = $carrello->prodotti()->with(['immagini'])->get();
 
-    // Prepariamo le variabili per il risultato
     $prodotti = [];
     $totale = 0;
 
-    // Iteriamo con un foreach invece di usare map
     foreach ($prodottiGrezzi as $prodotto) {
         
-        // Logica per l'immagine
         $foto = null;
         if ($prodotto->immagini && $prodotto->immagini->count() > 0) {
             $foto = $prodotto->immagini->first()->url;
@@ -42,15 +37,12 @@ class CartController extends BaseController
             $foto = $prodotto->immagine_url;
         }
 
-        // Calcoli matematici
         $prezzo = $prodotto->prezzo;
         $quantita = $prodotto->pivot->quantita;
         $subtotale = $prezzo * $quantita;
 
-        // Aggiungiamo al totale generale (così evitiamo di rifare sum() dopo)
         $totale += $subtotale;
 
-        // Aggiungiamo l'array formattato alla lista finale
         $prodotti[] = [
             'id' => $prodotto->id,
             'nome' => $prodotto->nome,

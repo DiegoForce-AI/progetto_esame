@@ -566,6 +566,10 @@ nav a img {
     object-fit: contain;
 }
 
+.footer-hamburger,
+.footer-api-menu {
+    display: none;
+}
 
 .site-footer {
     flex-shrink: 0;
@@ -725,17 +729,17 @@ footer img {
 
 @media (min-width: 1024px) {
     #hamburger-extra-buttons {
-        display: none !important;
+        display: none;
     }
     
     .search-dropdown-wrapper {
-        display: inline-block !important;
+        display: inline-block;
     }
 }
 
 @media (max-width: 1023px) {
     .search-dropdown-wrapper {
-        display: none !important;
+        display: none;
     }
 
     .nav-links.open #hamburger-extra-buttons {

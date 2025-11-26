@@ -838,10 +838,7 @@
         align-items: center;
         gap: 0.7em;
     }
+  
 }
 
 
-.footer-hamburger,
-.footer-api-menu {
-    display: none;
-}

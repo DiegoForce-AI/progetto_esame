@@ -32,7 +32,7 @@ class LoginController extends BaseController
             if (request()->ajax()) {
                 return response()->json(['success' => false, 'error' => $error]);
             }
-            Session::put('error', 'dati_mancanti');
+            Session::put('error', 'dati mancanti');
             return redirect('login')->withInput();
         }
 
@@ -42,7 +42,7 @@ class LoginController extends BaseController
             if (request()->ajax()) {
                 return response()->json(['success' => false, 'error' => $error]);
             }
-            Session::put('error', 'credenziali_non_valide');
+            Session::put('error', 'credenziali non valide');
             return redirect('login')->withInput();
         }
 
@@ -69,15 +69,15 @@ class LoginController extends BaseController
         if (Session::get('user_id')) {
             return redirect('home');
         }
-        //Validazione dati
+        
         if (strlen(request('username')) == 0 || strlen(request('password')) == 0) {
-            Session::put('error', 'dati_mancanti');
+            Session::put('error', 'dati mancanti');
             return redirect('register')->withInput();
         } else if (request('password') != request('conferma')) {
-            Session::put('error', 'le_password_non_corrispondono');
+            Session::put('error', 'le password non corrispondono');
             return redirect('register')->withInput();
         } else if (User::where('username', request('username'))->first()) {
-            Session::put('error', 'nome_utente_gia_esistente');
+            Session::put('error', 'nome utente già esistente');
             return redirect('register')->withInput();
         } else if (
             strlen(request('password')) < 8 ||
@@ -86,7 +86,7 @@ class LoginController extends BaseController
             !preg_match('/[0-9]/', request('password')) ||
             !preg_match('/[\W]/', request('password'))
         ) {
-            Session::put('error', 'password_insicura');
+            Session::put('error', 'password insicura');
             return redirect('register')->withInput();
         }
 

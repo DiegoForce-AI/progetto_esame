@@ -16,7 +16,6 @@ class Carrello extends Model
         return $this->belongsTo(User::class, 'utente_id');
     }
 
-    // relazione many-to-many con Prodotto attraverso la pivot
     public function prodotti()
     {
         return $this->belongsToMany(Prodotto::class, 'carrello_prodotti', 'carrello_id', 'prodotto_id')
