@@ -41,6 +41,6 @@ class SpotifyController extends BaseController
     
         $jsonResponse = json_decode($result, true);
 
-        return response()->json($jsonResponse);
+        return response()->json(data: $jsonResponse);
     }
 }

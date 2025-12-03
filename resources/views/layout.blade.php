@@ -13,6 +13,7 @@
 
 
 
+
  @yield('scripts')
     <script src="{{ url('js/home.js') }}" defer></script>
     <script src="{{ url('js/shopping.js') }}" defer></script>

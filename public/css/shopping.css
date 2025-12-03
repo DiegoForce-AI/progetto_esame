@@ -110,6 +110,17 @@ input[type="number"][name="quantita"]:focus,
     background: #005bb5;
 }
 
+#subTotale h4 {
+    display: flex;
+    justify-content: flex-start;
+    font-size: 25px;
+    font-weight: 800;
+    color: black;
+    margin: 0 auto;
+    max-width: 900px;
+    padding-top: 20px;
+}
+
 
 .empty-cart-message {
     max-width: 420px;
@@ -135,12 +146,11 @@ input[type="number"][name="quantita"]:focus,
     display: flex;
     flex-direction: column;
     max-width: 900px;
-    margin: 0 auto; /* Centra orizzontalmente */
+    margin: 0 auto; 
     padding: 20px;
-    font-family: sans-serif; /* Font pulito stile Apple */
+    font-family: sans-serif; 
 }
 
-/* Messaggio carrello vuoto */
 .empty-cart-message {
     text-align: center;
     margin-top: 50px;
@@ -155,16 +165,15 @@ input[type="number"][name="quantita"]:focus,
     color: #666;
 }
 
-/* --- Singolo Prodotto (Riga) --- */
 .cart-item {
     display: flex;
-    align-items: center; /* Centra verticalmente */
-    justify-content: space-between;
+    align-items: center; 
+    justify-content: space-around;
     padding: 25px 0;
-    border-bottom: 1px solid #d2d2d7; /* Linea separatrice sottile */
+    width: 90%;
+    border-bottom: 1px solid #d2d2d7; 
 }
 
-/* Immagine prodotto */
 .cart-item-img {
     width: 150px;
     height: auto;
@@ -172,9 +181,8 @@ input[type="number"][name="quantita"]:focus,
     margin-right: 30px;
 }
 
-/* Dettagli (Nome e Prezzo) */
 .cart-item-details {
-    flex: 1; /* Occupa tutto lo spazio disponibile */
+    flex: 1; 
 }
 
 .cart-item-details h3 {
@@ -188,15 +196,13 @@ input[type="number"][name="quantita"]:focus,
     color: #333;
 }
 
-/* Controlli (Quantità e Rimuovi) */
 .cart-item-controls {
     display: flex;
     flex-direction: column;
-    align-items: flex-end; /* Allinea a destra */
+    align-items: flex-end; 
     gap: 10px;
 }
 
-/* Contenitore Quantità */
 .qta-container {
     display: flex;
     align-items: center;
@@ -204,7 +210,6 @@ input[type="number"][name="quantita"]:focus,
     font-size: 14px;
 }
 
-/* Input numerico */
 .qta-input {
     width: 50px;
     padding: 5px;
@@ -214,9 +219,8 @@ input[type="number"][name="quantita"]:focus,
     border: 1px solid #ccc;
 }
 
-/* Bottone Rimuovi (Stile link) */
 .remove-btn {
-    color: #0066cc; /* Blu link */
+    color: #0066cc; 
     background: none;
     border: none;
     cursor: pointer;
@@ -464,3 +468,7 @@ input[type="number"][name="quantita"]:focus,
         display: flex;
     }
 }
+
+
+
+

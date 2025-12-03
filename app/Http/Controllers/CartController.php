@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 use App\Models\Carrello;
 use App\Models\CarrelloProdotti;
+use App\Models\Prodotto;
 
 class CartController extends BaseController
 {
@@ -76,13 +77,13 @@ class CartController extends BaseController
         $nome = $request->input('nome');
         $prodotto = null;
         if ($nome) {
-            $prodotto = \App\Models\Prodotto::where('nome', 'LIKE', "%$nome%")
+            $prodotto = Prodotto::where('nome', 'LIKE', "%$nome%")
                 ->orderBy('id')
                 ->first();
         } else {
             $prodottoId = $request->input('prodotto_id');
             if ($prodottoId) {
-                $prodotto = \App\Models\Prodotto::find($prodottoId);
+                $prodotto = Prodotto::find($prodottoId);
             }
         }
         if (!$prodotto) {
