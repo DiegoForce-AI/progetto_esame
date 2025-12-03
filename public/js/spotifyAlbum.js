@@ -1,4 +1,3 @@
-import { requestToken } from './spotifyToken.js';
 
 const container = document.querySelector('#album-container');
 
@@ -23,6 +22,22 @@ searchForm.appendChild(button);
 if (container && container.parentNode) {
     container.parentNode.insertBefore(searchForm, container);
     container.classList.add('hidden'); 
+}
+
+function onTokenResponse(response) {
+    if (!response.ok) return null;
+    return response.json();
+}
+
+function onTokenData(data) {
+    if (!data || !data.access_token) return null;
+    return data.access_token;
+}
+
+function requestToken() {
+    return fetch('/spotify/token')
+        .then(onTokenResponse)
+        .then(onTokenData);
 }
 
 

@@ -9,8 +9,8 @@ class SpotifyController extends BaseController
 {
     public function getToken()
     {
-        $clientId = '20e85ef50f67458696d40b008bb02b26';
-        $clientSecret = 'd0e7d5a0c0f94acba817393e0d241557';
+        $clientId = env('SPOTIFY_PUBLISHABLE_KEY');
+        $clientSecret = env('SPOTIFY_SECRET_KEY');
 
         $url = 'https://accounts.spotify.com/api/token'; 
 

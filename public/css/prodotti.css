@@ -1,10 +1,10 @@
-#carrello-msg {
+#carrello-msg.show {
     opacity: 1;
     position: fixed;
     top: 54px;
     left: 50%;
     transform: translateX(-50%);
-    z-index: 9999;
+    z-index: 10;
     min-width: 220px;
     max-width: 90vw;
     padding: 16px 32px;
@@ -14,13 +14,11 @@
     font-weight: 600;
     color: #fff;
     text-align: center;
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.13);
     pointer-events: none;
-    transition: opacity 0.3s;
 }
 
-.carrello-msg.show{
-    opacity: 1;
+#carrello-msg{
+    opacity: 0;
 }
 
 .carrello-msg-success {

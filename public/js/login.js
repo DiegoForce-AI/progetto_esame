@@ -59,7 +59,7 @@ function onSubmit(e) {
       method: 'POST',
       headers: {
         'X-Requested-With': 'XMLHttpRequest',
-        'X-CSRF-TOKEN': tokenInput ? tokenInput.value : ''
+        'X-CSRF-TOKEN': tokenInput.value
       },
       body: formData
     })

@@ -1,4 +1,4 @@
-const API_URL = 'http://127.0.0.1:8000';
+const BASE_URL = 'http://127.0.0.1:8000';
 const IMG_URL = 'http://127.0.0.1:8000/';
 
 function onResponse(response) {
@@ -32,13 +32,11 @@ function mostraMessaggioCarrello(msg, isError) {
         msgDiv.classList.add('carrello-msg-success');
     }
     
-    requestAnimationFrame(function() {
-        msgDiv.classList.add('show');
-    });
-    
+    msgDiv.classList.add('show');
+   
     setTimeout(function() {
         msgDiv.classList.remove('show');
-    }, 3000);
+    }, 2000);
 }
 
 
@@ -53,19 +51,20 @@ function onCartJson(data) {
     } else {
         mostraMessaggioCarrello('Prodotto aggiunto al carrello!', false);
     }
+
 }
 
 function aggiungiAlCarrello(prodottoId) {
 
     const metaToken = document.querySelector('meta[name="csrf-token"]');
-    const token = metaToken ? metaToken.getAttribute('content') : '';
+    const token = metaToken.content;
 
     const postData = {
         prodotto_id: prodottoId,
         quantita: 1
     };
 
-    fetch(API_URL + '/shopping/add', {
+    fetch(BASE_URL + '/shopping/add', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -100,7 +99,7 @@ if (listaContainer) {
             card.classList.add('prodotto-card');
 
             const link = document.createElement('a');
-            link.href = API_URL + '/prodotto/' + prodotto.id;
+            link.href = BASE_URL + '/prodotto/' + prodotto.id;
             link.classList.add('dettaglio-link');
 
             if (prodotto.immagine_url) {
@@ -142,7 +141,7 @@ if (listaContainer) {
         }
     }
 
-    fetch(API_URL + '/prodotti/json?filter=')
+    fetch(BASE_URL + '/prodotti/json?filter=')
         .then(onResponse, onError)
         .then(onProductsJson);
 
@@ -194,7 +193,7 @@ if (dettaglioContainer) {
 
         const divDesc = document.createElement('div');
         divDesc.classList.add('prodotto-desc');
-        divDesc.textContent = prodotto.descrizione || '';
+        divDesc.textContent = prodotto.descrizione;
         card.appendChild(divDesc);
 
         
@@ -212,7 +211,7 @@ if (dettaglioContainer) {
         dettaglioContainer.appendChild(card);
     }
 
-    fetch(API_URL + '/prodotto/' + id + '/json')
+    fetch(BASE_URL + '/prodotto/' + id + '/json')
         .then(onResponse, onError)
         .then(onDetailJson);
 }

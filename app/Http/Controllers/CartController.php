@@ -30,7 +30,6 @@ class CartController extends BaseController
 
     foreach ($prodottiGrezzi as $prodotto) {
         
-        $foto = null;
         if ($prodotto->immagini && $prodotto->immagini->count() > 0) {
             $foto = $prodotto->immagini->first()->url;
         } else if (!empty($prodotto->immagine_url)) {

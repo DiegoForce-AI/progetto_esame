@@ -23,10 +23,6 @@ Route::get('logout', [LoginController::class, 'logout']);
 Route::get('home', [CollectionController::class, 'home']);
 Route::get('prodotti', [ProdottoController::class, 'index']);
 
-Route::get('prodotti/json', function () {
-    $prodotti = App\Models\Prodotto::with('immagini')->get();
-    return response()->json($prodotti);
-});
 
 Route::get('prodotto/{id}', [ProdottoController::class, 'show']);
 Route::get('prodotto/{id}/json', [ProdottoController::class, 'showJson']);
@@ -58,4 +54,4 @@ Route::get('/fakestore', function() {
 
 
 
-Route::get(uri: '/prodotti/json', action: [ProdottoController::class, 'getProdotti']);
+Route::get( '/prodotti/json',  [ProdottoController::class, 'getProdotti']);

@@ -104,9 +104,7 @@ nav a img {
     border: 2px solid #0071e3;
     border-radius: 12px;
     z-index: 1000;
-    box-shadow: 0 8px 32px rgba(0, 113, 227, 0.13);
     font-size: 1.08em;
-    transition: box-shadow 0.2s, border 0.2s;
 }
 
 .account-dropdown {
@@ -178,33 +176,6 @@ nav a img {
 }
 
 
-.carrello-msg {
-    position: fixed;
-    top: 54px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 9999;
-    min-width: 220px;
-    max-width: 90vw;
-    padding: 16px 32px;
-    border-radius: 16px;
-    font-size: 1.18em;
-    font-weight: 600;
-    color: #fff;
-    text-align: center;
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.13);
-    opacity: 0.97;
-    pointer-events: none;
-    transition: opacity 0.3s;
-}
-
-.carrello-msg-success {
-    background: linear-gradient(90deg, #00c853 0%, #43e97b 100%);
-}
-
-.carrello-msg-errore {
-    background: linear-gradient(90deg, #e53935 0%, #ff5252 100%);
-}
 
 #result.search-result-error{
     position: absolute;
@@ -212,10 +183,7 @@ nav a img {
     left: 0;
     width: 100%;        
     z-index: 10000;     
-    
     margin-top: 12px;   
-    
-   
     background-color: #fff; 
     border: 1px solid #e53935; 
     border-radius: 12px;       
@@ -403,7 +371,6 @@ nav a img {
     left: 40px;
 }
 
-/* Hero iPhone Section */
 .hero-iphone {
     display: flex;
     flex-direction: column;

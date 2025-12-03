@@ -82,7 +82,7 @@ function onSubmit(e) {
     } else {
         const formData = new FormData(form);
         const tokenInput = document.querySelector('input[name="_token"]');
-        const csrfToken = tokenInput ? tokenInput.value : '';
+        const csrfToken = tokenInput.value;
         fetch(REGISTER_URL, {
             method: 'POST',
             headers: {

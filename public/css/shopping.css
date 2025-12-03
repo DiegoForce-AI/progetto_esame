@@ -14,56 +14,6 @@
 }
 
 
-.shopping-cart-table {
-    width: 100%;
-    max-width: 900px;
-    margin: 40px auto 0 auto;
-    border-collapse: separate;
-    border-spacing: 0;
-    background: #fff;
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.07);
-    border-radius: 14px;
-    overflow: hidden;
-}
-
-.shopping-cart-table th,
-.shopping-cart-table td {
-    padding: 18px 14px;
-    text-align: left;
-    border-bottom: 1px solid #f0f0f0;
-}
-
-.shopping-cart-table th {
-    background: linear-gradient(90deg, #eaf4fb 0%, #f7fafd 100%);
-    font-weight: 600;
-    font-size: 1.08em;
-    letter-spacing: 0.5px;
-    color: #0071e3;
-    border-bottom: 2px solid #d0e6f7;
-}
-
-.shopping-cart-table tr:last-child td {
-    border-bottom: none;
-}
-
-.shopping-cart-table tfoot td {
-    background: linear-gradient(90deg, #eaf4fb 0%, #f7fafd 100%);
-    font-weight: 700;
-    border-bottom: none;
-    font-size: 1.18em;
-    color: #005bb5;
-    text-align: right;
-}
-
-.shopping-cart-table td:first-child {
-    text-align: center;
-    vertical-align: middle;
-    width: 110px;
-    min-width: 90px;
-    max-width: 120px;
-    height: 100px;
-    background: #fff;
-}
 
 .cart-product-img {
     width: 80px;
@@ -179,6 +129,104 @@ input[type="number"][name="quantita"]:focus,
     font-size: 3em;
     margin-bottom: 10px;
     color: #0071e3;
+}
+
+#shopping-items {
+    display: flex;
+    flex-direction: column;
+    max-width: 900px;
+    margin: 0 auto; /* Centra orizzontalmente */
+    padding: 20px;
+    font-family: sans-serif; /* Font pulito stile Apple */
+}
+
+/* Messaggio carrello vuoto */
+.empty-cart-message {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.empty-cart-message h3 {
+    margin-bottom: 10px;
+    font-size: 24px;
+}
+
+.empty-cart-message p {
+    color: #666;
+}
+
+/* --- Singolo Prodotto (Riga) --- */
+.cart-item {
+    display: flex;
+    align-items: center; /* Centra verticalmente */
+    justify-content: space-between;
+    padding: 25px 0;
+    border-bottom: 1px solid #d2d2d7; /* Linea separatrice sottile */
+}
+
+/* Immagine prodotto */
+.cart-item-img {
+    width: 150px;
+    height: auto;
+    object-fit: contain;
+    margin-right: 30px;
+}
+
+/* Dettagli (Nome e Prezzo) */
+.cart-item-details {
+    flex: 1; /* Occupa tutto lo spazio disponibile */
+}
+
+.cart-item-details h3 {
+    margin: 0 0 5px 0;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.cart-item-price {
+    font-size: 16px;
+    color: #333;
+}
+
+/* Controlli (Quantità e Rimuovi) */
+.cart-item-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; /* Allinea a destra */
+    gap: 10px;
+}
+
+/* Contenitore Quantità */
+.qta-container {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 14px;
+}
+
+/* Input numerico */
+.qta-input {
+    width: 50px;
+    padding: 5px;
+    text-align: center;
+    margin-left: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+/* Bottone Rimuovi (Stile link) */
+.remove-btn {
+    color: #0066cc; /* Blu link */
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    text-decoration: none;
+    padding: 0;
+}
+
+.remove-btn:hover {
+    text-decoration: underline;
 }
 
 .empty-cart-message h3 {
@@ -374,35 +422,6 @@ input[type="number"][name="quantita"]:focus,
 
 
 @media (max-width: 700px) {
-
-    .shopping-cart-table,
-    .shopping-cart-table thead,
-    .shopping-cart-table tbody,
-    .shopping-cart-table th,
-    .shopping-cart-table td,
-    .shopping-cart-table tr {
-        display: block;
-        width: 100%;
-    }
-
-    .shopping-cart-table tr {
-        margin-bottom: 18px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-        border-radius: 10px;
-        background: #fff;
-    }
-
-    .shopping-cart-table th {
-        display: none;
-    }
-
-    .shopping-cart-table td {
-        border: none;
-        padding: 12px 10px;
-        text-align: left;
-        position: relative;
-    }
-
     .cart-product-img {
         margin-bottom: 8px;
     }

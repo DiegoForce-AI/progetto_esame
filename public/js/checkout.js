@@ -36,7 +36,7 @@ function onCheckoutSubmit(e) {
     const submitBtn = checkoutForm.querySelector('button[type="submit"]');
     if (submitBtn) submitBtn.disabled = true;
     const metaToken = document.querySelector('meta[name="csrf-token"]');
-    const csrfToken = metaToken ? metaToken.getAttribute('content') : '';
+    const csrfToken = metaToken.content;
     const formData = new FormData(checkoutForm);
     const bodyData = new URLSearchParams(formData);
     fetch(BASE_URL + '/checkout', {

@@ -24,10 +24,6 @@ class Prodotto extends Model
         return $this->hasMany(CarrelloProdotti::class, 'prodotto_id');
     }
 
-    public function categoria()
-    {
-        return $this->belongsTo(Categoria::class, 'categoria_id');
-    }
     public function ordineProdotti()
     {
         return $this->hasMany(OrdineProdotti::class, 'prodotto_id');

@@ -3,62 +3,14 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=shopping_cart" />
 @section('content')
     @if(count($cart) === 0)
-        <div class="empty-cart-message">
-<span class="material-symbols-outlined">shopping_cart</span>            
-            <h3>Shopping bag vuota</h3>
-            <p>Che ne dici di guardare qualcosa nello store?</p>
-            <a href="{{ url('prodotti') }}" class="btn btn-primary empty-cart-btn">Vai allo store</a>
+        <div id = 'shopping-items' >
         </div>
     @else
         <h2 class="shopping-title">Shopping Bag</h2>
-    <table class="shopping-cart-table">
-        <thead>
-            <tr>
-                <th></th>
-                <th>Nome</th>
-                <th>Prezzo</th>
-                <th>Quantità</th>
-                <th>Subtotale</th>
-            </tr>
-        </thead>
-        <tbody>
-        @foreach($cart as $prodotto)
-            <tr>
-                <td>
-                    @if($prodotto['foto'])
-                        <img src="{{ url( $prodotto['foto']) }}"
-                             alt="{{ $prodotto['nome'] }}"
-                             class="cart-product-img">
-                    @endif
-                </td>
-                <td>{{ $prodotto['nome'] }}</td>
-                <td>{{ number_format($prodotto['prezzo'], 2) }} €</td>
-                <td>
-                    <form action="{{ url('shopping/update') }}" method="POST" class="cart-qty-form">
-                        @csrf
-                        @method('PATCH')
-                        <input type="hidden" name="prodotto_id" value="{{ $prodotto['id'] }}">
-                        <input type="number" name="quantita" value="{{ $prodotto['quantita'] }}" min="1" max="99" class="cart-qty-input" >
-                    </form>
-                    <form action="{{ url('shopping/remove') }}" method="POST" class="cart-remove-form">
-                        @csrf
-                        @method('DELETE')
-                        <input type="hidden" name="prodotto_id" value="{{ $prodotto['id'] }}">
-                        <button type="submit" class="cart-remove-btn" title="Rimuovi dal carrello">&times;</button>
-                    </form>
-                </td>
-                <td>{{ number_format($prodotto['subtotale'], 2) }} €</td>
-            </tr>
-        @endforeach
-        </tbody>
-        <tfoot>
-            <tr>
-                <td colspan="4" class="cart-total-label"><strong>Totale:</strong></td>
-                <td><strong>{{ number_format($totale, 2) }} €</strong></td>
-            </tr>
-        </tfoot>
-    </table>
-    <div class="checkout-btn-wrapper">
+        <div id="shopping-items"></div>
+
+        <div id="subTotale"></div>
+        <div class="checkout-btn-wrapper">
         <a href="{{ url('checkout') }}" class="btn btn-primary cart-checkout-btn">Checkout</a>
     </div>
 
@@ -82,7 +34,7 @@
                                 @method('PATCH')
                                 <input type="hidden" name="prodotto_id" value="{{ $prodotto['id'] }}">
                                 Quantità:
-                                <input type="number" name="quantita" value="{{ $prodotto['quantita'] }}" min="1" max="99" class="cart-qty-input" style="width:44px;" onchange="this.form.submit()">
+                                <input type="number" name="quantita" value="{{ $prodotto['quantita'] }}" min="1" max="99" class="cart-qty-input" style="width:44px;" >
                             </form>
 
                             <form action="{{ url('shopping/remove') }}" method="POST" class="cart-remove-form" style="display:inline-block; margin-left:8px;">

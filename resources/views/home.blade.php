@@ -39,7 +39,7 @@
             </div>
             <div class='hero-bottom'>
                 <div class="button">
-                    <a href="{{ url('acquista-tutto') }}" class="btn">Acquista</a>
+                    <a href="{{ url('prodotti') }}" class="btn">Acquista</a>
                 </div>
             </div>
         </div>
@@ -54,7 +54,7 @@
     <img src="{{ asset('img/iphone17sfondo.jpg') }}" alt="iphone17sfondo">
         <div class='hero-iphone-button'>
             <div class="button">
-                <a href="{{ url('iphone') }}" class="btn">Scopri di più</a>
+                <a href="{{ url('prodotti') }}" class="btn">Scopri di più</a>
             </div>
         </div>
         <div class='hero-iphone-subdescription'>
@@ -69,7 +69,7 @@
         </div>
         <div class="hero-macbook-button">
             <div class="button">
-               <a href="{{ url('mac') }}" class="btn">Scopri di più</a>
+               <a href="{{ url('prodotti') }}" class="btn">Scopri di più</a>
             </div>
         </div>
     </div>

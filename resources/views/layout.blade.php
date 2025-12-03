@@ -10,6 +10,9 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 
+
+
+
  @yield('scripts')
     <script src="{{ url('js/home.js') }}" defer></script>
     <script src="{{ url('js/shopping.js') }}" defer></script>

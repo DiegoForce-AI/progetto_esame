@@ -13,3 +13,4 @@ class ImmagineProdotto extends Model
         return $this->belongsTo(Prodotto::class, 'prodotto_id');
     }
 }
+    

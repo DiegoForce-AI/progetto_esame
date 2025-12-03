@@ -34,7 +34,7 @@
                 </li>
             @endforeach
         @else
-            {{-- Cosa mostrare se è vuoto --}}
+        
             <li>Carrello vuoto</li>
         @endif
     </ul>

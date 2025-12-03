@@ -46,6 +46,15 @@ main {
 .spotify-album-meta {
     text-align: left;
 }
+
+
+#album-container h3{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 1.5em;
+}
+
 .spotify-album-cover {
     width: 180px;
     height: 180px;
@@ -380,6 +389,7 @@ body {
 }
 #song-container {
     margin-top: 24px;
+    font-size: 1.5em;
     display: flex;
     flex-direction: column;
     align-items: center;

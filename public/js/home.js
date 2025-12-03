@@ -52,6 +52,7 @@ const navLinks = document.querySelector('#nav-links');
 
 if (hamburgerBtn && navLinks) {
     const hamburgerIcon = hamburgerBtn.querySelector('.hamburger-icon');
+
     function toggleMenu() {
         navLinks.classList.toggle('open');
         const isOpen = navLinks.classList.contains('open');
@@ -177,7 +178,7 @@ if (hamburgerBtn && hamburgerExtras) {
         }
     }
     hamburgerBtn.addEventListener('click', updateHamburgerExtras);
-    window.addEventListener('resize', updateHamburgerExtras);
+    document.addEventListener('resize', updateHamburgerExtras);
     document.addEventListener('click', function(e) {
         if (!hamburgerBtn.contains(e.target) && !navLinks.contains(e.target)) {
             hamburgerExtras.classList.remove('show');
