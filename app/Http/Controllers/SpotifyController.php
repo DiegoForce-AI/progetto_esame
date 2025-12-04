@@ -23,8 +23,7 @@ class SpotifyController extends BaseController
 
        
         curl_setopt($curl, CURLOPT_POSTFIELDS, "grant_type=client_credentials");
-
-       
+        
         $headers = array(
             "Authorization: Basic " . base64_encode($clientId . ":" . $clientSecret),
             "Content-Type: application/x-www-form-urlencoded"
@@ -32,7 +31,7 @@ class SpotifyController extends BaseController
         curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
 
        
-        curl_setopt( $curl, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt( $curl, CURLOPT_RETURNTRANSFER, value: 1);
 
         $result = curl_exec($curl);
         
@@ -41,6 +40,6 @@ class SpotifyController extends BaseController
     
         $jsonResponse = json_decode($result, true);
 
-        return response()->json(data: $jsonResponse);
+        return response()->json($jsonResponse);
     }
 }

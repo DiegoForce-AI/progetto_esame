@@ -23,7 +23,6 @@
     <div id="checkout-cart">
     <h4>Riepilogo carrello</h4>
     <ul>
-        {{-- Controlliamo se la collection ha elementi --}}
         @if($cart->count() > 0)
             @foreach($cart as $prodotto)
                 <li>

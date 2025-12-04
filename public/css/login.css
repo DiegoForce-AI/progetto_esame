@@ -113,7 +113,6 @@ body {
   background: #fff;
   padding: 3rem 3.2rem 2.2rem 3.2rem;
   border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.13);
   max-width: 400px;
   text-align: left;
   position: relative;
@@ -183,7 +182,6 @@ body {
 
 .login-container .btn-login:hover {
   background: linear-gradient(90deg, #357ab7 0%, #4a90e2 100%);
-  filter: brightness(1.08);
 }
 
 
@@ -213,7 +211,6 @@ body {
 .login-container input:focus {
   outline: none;
   border-color: #4a90e2;
-  box-shadow: 0 0 6px rgba(74, 144, 226, 0.18);
 }
 
 

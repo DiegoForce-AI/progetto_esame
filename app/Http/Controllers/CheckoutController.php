@@ -17,14 +17,9 @@ class CheckoutController extends BaseController
             return redirect('login');
         }
         $carrello = Carrello::where('utente_id', $utenteId)->first();
-        $prodotti = $carrello ? $carrello->prodotti()->with(['immagini'])->get() : collect();
-        $track = [
-            'title' => 'Blinding Lights',
-            'artist' => 'The Weeknd',
-            'image' => 'https://i.scdn.co/image/ab67616d0000b2738863bc11d2aa12b54f5aeb36',
-            'url' => 'spotify'
-        ];
-        return view('checkout', ['cart' => $prodotti, 'track' => $track]);
+        $prodotti = $carrello->prodotti()->with(['immagini'])->get();
+        
+        return view('checkout', ['cart' => $prodotti]);
     }
 
     public function processOrder(Request $request)
@@ -57,12 +52,6 @@ class CheckoutController extends BaseController
 
 
     $carrello->prodotti()->detach();
-    $track = [
-        'title' => 'Blinding Lights',
-        'artist' => 'The Weeknd',
-        'image' => 'https://i.scdn.co/image/ab67616d0000b2738863bc11d2aa12b54f5aeb36',
-        'url' => 'spotify'
-    ];
-    return view('ordine_confermato', ['track' => $track]);
+    
     }
 }

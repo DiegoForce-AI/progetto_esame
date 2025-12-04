@@ -9,7 +9,7 @@ use Illuminate\Http\JsonResponse;
 
 class ProdottoController extends BaseController
 {
-    public function getProdotti(Request $request)
+    public function getProdotti()
     {
         $prodotti = DB::table('prodotti')->get();
 
@@ -30,14 +30,7 @@ class ProdottoController extends BaseController
     {
         $prodotti = Prodotto::with('immagini')->get();
         
-        $track = [
-            'title' => 'Blinding Lights',
-            'artist' => 'The Weeknd',
-            'image' => 'https://i.scdn.co/image/ab67616d0000b2738863bc11d2aa12b54f5aeb36',
-            'url' => 'spotify'
-        ];
-        
-        return view('prodotti')->with(['prodotti' => $prodotti, 'track' => $track]);
+        return view('prodotti')->with(['prodotti' => $prodotti]);
     }
 
     public function show($id)
@@ -48,16 +41,9 @@ class ProdottoController extends BaseController
             return redirect('prodotti');
         }
 
-        $track = [
-            'title' => 'Blinding Lights',
-            'artist' => 'The Weeknd',
-            'image' => 'https://i.scdn.co/image/ab67616d0000b2738863bc11d2aa12b54f5aeb36',
-            'url' => 'spotify'
-        ];
-
         $backUrl = 'prodotti';
 
-        return view('prodotto')->with(['prodotto' => $prodotto, 'track' => $track, 'backUrl' => $backUrl]);
+        return view('prodotto')->with(['prodotto' => $prodotto, 'backUrl' => $backUrl]);
     }
 
     public function showJson($id)
@@ -71,8 +57,9 @@ class ProdottoController extends BaseController
         return response()->json($prodotto);
     }
 
+
     public function search(Request $request): JsonResponse
-    {
+     {
         $nome = $request->query('nome');
 
         if (!$nome) {

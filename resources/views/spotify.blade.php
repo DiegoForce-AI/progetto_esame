@@ -19,6 +19,6 @@
         </div>
     </div>
     <div class="spotify-switch-search">
-        <a href="{{ url('spotify-canzoni') }}" class="spotify-switch-btn">Cerca per canzone &rarr;</a>
+        <a href="{{ url('spotify-canzoni') }}" class="spotify-switch-btn">Cerca per canzone</a>
     </div>
 @endsection

@@ -114,6 +114,7 @@ const searchForm = document.querySelector('#search-form');
 if (searchForm && searchInput) {
     const resultDiv = document.querySelector('#result');
     if (resultDiv) resultDiv.classList.add('hidden');
+    
     function onSearchJson(data) {
         if (resultDiv) {
             resultDiv.innerHTML = '';

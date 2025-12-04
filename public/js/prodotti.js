@@ -141,7 +141,7 @@ if (listaContainer) {
         }
     }
 
-    fetch(BASE_URL + '/prodotti/json?filter=')
+    fetch(BASE_URL + '/prodotti/json')
         .then(onResponse, onError)
         .then(onProductsJson);
 

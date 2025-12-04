@@ -15,7 +15,6 @@
     </div>
 
 
-
     <div class="checkout-summary-custom" id="checkout-mobile">
         <h3>Riepilogo ordine</h3>
         <div class="checkout-summary-list">
@@ -29,15 +28,15 @@
                     <div class="checkout-summary-item-info">
                         <div class="checkout-summary-item-name">{{ $prodotto['nome'] }}</div>
                         <div class="checkout-summary-item-qty">
-                            <form action="{{ url('shopping/update') }}" method="POST" class="cart-qty-form" style="display:inline-block;">
+                            <form action="{{ url('shopping/update') }}" method="POST" class="cart-qty-form">
                                 @csrf
                                 @method('PATCH')
                                 <input type="hidden" name="prodotto_id" value="{{ $prodotto['id'] }}">
                                 Quantità:
-                                <input type="number" name="quantita" value="{{ $prodotto['quantita'] }}" min="1" max="99" class="cart-qty-input" style="width:44px;" >
+                                <input type="number" name="quantita" value="{{ $prodotto['quantita'] }}" min="1" max="99" class="cart-qty-input"  >
                             </form>
 
-                            <form action="{{ url('shopping/remove') }}" method="POST" class="cart-remove-form" style="display:inline-block; margin-left:8px;">
+                            <form action="{{ url('shopping/remove') }}" method="POST" class="cart-remove-form" >
                         @csrf
                         @method('DELETE')
                         <input type="hidden" name="prodotto_id" value="{{ $prodotto['id'] }}">

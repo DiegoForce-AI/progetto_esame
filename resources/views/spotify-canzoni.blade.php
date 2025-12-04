@@ -17,6 +17,6 @@
         <div id="song-container"></div>
     </div>
     <div class="spotify-switch-search">
-        <a href="{{ url('spotify') }}" class="spotify-switch-btn">&larr; Cerca per album</a>
+        <a href="{{ url('spotify') }}" class="spotify-switch-btn"> Cerca per album</a>
     </div>
 @endsection

@@ -4,7 +4,6 @@ const metaToken = document.querySelector('meta[name="csrf-token"]');
 const csrfToken = metaToken.content;
 
 
-
 function onResponse(response) {
     if (!response.ok) {
         console.log('Risposta non valida');
@@ -173,7 +172,7 @@ function onQuantityChange(e){
 
 if(shoppingItemsDiv){
     shoppingItemsDiv.addEventListener('click', onRemoveClick);
-    shoppingItemsDiv.addEventListener('input', onQuantityChange);
+    shoppingItemsDiv.addEventListener('click', onQuantityChange);
 }
 
 loadCart();

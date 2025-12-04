@@ -65,14 +65,12 @@ nav {
     text-decoration: none;
     border-radius: 8px;
     padding: 12px 32px;
-    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
-    box-shadow: 0 2px 8px rgba(0,113,227,0.07);
+    margin-left: 10px;
     display: inline-block;
 }
 .prodotto-back-link-btn:hover {
     background: #005bb5;
     color: #fff;
-    box-shadow: 0 4px 18px rgba(0,113,227,0.13);
 }
 .prodotto-detail-wrapper {
     min-height: 60vh;
@@ -82,9 +80,7 @@ nav {
     justify-content: flex-start;
     padding-top: 24px;
 }
-.prodotto-img {
-    margin-bottom: 18px;
-}
+
 .prodotto-nome-big {
     font-size: 1.5em;
     font-weight: 800;
@@ -100,7 +96,6 @@ nav {
     padding: 6px 16px;
     margin-bottom: 12px;
     font-weight: 700;
-    box-shadow: 0 1px 4px rgba(26,127,55,0.07);
     display: inline-block;
 }
 .prodotto-desc {
@@ -121,7 +116,6 @@ nav {
     text-decoration: none;
     transition: background 0.2s;
     margin-top: 18px;
-    box-shadow: 0 2px 8px rgba(0,113,227,0.07);
 }
 .prodotto-back-link:hover {
     background: #eaf4fb;
@@ -173,7 +167,6 @@ nav {
     text-align: center;
     margin-bottom: 18px;
     border-radius: 0 0 18px 18px;
-    box-shadow: 0 2px 12px rgba(0,113,227,0.07);
 }
 .prodotti-title {
     font-size: 2.3em;
@@ -200,17 +193,14 @@ nav {
     padding: 22px 18px 18px 18px;
     width: 260px;
     min-height: 370px;
-    box-shadow: 0 4px 18px rgba(0,113,227,0.07);
     text-align: center;
     background: #fff;
-    transition: box-shadow 0.2s, transform 0.2s;
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 .prodotto-card:hover {
-    box-shadow: 0 8px 32px rgba(0,113,227,0.13);
     transform: translateY(-4px) scale(1.025);
 }
 .prodotto-img {
@@ -219,9 +209,7 @@ nav {
     object-fit: contain;
     border-radius: 10px;
     margin-bottom: 14px;
-    background: #f5faff;
-    box-shadow: 0 1px 8px rgba(0,113,227,0.08);
-    padding: 8px;
+    padding: 3px;
 }
 .prodotto-nome {
     font-size: 1.18em;
@@ -239,7 +227,6 @@ nav {
     padding: 6px 16px;
     margin-bottom: 12px;
     margin-top: 0;
-    box-shadow: 0 1px 4px rgba(26,127,55,0.07);
 }
 .prodotto-desc {
     color: #444;
@@ -259,7 +246,6 @@ nav {
     text-decoration: none;
     transition: background 0.2s;
     margin-top: auto;
-    box-shadow: 0 2px 8px rgba(0,113,227,0.07);
 }
 .prodotto-btn:hover {
     background: #005bb5;

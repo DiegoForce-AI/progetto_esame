@@ -17,6 +17,6 @@
         <div id="dettaglio-prodotto" data-id="{{ $prodotto->id }}"></div>
     </div>
     <div class="prodotto-back-link-wrapper">
-        <a href="{{ url($backUrl) }}" class="prodotto-back-link-btn">&larr; Torna alla lista prodotti</a>
+        <a href="{{ url($backUrl) }}" class="prodotto-back-link-btn"> Torna alla lista prodotti</a>
     </div>
 @endsection

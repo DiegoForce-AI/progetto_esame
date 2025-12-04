@@ -11,9 +11,6 @@
 </head>
 
 
-
-
-
  @yield('scripts')
     <script src="{{ url('js/home.js') }}" defer></script>
     <script src="{{ url('js/shopping.js') }}" defer></script>
@@ -72,7 +69,9 @@
     </nav>
 
     <main>
-        <div id="result"></div>
+        <div id="result">
+            
+        </div>
         @yield('content')
     </main>
 
@@ -112,7 +111,7 @@
             </div>
         </div>
         <div class="footer-center">
-            <p>&copy; {{ date('Y') }} <span>Apple</span>. Tutti i diritti riservati.<br>
+            <p>&copy; {{ date('Y') }} Tutti i diritti riservati.<br>
                 <br>Powered By: Diego Favitta, 1000044715
             </p>
         </div>

@@ -51,57 +51,41 @@ class CartController extends BaseController
             'prezzo' => $prezzo,
             'subtotale' => $subtotale,
         ];
+
+
     }
 
-    if ($request->ajax() || $request->wantsJson()) {
+    if ($request->ajax()) {
         return response()->json(['cart' => $prodotti, 'totale' => $totale]);
-    }
+    } 
 
-    $track = [
-        'title' => 'Blinding Lights',
-        'artist' => 'The Weeknd',
-        'image' => 'https://i.scdn.co/image/ab67616d0000b2738863bc11d2aa12b54f5aeb36',
-        'url' => 'spotify'
-    ];
-
-    return view('shopping', ['cart' => $prodotti, 'totale' => $totale, 'track' => $track]);
+    return view('shopping', ['cart' => $prodotti, 'totale' => $totale]);
 }
 
     public function add(Request $request)
     {
         $utenteId = \Session::get('user_id');
         if (!$utenteId) {
-            return response()->json(['error' => 'Utente non autenticato'], 401);
+            return response()->json(['error' => 'Utente non autenticato'],  401);
         }
         $carrello = Carrello::firstOrCreate(['utente_id' => $utenteId]);
-        $nome = $request->input('nome');
-        $prodotto = null;
-        if ($nome) {
-            $prodotto = Prodotto::where('nome', 'LIKE', "%$nome%")
-                ->orderBy('id')
-                ->first();
-        } else {
             $prodottoId = $request->input('prodotto_id');
             if ($prodottoId) {
                 $prodotto = Prodotto::find($prodottoId);
             }
-        }
-        if (!$prodotto) {
-            return response()->json(['error' => 'Prodotto non trovato'], 404);
-        }
         $esistente = CarrelloProdotti::where('carrello_id', $carrello->id)
             ->where('prodotto_id', $prodotto->id)
             ->first();
         if ($esistente) {
             $nuovaQuantita = $esistente->quantita + $request->input('quantita', 1);
             CarrelloProdotti::where('carrello_id', $carrello->id)
-                ->where('prodotto_id', $prodotto->id)
+                ->where('prodotto_id',  $prodotto->id)
                 ->update(['quantita' => $nuovaQuantita]);
         } else {
             CarrelloProdotti::create([
                 'carrello_id' => $carrello->id,
                 'prodotto_id' => $prodotto->id,
-                'quantita' => $request->input('quantita', 1),
+                'quantita' => $request->input('quantita', default: 1),
             ]);
         }
         return $this->index($request);
@@ -112,10 +96,10 @@ class CartController extends BaseController
     {
         $utenteId = \Session::get('user_id');
         if (!$utenteId) {
-            return response()->json(['error' => 'Utente non autenticato'], 401);
+            return response()->json( ['error' => 'Utente non autenticato'], 401);
         }
-        $carrello = Carrello::where('utente_id', $utenteId)->first();
-        $prodottoId = $request->input('prodotto_id', $request->query('prodotto_id'));
+        $carrello = Carrello::where( 'utente_id', $utenteId)->first();
+        $prodottoId = $request->input('prodotto_id');
         if ($carrello && $prodottoId) {
             CarrelloProdotti::where('carrello_id', $carrello->id)
                 ->where('prodotto_id', $prodottoId)

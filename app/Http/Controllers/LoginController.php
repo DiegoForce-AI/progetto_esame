@@ -21,37 +21,24 @@ class LoginController extends BaseController
     public function do_login()
     {
         if (Session::get('user_id')) {
-            if (request()->ajax()) {
-                return response()->json(['success' => true, 'redirect' => url('home')]);
-            }
-            return redirect('home');
+            return response()->json(['success' => true, 'redirect' => url('home')]);
         }
 
         if (strlen(request('username')) == 0 || strlen(request('password')) == 0) {
             $error = 'Inserisci username e password';
-            if (request()->ajax()) {
-                return response()->json(['success' => false, 'error' => $error]);
-            }
-            Session::put('error', 'dati mancanti');
-            return redirect('login')->withInput();
+            return response()->json(['success' => false, 'error' => $error]);
         }
 
         $user = User::where('username', request('username'))->first();
         if (!$user || !password_verify(request('password'), $user->password)) {
             $error = 'Credenziali non valide';
-            if (request()->ajax()) {
-                return response()->json(['success' => false, 'error' => $error]);
-            }
-            Session::put('error', 'credenziali non valide');
-            return redirect('login')->withInput();
+            return response()->json(['success' => false, 'error' => $error]);
         }
 
         Session::put('user_id', $user->id);
         Session::put('username', $user->username);
-        if (request()->ajax()) {
-            return response()->json(['success' => true, 'redirect' => url('home')]);
-        }
-        return redirect('home');
+        
+        return response()->json(['success' => true, 'redirect' => url('home')]);
     }
 
     public function register_form()
@@ -96,6 +83,7 @@ class LoginController extends BaseController
         $user->save();
         return redirect('login');
     }
+
     public function logout()
     {
         Session::flush();

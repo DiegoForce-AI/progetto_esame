@@ -25,7 +25,6 @@ main {
     justify-content: space-between;
     background: linear-gradient(120deg, #232323 80%, #1db95422 100%);
     border-radius: 22px;
-    box-shadow: 0 6px 32px rgba(30, 215, 181, 0.13);
     padding: 36px 48px;
     gap: 38px;
     min-width: 540px;
@@ -60,7 +59,6 @@ main {
     height: 180px;
     border-radius: 18px;
     object-fit: cover;
-    box-shadow: 0 4px 18px rgba(30,215,96,0.18);
     border: 3px solid #1db95444;
     background: #181818;
     display: block;
@@ -71,7 +69,6 @@ main {
     margin-top: 18px;
     background: #232323;
     border-radius: 14px;
-    box-shadow: 0 2px 12px rgba(30,215,96,0.08);
     padding: 22px 32px;
     max-width: 600px;
     color: #fff;
@@ -94,13 +91,11 @@ main {
     text-decoration: none;
     border-radius: 10px;
     padding: 16px 44px;
-    box-shadow: 0 2px 8px rgba(30,215,96,0.10);
     letter-spacing: 0.5px;
 }
 .spotify-back-btn:hover {
     background: #169943;
     color: #fff;
-    box-shadow: 0 4px 18px rgba(30,215,96,0.18);
     transform: scale(1.04);
 }
 #album-container {
@@ -113,7 +108,6 @@ main {
     max-width: 1100px;
     background: rgba(35,35,35,0.85);
     border-radius: 18px;
-    box-shadow: 0 4px 24px rgba(30,215,96,0.07);
 }
 
 .spotify-album-detail {
@@ -130,7 +124,6 @@ main {
     align-items: flex-start;
     background: linear-gradient(120deg, #232323 80%, #1db95422 100%);
     border-radius: 22px;
-    box-shadow: 0 6px 32px rgba(30,215,96,0.13);
     padding: 36px 48px 36px 36px;
     gap: 38px;
     min-width: 540px;
@@ -159,7 +152,6 @@ main {
     height: 180px;
     border-radius: 18px;
     object-fit: cover;
-    box-shadow: 0 4px 18px rgba(30,215,96,0.18);
     border: 3px solid #1db95444;
     background: #181818;
 }
@@ -167,7 +159,6 @@ main {
     margin-top: 18px;
     background: #232323;
     border-radius: 14px;
-    box-shadow: 0 2px 12px rgba(30,215,96,0.08);
     padding: 22px 32px;
     max-width: 600px;
     color: #fff;
@@ -196,13 +187,10 @@ main {
     text-decoration: none;
     border-radius: 8px;
     padding: 12px 32px;
-    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
-    box-shadow: 0 2px 8px rgba(30,215,96,0.08);
 }
 .spotify-back-btn:hover {
     background: #169943;
     color: #fff;
-    box-shadow: 0 4px 18px rgba(30,215,96,0.18);
 }
 .spotify-switch-search {
     display: flex;
@@ -217,13 +205,11 @@ main {
     text-decoration: none;
     border-radius: 8px;
     padding: 10px 28px;
-    box-shadow: 0 2px 8px rgba(30,215,96,0.08);
     display: inline-block;
 }
 .spotify-switch-btn:hover {
     background: #169943;
     color: #fff;
-    box-shadow: 0 4px 18px rgba(30,215,96,0.18);
 }
 .spotify-result-list {
     display: flex;
@@ -237,7 +223,6 @@ main {
 .spotify-result-card {
     background: linear-gradient(120deg, #232323 80%, #1db95422 100%);
     border-radius: 18px;
-    box-shadow: 0 4px 24px rgba(30,215,96,0.10);
     padding: 26px 32px;
     display: flex;
     align-items: center;
@@ -250,7 +235,6 @@ main {
 .spotify-result-card:hover {
     border: 2.5px solid #1db954;
     background: linear-gradient(120deg, #282828 80%, #1db95433 100%);
-    box-shadow: 0 8px 32px 0 rgba(30,215,96,0.18), 0 0 0 4px #1db95422;
     transform: translateY(-2px) scale(1.025);
 }
 .spotify-result-img {
@@ -258,7 +242,6 @@ main {
     height: 84px;
     border-radius: 16px;
     object-fit: cover;
-    box-shadow: 0 4px 18px rgba(30,215,96,0.18);
     border: 3px solid #1db95444;
     background: #181818;
 }
@@ -326,11 +309,9 @@ form {
     background: #232323;
     color: #fff;
     outline: none;
-    box-shadow: 0 2px 8px rgba(30,215,96,0.08);
 }
 .spotify-search-input:focus {
     background: #282828;
-    box-shadow: 0 4px 18px rgba(30,215,96,0.18);
 }
 .spotify-search-btn {
     padding: 10px 24px;
@@ -341,11 +322,9 @@ form {
     font-weight: 700;
     font-size: 1.1em;
     cursor: pointer;
-    box-shadow: 0 2px 8px rgba(30,215,96,0.08);
 }
 .spotify-search-btn:hover {
     background: #169943;
-    box-shadow: 0 4px 18px rgba(30,215,96,0.18);
 }
 body {
     background: #181818;
@@ -363,7 +342,6 @@ body {
     height: 72px;
     border-radius: 16px;
     margin-bottom: 12px;
-    box-shadow: 0 4px 18px rgba(30,215,96,0.18);
 }
 .spotify-title {
     font-size: 2.3em;
@@ -411,4 +389,3 @@ body {
         min-width: 280px;
     }
 }
-
